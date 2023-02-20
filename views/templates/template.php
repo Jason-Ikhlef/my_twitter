@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>COTÉ GAUCHE</h1>
-    <?= $content ?>
+    <?= $content ?> <!-- CURRENT VIEW HERE -->
     <h1>COTÉ DROIT</h1>
 </body>
 </html>
