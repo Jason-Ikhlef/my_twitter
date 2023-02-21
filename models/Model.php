@@ -1,4 +1,5 @@
 <?php
+
 abstract class Model
 {
 
@@ -37,6 +38,35 @@ abstract class Model
 
         } catch (Exception) {
             
+            return false;
+        }
+    }
+
+    protected function getLastTweetsQuery($obj) {
+
+        $tweets = [];
+
+        try {
+
+            $query = self::$_db->prepare(
+
+                'SELECT message FROM tweets
+                ORDER BY date DESC
+                LIMIT 10'
+            );
+
+            $query->execute();
+
+            while($data = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $tweets[] = new $obj($data);
+            }
+
+            $query->closeCursor();
+            return $tweets;
+            
+        } catch (Exception) {
+
             return false;
         }
     }

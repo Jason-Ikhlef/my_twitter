@@ -7,10 +7,10 @@ $(".ConfirmNewTweet").on("click", function(e) {
         data: form.serialize(),
         url: "./AJAX/php/do.newTweet.php",
         success: function(data) {
-            console.log(data);
-            if (data == 1) {
 
-             // redirection connexion
+            if (data != 'Message trop long' && data != 'Tweet vide') {
+
+                $('.tweet').first().clone().html(data).insertAfter('#newTweet')
             } else {
 
                 // pop-up erreur
@@ -18,5 +18,4 @@ $(".ConfirmNewTweet").on("click", function(e) {
             }
         }
     })
-
 });

@@ -19,9 +19,22 @@ class TweetManager extends Model {
 
         if ($data) {
 
-            return true;
+            return $message;
         } else {
             
+            return false;
+        }
+    }
+
+    public function getLastTweets() {
+
+        $this->getDb();
+        $data = $this->getLastTweetsQuery('Tweet');
+
+        if ($data) {
+
+            return $data;
+        } else {
             return false;
         }
     }

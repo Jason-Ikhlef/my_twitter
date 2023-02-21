@@ -6,4 +6,8 @@ include_once('../../controllers/TweetManager.php');
 $controller = new TweetManager;
 $tweetContent = $_POST['newTweet'];
 
-echo $controller->newTweet($tweetContent);
+if ($controller->newTweet($tweetContent) == $tweetContent) {
+    echo $tweetContent;
+} else {
+    echo $controller->newTweet($tweetContent);
+}
