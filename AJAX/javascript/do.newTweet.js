@@ -10,16 +10,11 @@ $(".ConfirmNewTweet").on("click", function(e) {
             console.log(data);
             if (data == 1) {
 
-              alert('Tweet posté')
-            } else if (data == 'empty') {
-
-                alert('Tweet vide')
-            } else if (data == 'tooLong') {
-
-                alert('Tweet trop long')
+             // redirection connexion
             } else {
 
-                alert('Erreur')
+                // pop-up erreur
+                alert(data);
             }
         }
     })

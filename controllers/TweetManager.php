@@ -8,10 +8,10 @@ class TweetManager extends Model {
 
         if (empty($message)) {
 
-            return 'empty';
+            return 'Tweet vide';
         } else if (strlen($message) > 140) {
             
-            return 'tooLong';
+            return 'Message trop long';
         }
 
         $this->getDb();
