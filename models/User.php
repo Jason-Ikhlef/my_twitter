@@ -7,6 +7,7 @@ class User {
     private $_password;
     private $_follows;
     private $_picture;
+    private $_date;
     public function __construct(array $data) {
 
         $this->hydrate($data);
@@ -68,6 +69,11 @@ class User {
 
         $this->_picture = $picture;
     }
+
+    public function setDate($date) {
+
+        $this->_date = $date;
+    }
  
 
     //GETTERS
@@ -100,5 +106,10 @@ class User {
     public function picture() {
         
         return $this->_picture;
+    }
+
+    public function date() {
+
+        return $this->_date;
     }
 }
