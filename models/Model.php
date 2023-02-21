@@ -19,4 +19,25 @@ abstract class Model
             return self::$_db;
         }
     }
+
+    protected function newTweetQuery(string $message, int $user_id = 1, $images = '') {
+
+        try {
+
+        $query = self::$_db->prepare(
+
+            "INSERT INTO tweets (user_id, message, images)
+            VALUES (:user_id, :message, :images)"
+
+        );
+
+        $query->execute(["user_id" => $user_id, "message" => $message, "images" => $images]);
+
+        return true;
+
+        } catch (Exception) {
+            
+            return false;
+        }
+    }
 }

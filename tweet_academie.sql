@@ -11,14 +11,14 @@ CREATE TABLE `users` (
   `password` VARCHAR(40) NOT NULL,
   `follows` LONGTEXT,
   `picture` VARCHAR(2048),
-  `date` DATE GETDATE(),
+  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `messages` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `message` VARCHAR(140) NOT NULL,
-  `date` DATE GETDATE(),
+  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `conversation_id` INT,
   `user_id` INT,
   PRIMARY KEY (`id`),
@@ -28,15 +28,16 @@ CREATE TABLE `messages` (
 
 CREATE TABLE `tweets` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `origin` INT DEFAULT NULL,
   `user_id` INT,
   `message` VARCHAR(140) NOT NULL,
-  `date` DATE GETDATE(),
+  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `images` VARCHAR(2048),
-  `origin` INT,
   `comments` LONGTEXT,
   `liked_id` LONGTEXT,
-  PRIMARY KEY (`id`, `origin`),
+  PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
+  FOREIGN KEY (`origin`) REFERENCES (`id`)
 );
 
 CREATE TABLE `likes` (
