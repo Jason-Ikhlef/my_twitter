@@ -6,6 +6,7 @@ class ControllerIndex
 {
     private $_view;
     private $_tweetManager;
+    private $_userManager;
 
     public function __construct($url) {
 

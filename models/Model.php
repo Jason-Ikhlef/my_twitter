@@ -42,7 +42,7 @@ abstract class Model
         }
     }
 
-    protected function getLastTweetsQuery($obj) {
+    protected function getLastTweetsQuery(string $obj) {
 
         $tweets = [];
 
@@ -50,7 +50,7 @@ abstract class Model
 
             $query = self::$_db->prepare(
 
-                'SELECT message FROM tweets
+                'SELECT tweets.id, user_id, message FROM tweets
                 ORDER BY date DESC
                 LIMIT 10'
             );
@@ -64,6 +64,35 @@ abstract class Model
 
             $query->closeCursor();
             return $tweets;
+            
+        } catch (Exception) {
+
+            return false;
+        }
+    }
+
+    function nicknameFromIdQuery(int $id, string $obj) {
+
+        $nickname = [];
+
+        try {
+
+            $query = self::$_db->prepare(
+
+                'SELECT nickname FROM users
+                WHERE id = :id'
+
+            );
+
+            $query->execute(["id" => $id]);
+
+            while($data = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $nickname[] = new $obj($data);
+            }
+
+            $query->closeCursor();
+            return $nickname;
             
         } catch (Exception) {
 

@@ -10,7 +10,8 @@ $(".ConfirmNewTweet").on("click", function(e) {
 
             if (data != 'Message trop long' && data != 'Tweet vide') {
 
-                $('.tweet').first().clone().html(data).insertAfter('#newTweet')
+                window.location.replace('/twitter/index')
+                
             } else {
 
                 // pop-up erreur
