@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/176eaa1f6f.js" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery-3.6.3.min.js" defer></script>
     <script src="./javascript/script.js" defer></script>
+    <script src="./AJAX/javascript/do.newTweet.js" defer></script>
+    <script src="./AJAX/javascript/do.retweet.js" defer></script>
+    <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
     <title><?= $t ?></title>
 </head>
 <body>

@@ -5,6 +5,8 @@ require_once('./views/View.php');
 class ControllerIndex
 {
     private $_view;
+    private $_tweetManager;
+    private $_userManager;
 
     public function __construct($url) {
 
@@ -22,7 +24,10 @@ class ControllerIndex
 
     private function baseIndex() {
 
+        $this->_tweetManager = new TweetManager;
+        $tweets = $this->_tweetManager->getLastTweets();
+
         $this->_view = new View('Index');
-        $this->_view->generate(['' => '']);
+        $this->_view->generate(['tweets' => $tweets]);
     }
 }
