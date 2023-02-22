@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./style/style.css">
     <script src="./javascript/script.js" defer></script>
     <script src="./AJAX/javascript/do.newTweet.js" defer></script>
+    <script src="./AJAX/javascript/do.retweet.js" defer></script>
+    <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
     <title><?= $t ?></title>
 </head>
 <body>

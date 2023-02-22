@@ -3,6 +3,7 @@
 $this->_t = 'Tweet Academy | Index'; // Normal que le $this soit souligné au jaune, NO PANIC.
 
 $user = new UserManager;
+$tweet = new TweetManager;
 
 ?>
 
@@ -14,21 +15,32 @@ $user = new UserManager;
     </form>
 
     <?php if ($tweets): ?>
-    <?php foreach ($tweets as $tweet): ?>
-        <form method="get">
+    <?php foreach ($tweets as $data): ?>
             <div class="tweet">
                 <div class="tweet-header">
-                    <?= $user->nicknameFromId($tweet->user_id())[0]->nickname() ?>
+                    <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                 </div>
                 <div class="tweet-main">
-                    <?= $tweet->message() ?>
+                    <?= $data->message() ?>
                 </div>
+                <?php if ($data->origin()) :?>
+                    <div class="tweet-quote">
+                        <div class="nickname-quoteTweet">
+                            <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
+                        </div>
+                        <div class="message-quoteTweet">
+                            MESSAGE
+                        </div>
+                    </div>
+                <?php endif ?>
                 <div style="margin-top: 10px;" class="tweet-footer">
-                    <button style="cursor: pointer;" value="<?= $tweet->id() ?>" name="retweetButton" type="submit">Retweet</button>
-                    <button style="cursor: pointer;" value="<?= $tweet->id() ?>" name="commentButton" type="submit">Commenter</button>
+                    <form id="tweetMainForm">
+                        <button class="retweetButton" style="cursor: pointer;" value="<?= $data->id() ?>" name="retweetButton" >Retweet</button>
+                        <button style="cursor: pointer;" value="<?= $data->id() ?>" name="commentButton" type="button">Commenter</button>
+                        <button class="quoteTweetButton" style="cursor: pointer;" value="<?= $data->id() ?>" name="quoteTweetButton" type="button">Citer</button>
+                    </form>
                 </div>
             </div>
-        </form>
     <?php endforeach ?>
     <?php endif ?>
 </div>
