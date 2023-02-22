@@ -3,8 +3,6 @@
 $controller = new UserManager;
 $controller->logout();
 
-var_dump($_SESSION);
-
 ?>
 
 <!DOCTYPE html>
