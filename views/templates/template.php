@@ -1,3 +1,10 @@
+<?php 
+
+$controller = new UserManager;
+$controller->logout();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +21,9 @@
     <script src="./AJAX/javascript/do.retweet.js" defer></script>
     <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
     <title><?= $t ?></title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="./AJAX/javascript/do.login.js" defer></script>
+    <script src="./AJAX/javascript/do.register.js" defer></script>
 </head>
 <body>
     <div class="grid grid-cols-5 lg:grid-cols-9 xl:grid-cols-10 gap-4">

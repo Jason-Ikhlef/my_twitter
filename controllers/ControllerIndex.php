@@ -24,6 +24,8 @@ class ControllerIndex
 
     private function baseIndex() {
 
+        session_start();
+        
         $this->_tweetManager = new TweetManager;
         $tweets = $this->_tweetManager->getLastTweets();
 
