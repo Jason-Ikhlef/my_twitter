@@ -5,14 +5,9 @@ include_once ("../../controllers/UserManager.php");
 
 if (!empty($_POST["nickname"]) && !empty($_POST["email"]) && !empty($_POST["registerPassword"]) && !empty($_POST["registerConfirmPassword"])) {
 
-    if ($_POST["registerPassword"] !== $_POST["registerConfirmPassword"]) {
-        echo "Les mots de passe ne correspondent pas";
-        return;
-    }
-
     $controller = new UserManager;
 
-    $sanitized = $controller->sanitize($_POST["email"], $_POST["nickname"]);
+    $sanitized = $controller->sanitize($_POST["email"], $_POST["nickname"], $_POST["registerPassword"], $_POST["registerConfirmPassword"]);
 
     if ($sanitized !== true) {
 

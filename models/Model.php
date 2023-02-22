@@ -85,4 +85,28 @@ abstract class Model {
             return false;
         }
     }
+
+    protected function loginQuery ($email, $password){
+
+        try {
+
+            $req = self::$_db->prepare(
+
+                "SELECT * FROM users WHERE email = :email AND password = :password"
+
+            );
+
+            $req->execute(["email" => $email, "password" => $password]);
+            $req = $req->fetch();
+
+            if (empty($req)) {
+                return false;
+            } else {
+                return $req;
+            }
+
+        } catch (Exception) {
+            return false;
+        }
+    }
 }

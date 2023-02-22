@@ -31,7 +31,20 @@ class UserManager extends Model {
         return $data;
     }
 
-    public function sanitize (string $email, string $nickname) {
+    public function login (string $email, string $password){
+
+        $this->getDb();
+        $data = $this->loginQuery($email, $password);
+
+        return $data;
+    }
+
+    public function sanitize (string $email, string $nickname, string $password, string $confirmPassword) {
+
+        if ($password !== $confirmPassword) {
+
+            return "Les mots de passe ne correspondent pas";
+        }
 
         $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
         $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -50,6 +63,15 @@ class UserManager extends Model {
             return true;
         }
     }
+
+    public function logout () {
+        if (isset($_POST["logout"])){
+            session_destroy();
+            session_start();
+            header("Location:index");
+        }
+    }
 }
+
 
 ?>

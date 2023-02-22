@@ -22,6 +22,8 @@ class ControllerIndex
 
     private function baseIndex() {
 
+        session_start();
+        
         $this->_view = new View('Index');
         $this->_view->generate(['' => '']);
     }
