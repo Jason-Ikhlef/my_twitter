@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/89d1d88b5e.js" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-3.6.3.min.js" defer></script>
-    <script src="../javascript/script.js" defer></script>
+    <script src="../../javascript/script.js" defer></script>
     <title><?= $t ?></title>
 </head>
 

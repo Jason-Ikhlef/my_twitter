@@ -1,7 +1,7 @@
 <?php 
 
-$controller = new UserManager;
-$controller->logout();
+$user = new UserManager;
+$user->logout();
 
 ?>
 
@@ -15,15 +15,13 @@ $controller->logout();
     <link rel="stylesheet" href="./style/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/176eaa1f6f.js" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-3.6.3.min.js" defer></script>
     <script src="./javascript/script.js" defer></script>
     <script src="./AJAX/javascript/do.newTweet.js" defer></script>
     <script src="./AJAX/javascript/do.retweet.js" defer></script>
     <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
-    <title><?= $t ?></title>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="./AJAX/javascript/do.login.js" defer></script>
     <script src="./AJAX/javascript/do.register.js" defer></script>
+    <title><?= $t ?></title>
 </head>
 <body>
     <div class="grid grid-cols-5 lg:grid-cols-9 xl:grid-cols-10 gap-4">
