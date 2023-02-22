@@ -29,7 +29,7 @@ $tweet = new TweetManager;
                             <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
                         </div>
                         <div class="message-quoteTweet">
-                            MESSAGE
+                            <?= $tweet->getAllById($data->origin(), 'Tweet')[0]->message() ?>
                         </div>
                     </div>
                 <?php endif ?>

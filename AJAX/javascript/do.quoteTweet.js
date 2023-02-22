@@ -9,10 +9,12 @@ $(".quoteTweetButton").on("click", function(e) {
         success: function(data) {
             if (data == 1) {
 
-                // success
+                window.location.replace('/twitter/index')
+                
             } else {
 
                 // pop-up erreur
+                alert('error')
             }
         }
     })
