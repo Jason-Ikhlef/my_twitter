@@ -3,7 +3,7 @@
 class UserManager extends Model {
 
     public function register (string $nickname, string $email, string $password, string $confirmPassword){
-
+    
         if ($password !== $confirmPassword) {
 
             return "Les mots de passe ne correspondent pas";
@@ -69,6 +69,19 @@ class UserManager extends Model {
             session_destroy();
             session_start();
             header("Location:index");
+        }
+    }
+    
+    public function nicknameFromId(int $id) {
+
+        $this->getDb();
+        $data = $this->nicknameFromIdQuery($id, 'User');
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
         }
     }
 }
