@@ -1,6 +1,5 @@
 <?php 
 
-include_once("../models/Model.php");
 class UserManager extends Model {
 
     public function register (string $nickname, string $email, string $password, string $confirmPassword){
@@ -22,6 +21,34 @@ class UserManager extends Model {
         $data = $this->emailCheckQuery($email);
 
         return $data;
+    }
+
+    public function nicknameCheck (string $nickname) {
+
+        $this->getDb();
+        $data = $this->nicknameCheckQuery($nickname);
+
+        return $data;
+    }
+
+    public function sanitize (string $email, string $nickname) {
+
+        $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+        
+        if ($sanitizedEmail !== $email) {
+
+            return "Format de l'adresse mail invalide";
+        } else if ($isEmail === false) {
+
+            return "Format de l'adresse mail invalide";
+        } else if (preg_match('/^[a-zA-Z0-9_]+$/', $nickname) == false) {
+
+            return "Le nom d'utilisateur ne peut contenir que des lettres ou des chiffres";
+        } else {
+
+            return true;
+        }
     }
 }
 

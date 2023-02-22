@@ -8,7 +8,7 @@ $("#registerBtn").click(function (e) {
         data: str,
         success: function (data) {
             if (data == 1) {
-                "gg bro"
+                $(".display-error").html("gg bro")
             } else {
                 $(".display-error").html(data)
             }
