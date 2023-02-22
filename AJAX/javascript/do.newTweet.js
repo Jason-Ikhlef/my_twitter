@@ -7,9 +7,9 @@ $(".ConfirmNewTweet").on("click", function(e) {
         data: form.serialize(),
         url: "./AJAX/php/do.newTweet.php",
         success: function(data) {
-
+            
             if (data != 'Message trop long' && data != 'Tweet vide') {
-
+        
                 window.location.replace('/twitter/index')
                 
             } else {

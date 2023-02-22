@@ -15,7 +15,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `messages` (
+CREATE TABLE `messages`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `message` VARCHAR(140) NOT NULL,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -36,8 +36,8 @@ CREATE TABLE `tweets` (
   `comments` LONGTEXT,
   `liked_id` LONGTEXT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
-  FOREIGN KEY (`origin`) REFERENCES (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+  FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL
 );
 
 CREATE TABLE `likes` (
@@ -48,3 +48,14 @@ CREATE TABLE `likes` (
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`)
 );
+
+CREATE TABLE `retweets` (
+  `id` INT  NOT NULL AUTO_INCREMENT,
+  `tweet_id` INT,
+  `user_id` INT,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+  FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO `users` (`id`, `nickname`, `email`, `password`, `follows`, `picture`, `date`) VALUES (NULL, 'dorian', 'dorian@dorian.fr', 'dorian', NULL, NULL, current_timestamp());

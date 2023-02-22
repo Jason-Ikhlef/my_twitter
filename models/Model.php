@@ -6,7 +6,8 @@ abstract class Model {
 
     private static function setDb() {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'AJR2042ci6');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'dorian1', '123');
+        
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
@@ -34,6 +35,11 @@ abstract class Model {
             $req->execute(["nickname" => $nickname, "email" => $email, "password" => $password]);
 
             return true;
+        } catch (Exception) {
+
+            return false;
+        }
+    }
 
     protected function newTweetQuery(string $message, int $user_id = 1, $images = '') {
 
@@ -104,6 +110,11 @@ abstract class Model {
             } else {
                 return true;
             }
+        } catch (Exception) {
+
+            return false;
+        }
+    }
             
     function nicknameFromIdQuery(int $id, string $obj) {
 
@@ -155,8 +166,12 @@ abstract class Model {
             }
 
         } catch (Exception) {
-=======
-    function idUserFromOriginQuery(int $origin_id, string $obj) {
+
+            return false;
+        }
+    }
+
+    protected function idUserFromOriginQuery(int $origin_id, string $obj) {
 
         $nickname = [];
 
@@ -224,7 +239,7 @@ abstract class Model {
 
             $query = self::$_db->prepare(
 
-                "INSERT INTO retweet (tweet_id, user_id)
+                "INSERT INTO retweets (tweet_id, user_id)
                 VALUES ($tweet_id, $user_id)"
 
             );

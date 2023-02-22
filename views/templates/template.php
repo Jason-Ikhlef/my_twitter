@@ -52,7 +52,9 @@ $controller->logout();
                 <i class="fa-solid fa-gear hover:bg-gray-200 m-2.5 rounded-full p-4 button"></i>
             </div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ea nostrum debitis mollitia, ratione nulla molestias voluptatem animi consequatur? Cupiditate, corrupti rem? Itaque, officia ex a ipsa autem sed saepe.
+
                 <?= $content ?>
+                
             <div class="border w-full hover:bg-gray-100">
                 <div class="flex m-2">
                     <img src="https://picsum.photos/id/237/200/300" alt="avatar" class="w-12 h-12 rounded-full">
