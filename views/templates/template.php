@@ -3,6 +3,8 @@
 $controller = new UserManager;
 $controller->logout();
 
+var_dump($_SESSION);
+
 ?>
 
 <!DOCTYPE html>
@@ -16,13 +18,23 @@ $controller->logout();
     <title><?= $t ?></title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="./AJAX/javascript/do.login.js" defer></script>
+    <script src="./AJAX/javascript/do.register.js" defer></script>
 </head>
 <body>
     <h1>COTÉ GAUCHE</h1>
+
     <form id="login-form">
         <input type="text" name="email" id="" placeholder="email">
         <input type="text" name="password" id="" placeholder="mdp">
         <input type="button" id="loginBtn" value="Confirm">
+    </form>
+
+    <form id="register-form">
+        <input type="text" name="nickname" placeholder="nickname">
+        <input type="text" name="email" id="" placeholder="email">
+        <input type="text" name="registerPassword" id="" placeholder="mdp">
+        <input type="text" name="registerConfirmPassword" id="" placeholder="mdp">
+        <input type="button" id="registerBtn" value="Confirm">
     </form>
 
     <form method="post" action="index.php">

@@ -21,6 +21,8 @@ abstract class Model {
 
         try {
 
+            $password = hash('ripemd160', $password);
+
             $req = self::$_db->prepare(
 
                 "INSERT INTO users (nickname, email, password) VALUES (:nickname, :email, :password)"
@@ -89,6 +91,8 @@ abstract class Model {
     protected function loginQuery ($email, $password){
 
         try {
+
+            $password = hash('ripemd160', $password);
 
             $req = self::$_db->prepare(
 
