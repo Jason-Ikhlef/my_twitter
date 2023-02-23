@@ -1,4 +1,4 @@
-$("#loginBtn").click(function (e) {
+$("#login-btn").click(function (e) {
     e.preventDefault()
     const form = $('#login-form')
     let str = form.serialize()

@@ -1,4 +1,4 @@
-$("#registerBtn").click(function (e) {
+$("#register-btn").click(function (e) {
     e.preventDefault()
     const form = $('#register-form')
     let str = form.serialize()
@@ -8,9 +8,9 @@ $("#registerBtn").click(function (e) {
         data: str,
         success: function (data) {
             if (data == "") {
-                $(".display-error").html("gg bro")
+                alert("gg bro")
             } else {
-                $(".display-error").html(data)
+                alert(data)
             }
         }
     })
