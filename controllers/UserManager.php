@@ -2,6 +2,11 @@
 
 class UserManager extends Model {
 
+    public function __construct(){
+        
+        $this->logout();
+    }
+
     public function register (string $nickname, string $email, string $password, string $confirmPassword){
     
         if ($password !== $confirmPassword) {

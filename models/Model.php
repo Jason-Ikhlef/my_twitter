@@ -24,7 +24,7 @@ abstract class Model {
 
         try {
 
-            $password = hash('ripemd160', $password);
+            $password = hash('ripemd160', $password . "vive le projet tweet_academy");
 
             $req = self::$_db->prepare(
 
@@ -204,7 +204,7 @@ abstract class Model {
 
         try {
 
-            $password = hash('ripemd160', $password);
+            $password = hash('ripemd160', $password . "vive le projet tweet_academy");
 
             $req = self::$_db->prepare(
 
