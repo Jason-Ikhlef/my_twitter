@@ -208,7 +208,7 @@ abstract class Model {
 
             $req = self::$_db->prepare(
 
-                "SELECT * FROM users WHERE email = :email AND password = :password"
+                "SELECT id, nickname, email, follows, picture, date FROM users WHERE email = :email AND password = :password"
 
             );
 
@@ -275,7 +275,7 @@ abstract class Model {
         }
     }
 
-    protected function getAllByIdQuery(int $id, string $obj) {
+    protected function getAllByIdQuery(int $id, string $obj, string $table) {
 
         $tweet = [];
 
@@ -283,7 +283,7 @@ abstract class Model {
 
             $query = self::$_db->prepare(
 
-                "SELECT * FROM tweets
+                "SELECT * FROM $table
                 WHERE id = :id"
 
             );

@@ -3,7 +3,7 @@
 class UserManager extends Model {
 
     public function __construct(){
-        
+
         $this->logout();
     }
 
@@ -62,7 +62,7 @@ class UserManager extends Model {
             return "Format de l'adresse mail invalide";
         } else if (preg_match('/^[a-zA-Z0-9_]+$/', $nickname) == false) {
 
-            return "Le nom d'utilisateur ne peut contenir que des lettres ou des chiffres";
+            return "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres ou des underscores";
         } else {
 
             return true;
