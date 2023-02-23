@@ -32,7 +32,7 @@ $user->logout();
         </div>
         <div class="block">
             <div class="col-span-1 xl:col-span-2 h-screen flex flex-col pt-2 border-r fixed xl:mr-4">
-                <i class="fa-brands fa-twitter w-fit hover:bg-blue-100 px-3 py-2 text-blue-600 rounded-full mx-auto text-2xl cursor-pointer xl:ml-1.5"></i>
+                <i class="fa-brands fa-twitter w-fit hover:bg-blue-100 px-3 py-2 text-blue-500 rounded-full mx-auto text-2xl cursor-pointer xl:ml-1.5"></i>
                 <div class="w-fit mx-auto text-xl cursor-pointer">
                     <i class="fa-solid fa-magnifying-glass p-4 mx-auto rounded-full hover:bg-gray-100 lg:hidden"></i>
                 </div>
@@ -51,7 +51,7 @@ $user->logout();
                 <label for="searchTweets">
                     <i class="fa-solid fa-magnifying-glass p-4 mx-auto text-left hover:bg-gray-100 rounded-tl-lg rounded-bl-lg m-2.5 p-2"></i>
                 </label> 
-                <input type="text" class="bg-gray-200 p-2 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7 mt-5" name="searchTweets" placeholder="Recherche Twitter"  id="searchTweets">
+                <input type="text" class="bg-gray-200 p-4 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7 mt-5" name="searchTweets" placeholder="Recherche Twitter"  id="searchTweets">
                 <i class="fa-solid fa-gear hover:bg-gray-200 m-2.5 rounded-full p-4 button cursor-pointer"></i>
             </div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ea nostrum debitis mollitia, ratione nulla molestias voluptatem animi consequatur? Cupiditate, corrupti rem? Itaque, officia ex a ipsa autem sed saepe.
@@ -66,7 +66,7 @@ $user->logout();
                 </div>
                 <p class="ml-16 mt-[-30px] text-sm mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nam illo veniam voluptatem vel minus eaque, doloribus accusamus fugit sequi sunt qui reprehenderit ullam ratione eveniet perspiciatis error laudantium dicta.</p>
                 <img src="https://media.discordapp.net/attachments/1045751662767247433/1077655495965413466/Snapchat-362771284.jpg?width=328&height=584" alt="" class="w-[504px] h-[504px] mx-auto rounded-3xl">
-                <div class="flex w-full gap-2 flex-col sm:flex-row mx-auto text-center sm:gap-8 mt-2 mb-2">
+                <div class="flex w-full gap-2 pl-4 flex-col sm:flex-row mx-auto text-center sm:gap-8 mt-2 mb-2">
                     <div class="flex gap-4 text-gray-500 hover:text-blue-400 cursor-pointer">
                         <i class="fa-regular fa-comment mt-1"></i>
                         <p>Comments</p>
@@ -111,7 +111,7 @@ $user->logout();
                     <p class="italic">Les utilisateurs de Twitter sont les premiers à savoir.</p>
                 </div>
                 <button class="rounded-3xl text-white border w-1/2 lg:1/6 mt-4 mb-4 ml-4 md:w-3/12 xl:w-2/12 button">Se connecter</button>
-                <button class="text-block bg-white rounded-3xl mr-4 w-1/2 lg:1/6 mt-4 mb-4 md:w-3/12 xl:w-2/12">Utiliser l'application</button>
+                <button class="text-block bg-white rounded-3xl mr-4 w-1/2 lg:1/6 mt-4 mb-4 md:w-3/12 xl:w-2/12">S'inscrire</button>
             </div>
         </div>
     </div>
@@ -120,8 +120,8 @@ $user->logout();
 
     <div id="loginOverlay" class="fixed w-full h-auto p-10 bg-gray-500/50 inset-0 z-1 hidden">
         <div class="popup bg-white flex flex-col justify-center items-center w-auto m-auto max-w-md h-auto rounded-lg text-black p-1">
+            <button class="close self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
             <form class="logInForm flex flex-col justify-center items-center w-full mb-8" autocomplete="off">
-                <button class="close self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
                 <i class="fa-brands fa-twitter fa-2xl self-center mb-17 mt-2 text-blue-500"></i>
                 <div class="logInText my-8 w-2/3">
                     <p class="text-xl text-center font-semibold">Connectez-vous à Twitter</p>
@@ -151,8 +151,8 @@ $user->logout();
 
     <div id="signInOverlay" class="hidden fixed w-full h-auto p-10 bg-gray-500/50 inset-0 z-1">
         <div class="popup bg-white flex flex-col justify-center items-center w-auto m-auto max-w-md h-auto rounded-lg text-black p-1">
+            <button class="signInClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
             <form class="logInForm flex flex-col justify-center items-center w-full mb-8" autocomplete="off">
-                <button class="signInClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
                 <i class="fa-brands fa-twitter fa-2xl self-center mb-17 mt-2 text-blue-500"></i>
                 <div class="logInText my-8 w-2/3">
                     <p class="text-xl text-center font-semibold">Rejoignez Twitter</p>
