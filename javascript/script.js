@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-    // Log in popup display
+    //Log in popup display
     
     $(".button").on("click", function() {
         $("#loginOverlay").removeClass("hidden");
@@ -12,7 +12,7 @@ $( document ).ready(function() {
         $("#loginOverlay").addClass("hidden");
     });
     
-    // Sign in popup display
+    //Sign in popup display
     
     $(".signInButton").on("click", function() {
         $("#signInOverlay").removeClass("hidden");
