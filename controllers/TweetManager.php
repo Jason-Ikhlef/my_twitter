@@ -77,6 +77,19 @@ class TweetManager extends Model {
             return false;
         }
     }
+
+    public function getAllById($id, $obj) {
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($id, $obj);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>

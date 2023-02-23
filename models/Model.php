@@ -116,7 +116,7 @@ abstract class Model {
         }
     }
             
-    function nicknameFromIdQuery(int $id, string $obj) {
+    protected function nicknameFromIdQuery(int $id, string $obj) {
 
         $nickname = [];
 
@@ -228,7 +228,7 @@ abstract class Model {
         }
     }
     
-    function retweetQuery(int $tweet_id) {
+    protected function retweetQuery(int $tweet_id) {
 
         session_start();
 
@@ -254,7 +254,7 @@ abstract class Model {
         }
     }
 
-    function quoteTweetQuery(int $origin, string $message, int $user_id = 1, $images = '') {
+    protected function quoteTweetQuery(int $origin, string $message, int $user_id = 1, $images = '') {
 
         try {
 
@@ -273,5 +273,34 @@ abstract class Model {
             
             return false;
         }
+    }
+
+    protected function getAllByIdQuery(int $id, string $obj) {
+
+        $tweet = [];
+
+        try {
+
+            $query = self::$_db->prepare(
+
+                "SELECT * FROM tweets
+                WHERE id = :id"
+
+            );
+
+            $query->execute(["id" => $id]);
+
+            while($data = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $tweet[] = new $obj($data);
+            }
+
+            $query->closeCursor();
+            return $tweet;
+
+            } catch (Exception) {
+                
+                return false;
+            }
     }
 }

@@ -1,12 +1,3 @@
-/* h1 {
-  color: red; /* test */
-/* } */
-/* 
-body {
-  display: flex;
-  justify-content: space-around;
-}
-
 .feed {
   display: flex;
   flex-direction: column;
@@ -17,6 +8,6 @@ body {
 .tweet {
   padding: 1rem;
   border: 1px solid black;
-} */ 
+} 
 
 /*# sourceMappingURL=style.css.map */

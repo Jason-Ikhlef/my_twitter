@@ -4,16 +4,17 @@ $(".quoteTweetButton").on("click", function(e) {
 
     $.ajax({
         type: "POST",
-        data: {tweet_id : e.target.value, form : form.serialize()},
+        data: {tweet_id : e.target.value, form : decodeURI(form.serialize())},
         url: "./AJAX/php/do.quoteTweet.php",
         success: function(data) {
-            console.log(data)
             if (data == 1) {
 
-                // success
+                window.location.replace('/twitter/index')
+                
             } else {
 
                 // pop-up erreur
+                alert('error')
             }
         }
     })
