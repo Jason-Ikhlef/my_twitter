@@ -3,11 +3,13 @@ $( document ).ready(function() {
 //Log in popup display
 
 $(".button").on("click", function() {
-    $("#overlay").css("display", "block");
+    $("#loginOverlay").removeClass("hidden");
+    $("#loginOverlay").addClass("block");
 });
 
 $(".close").on("click", function() {
-    $("#overlay").css("display", "none");
+    $("#loginOverlay").removeClass("block");
+    $("#loginOverlay").addClass("hidden");
 });
 
 //Sign in popup display
