@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $controller = new UserManager;
 $controller->logout();
@@ -7,6 +7,7 @@ $controller->logout();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +26,7 @@ $controller->logout();
     <script src="./AJAX/javascript/do.login.js" defer></script>
     <script src="./AJAX/javascript/do.register.js" defer></script>
 </head>
+
 <body>
     <div class="grid grid-cols-5 lg:grid-cols-10 xl:grid-cols-12 gap-2">
         <div class="hidden xl:col-span-1 xl:block">
@@ -56,8 +58,8 @@ $controller->logout();
             </div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ea nostrum debitis mollitia, ratione nulla molestias voluptatem animi consequatur? Cupiditate, corrupti rem? Itaque, officia ex a ipsa autem sed saepe.
 
-                <?= $content ?>
-                
+            <?= $content ?>
+
             <div class="border w-full hover:bg-gray-100">
                 <div class="flex m-2">
                     <img src="https://picsum.photos/id/237/200/300" alt="avatar" class="w-12 h-12 rounded-full">
@@ -99,7 +101,7 @@ $controller->logout();
                     <p>Informations sur les publicités</p>
                     <p>© Twitter, Inc</p>
                 </div>
-            </div> 
+            </div>
         </div>
         <div class="hidden xl:col-span-1 xl:block">
 
@@ -122,7 +124,7 @@ $controller->logout();
         <div class="popup bg-white flex flex-col justify-center items-center w-auto m-auto max-w-md h-auto rounded-lg text-black p-1">
             <form class="logInForm flex flex-col justify-center items-center w-full mb-8" autocomplete="off">
                 <button class="close self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
-                <i class="fa-brands fa-twitter fa-2xl self-center mb-17 mt-2 text-blue-500"></i>           
+                <i class="fa-brands fa-twitter fa-2xl self-center mb-17 mt-2 text-blue-500"></i>
                 <div class="logInText my-8 w-2/3">
                     <p class="text-xl text-center font-semibold">Connectez-vous à Twitter</p>
                 </div>
@@ -130,13 +132,13 @@ $controller->logout();
                     <label for="email" class="font-semibold">*Email:</label>
                 </div>
                 <div class="email mb-3 w-2/3">
-                    <input type="email" id="email" name="email" placeholder="example@test.com" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
+                    <input type="email" id="email" name="email" placeholder="example@test.com" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold" required></input>
                 </div>
                 <div class="password mb-1 w-2/3">
                     <label for="password" class="font-semibold">*Password:</label>
                 </div>
                 <div class="password mb-3 w-2/3">
-                    <input type="password" id="password" name="password" placeholder="******" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
+                    <input type="password" id="password" name="password" placeholder="******" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold" required></input>
                 </div>
                 <button class="bg-blue-500 w-2/3 h-8 rounded-lg text-white my-3 font-semibold">Connexion</button>
             </form>
@@ -190,4 +192,5 @@ $controller->logout();
         </div>
     </div>
 </body>
+
 </html>
