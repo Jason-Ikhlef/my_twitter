@@ -78,10 +78,49 @@ class TweetManager extends Model {
         }
     }
 
-    public function getAllById($id, $obj) {
+    public function newComment($message, $tweet_id, $images = '') {
+        
+        $this->getDb();
+        $data = $this->newCommentQuery($message, $tweet_id, $images);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function getComments() {
 
         $this->getDb();
-        $data = $this->getAllByIdQuery($id, $obj, "tweets");
+        $data = $this->getAllByIdQuery($_POST['seeComments'], 'Tweet', 'tweets', 'comments');
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function aboveCommentsTweet() {
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($_POST['seeComments'], 'Tweet', 'tweets', 'id');
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function getAllTweetsDataById($id, $obj) {
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($id, $obj, 'tweets', 'id');
 
         if ($data) {
 

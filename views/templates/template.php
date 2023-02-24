@@ -15,6 +15,7 @@
     <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
     <script src="./AJAX/javascript/do.login.js" defer></script>
     <script src="./AJAX/javascript/do.register.js" defer></script>
+    <script src="./AJAX/javascript/do.comment.js" defer></script>
     <title><?= $t ?></title>
 </head>
 
@@ -25,7 +26,7 @@
         </div>
         <div class="block">
             <div class="col-span-1 xl:col-span-2 h-screen flex flex-col pt-2 fixed xl:mr-4">
-                <i class="fa-brands fa-twitter w-fit hover:bg-blue-100 px-3 py-2 text-blue-500 rounded-full mx-auto text-2xl cursor-pointer xl:ml-1.5"></i>
+                <a href="index"><i class="fa-brands fa-twitter w-fit hover:bg-blue-100 px-3 py-2 text-blue-500 rounded-full mx-auto text-2xl cursor-pointer xl:ml-1.5"></i></a>
                 <div class="w-fit mx-auto text-xl cursor-pointer">
                     <i class="fa-solid fa-magnifying-glass p-4 mx-auto rounded-full hover:bg-gray-100 lg:hidden"></i>
                 </div>
@@ -47,11 +48,10 @@
                 <input type="text" class="bg-gray-200 p-5 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7 mt-5 " name="searchTweets" placeholder="Recherche Twitter"  id="searchTweets">
                 <i class="fa-solid fa-gear hover:bg-gray-200 m-2.5 rounded-full p-4 button cursor-pointer"></i>
             </div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ea nostrum debitis mollitia, ratione nulla molestias voluptatem animi consequatur? Cupiditate, corrupti rem? Itaque, officia ex a ipsa autem sed saepe.
 
             <?= $content ?>
 
-            <div class="border w-full hover:bg-gray-100">
+            <!-- <div class="border w-full hover:bg-gray-100">
                 <div class="flex m-2">
                     <img src="https://picsum.photos/id/237/200/300" alt="avatar" class="w-12 h-12 rounded-full">
                     <p class="ml-2 font-bold">Nickname</p>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate ratione vitae pariatur, nemo velit similique quam tempora ducimus architecto porro perspiciatis adipisci animi neque iure inventore recusandae, optio dignissimos voluptatibus.
-            </div>
+            </div> -->
         </div> 
         <div class="hidden lg:flex col-span-3 w-full mx-auto">
             <div class="border h-fit mt-4 mr-4 ml-4 p-4 rounded-lg fixed lg:w-[290px] xl:w-[350px] justify-center">

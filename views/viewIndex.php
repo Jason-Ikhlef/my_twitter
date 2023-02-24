@@ -49,20 +49,19 @@ $tweet = new TweetManager;
                             </div>
                             <div>
                                 <p class="ml-2 mb-2">
-                                    <?= $tweet->getAllById($data->origin(), 'Tweet')[0]->message() ?>
+                                    <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
                                 </p>
                                 <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-b-xl">
                             </div>
                         </div>
                     </div>
                 <?php endif ?>
-                <div class="m-4 border">
-                    <form id="tweetMainForm" class="flex gap-8 ">
-                        <div class="flex cursor-pointer hover:text-blue-400 relative">
-                            <button value="<?= $data->id() ?>" name="retweetButton" class="retweetButton" >
+                <div class="m-4 border flex gap-8">
+                    <div class="flex cursor-pointer hover:text-blue-400 relative">
+                            <button value="<?= $data->id() ?>" name="retweetButton" class=" flex retweetButton" >
                                 <i class="fa-solid fa-retweet mt-1"></i>
+                                <p class="ml-1">12</p>
                             </button>
-                            <p class="ml-1">12</p>
                         </div>
                         <div class="flex cursor-pointer hover:text-green-400">
                             <button value="<?= $data->id() ?>" name="commentButton" type="button" class="commentButton">
@@ -76,7 +75,9 @@ $tweet = new TweetManager;
                             </button>
                             <p class="ml-1">12</p>
                         </div>
-                    </form>
+                        <form action="tweet" method="post" id="tweetMainForm">
+                            <button class="seeComments" style="cursor: pointer;" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
+                        </form>
                 </div>
                 <div class="hidden absolute bg-gray-200 rounded-xl z-10" id="retweetOverlay">
                     <div class="flex border cursor-pointer hover:bg-gray-100">
