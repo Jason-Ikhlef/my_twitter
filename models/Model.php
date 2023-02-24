@@ -45,8 +45,12 @@ abstract class Model
         }
     }
 
-    protected function newTweetQuery(string $message, int $user_id = 1, $images = '')
-    {
+    protected function newTweetQuery(string $message, $images = '') {
+
+        session_start();
+
+        $user_id = $_SESSION['user_id'];
+        // $user_id = 2;
 
         try {
 
@@ -76,6 +80,7 @@ abstract class Model
             $query = self::$_db->prepare(
 
                 'SELECT tweets.id, origin, user_id, message FROM tweets
+                WHERE comments IS NULL
                 ORDER BY date DESC
                 LIMIT 50'
             );
@@ -239,8 +244,8 @@ abstract class Model
 
         try {
 
-            // $id_user = $_SESSION['user_id'];
-            $user_id = 1;
+            $user_id = $_SESSION['user_id'];
+            // $user_id = 2;
 
             $query = self::$_db->prepare(
 
@@ -258,8 +263,12 @@ abstract class Model
         }
     }
 
-    protected function quoteTweetQuery(int $origin, string $message, int $user_id = 1, $images = '')
-    {
+    protected function quoteTweetQuery(int $origin, string $message, $images = '') {
+
+        session_start();
+
+        $user_id = $_SESSION['user_id'];
+        // $user_id = 2;
 
         try {
 
@@ -279,8 +288,8 @@ abstract class Model
         }
     }
 
-    protected function getAllByIdQuery(int $id, string $obj, string $table)
-    {
+
+    protected function getAllByIdQuery(int $id, string $obj, string $table, string $column) {
 
         $tweet = [];
 
@@ -289,11 +298,11 @@ abstract class Model
             $query = self::$_db->prepare(
 
                 "SELECT * FROM $table
-                WHERE id = :id"
+                WHERE $column = :$column"
 
             );
 
-            $query->execute(["id" => $id]);
+            $query->execute([$column => $id]);
 
             while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
 
@@ -302,8 +311,35 @@ abstract class Model
 
             $query->closeCursor();
             return $tweet;
-        } catch (Exception) {
 
+
+        } catch (Exception) {
+            
+            return false;
+        }
+    }
+
+    protected function newCommentQuery(string $message, $tweet_id, $images = '') {
+
+        session_start();
+
+        $user_id = $_SESSION['user_id'];
+        // $user_id = 1;
+
+        try {
+
+            $query = self::$_db->prepare(
+    
+                "INSERT INTO tweets (user_id, message, images, comments)
+                VALUES (:user_id, :message, :images, :comment)"
+    
+            );
+    
+            $query->execute(["user_id" => $user_id, "message" => $message, "images" => $images, "comment" => $tweet_id]);
+    
+            return true;
+    
+        } catch (Exception) {
             return false;
         }
     }

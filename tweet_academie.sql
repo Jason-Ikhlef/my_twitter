@@ -33,11 +33,12 @@ CREATE TABLE `tweets` (
   `message` VARCHAR(140) NOT NULL,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `images` VARCHAR(2048),
-  `comments` LONGTEXT,
+  `comments` INT DEFAULT NULL,
   `liked_id` LONGTEXT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL
+  FOREIGN KEY (`id`) REFERENCES `tweets`(`comments`) ON DELETE CASCADE,
 );
 
 CREATE TABLE `likes` (
@@ -54,7 +55,7 @@ CREATE TABLE `retweets` (
   `tweet_id` INT,
   `user_id` INT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
