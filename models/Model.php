@@ -1,17 +1,20 @@
 <?php
 
-abstract class Model {
+abstract class Model
+{
 
     private static $_db;
 
-    private static function setDb() {
+    private static function setDb()
+    {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'dorian1', '123');
-        
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'root');
+
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
-    protected function getDb() {
+    protected function getDb()
+    {
 
         if (self::$_db == null) {
             self::setDb();
@@ -20,7 +23,8 @@ abstract class Model {
     }
 
 
-    protected function registerQuery (string $nickname, string $email, string $password){
+    protected function registerQuery(string $nickname, string $email, string $password)
+    {
 
         try {
 
@@ -31,7 +35,7 @@ abstract class Model {
                 "INSERT INTO users (nickname, email, password) VALUES (:nickname, :email, :password)"
 
             );
-            
+
             $req->execute(["nickname" => $nickname, "email" => $email, "password" => $password]);
 
             return true;
@@ -50,24 +54,24 @@ abstract class Model {
 
         try {
 
-        $query = self::$_db->prepare(
+            $query = self::$_db->prepare(
 
-            "INSERT INTO tweets (user_id, message, images)
+                "INSERT INTO tweets (user_id, message, images)
             VALUES (:user_id, :message, :images)"
 
-        );
+            );
 
-        $query->execute(["user_id" => $user_id, "message" => $message, "images" => $images]);
+            $query->execute(["user_id" => $user_id, "message" => $message, "images" => $images]);
 
-        return true;
-
+            return true;
         } catch (Exception) {
-            
+
             return false;
         }
     }
 
-    protected function getLastTweetsQuery(string $obj) {
+    protected function getLastTweetsQuery(string $obj)
+    {
 
         $tweets = [];
 
@@ -83,14 +87,13 @@ abstract class Model {
 
             $query->execute();
 
-            while($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
 
                 $tweets[] = new $obj($data);
             }
 
             $query->closeCursor();
             return $tweets;
-            
         } catch (Exception) {
 
             return false;
@@ -98,19 +101,20 @@ abstract class Model {
     }
 
 
-    protected function emailCheckQuery ($email) {
+    protected function emailCheckQuery($email)
+    {
 
         try {
-        
+
             $req = self::$_db->prepare(
-                
+
                 "SELECT email FROM users WHERE email = :email"
-                
+
             );
-            
+
             $req->execute(["email" => $email]);
             $req = $req->fetch();
-            
+
             if (empty($req)) {
                 return false;
             } else {
@@ -121,8 +125,9 @@ abstract class Model {
             return false;
         }
     }
-            
-    protected function nicknameFromIdQuery(int $id, string $obj) {
+
+    protected function nicknameFromIdQuery(int $id, string $obj)
+    {
 
         $nickname = [];
 
@@ -137,14 +142,13 @@ abstract class Model {
 
             $query->execute(["id" => $id]);
 
-            while($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
 
                 $nickname[] = new $obj($data);
             }
 
             $query->closeCursor();
             return $nickname;
-            
         } catch (Exception) {
 
             return false;
@@ -152,10 +156,11 @@ abstract class Model {
     }
 
 
-    protected function nicknameCheckQuery ($nickname) {
+    protected function nicknameCheckQuery($nickname)
+    {
 
         try {
-                
+
             $req = self::$_db->prepare(
 
                 "SELECT nickname FROM users WHERE nickname = :nickname"
@@ -170,14 +175,14 @@ abstract class Model {
             } else {
                 return true;
             }
-
         } catch (Exception) {
 
             return false;
         }
     }
 
-    protected function idUserFromOriginQuery(int $origin_id, string $obj) {
+    protected function idUserFromOriginQuery(int $origin_id, string $obj)
+    {
 
         $nickname = [];
 
@@ -192,21 +197,21 @@ abstract class Model {
 
             $query->execute(["origin" => $origin_id]);
 
-            while($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
 
                 $nickname[] = new $obj($data);
             }
 
             $query->closeCursor();
             return $nickname;
-            
         } catch (Exception) {
 
             return false;
         }
     }
 
-    protected function loginQuery ($email, $password){
+    protected function loginQuery($email, $password)
+    {
 
         try {
 
@@ -226,15 +231,14 @@ abstract class Model {
             } else {
                 return $req;
             }
-
         } catch (Exception) {
-        
-        return false;
-        
+
+            return false;
         }
     }
-    
-    protected function retweetQuery(int $tweet_id) {
+
+    protected function retweetQuery(int $tweet_id)
+    {
 
         session_start();
 
@@ -253,7 +257,6 @@ abstract class Model {
             $query->execute();
 
             return true;
-            
         } catch (Exception) {
 
             return false;
@@ -269,22 +272,22 @@ abstract class Model {
 
         try {
 
-        $query = self::$_db->prepare(
+            $query = self::$_db->prepare(
 
-            "INSERT INTO tweets (origin, user_id, message, images)
+                "INSERT INTO tweets (origin, user_id, message, images)
             VALUES (:origin, :user_id, :message, :images)"
 
-        );
+            );
 
-        $query->execute(["origin" => $origin, "user_id" => $user_id, "message" => $message, "images" => $images]);
+            $query->execute(["origin" => $origin, "user_id" => $user_id, "message" => $message, "images" => $images]);
 
-        return true;
-
+            return true;
         } catch (Exception) {
-            
+
             return false;
         }
     }
+
 
     protected function getAllByIdQuery(int $id, string $obj, string $table, string $column) {
 
@@ -301,13 +304,14 @@ abstract class Model {
 
             $query->execute([$column => $id]);
 
-            while($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
 
                 $tweet[] = new $obj($data);
             }
 
             $query->closeCursor();
             return $tweet;
+
 
         } catch (Exception) {
             
@@ -336,7 +340,6 @@ abstract class Model {
             return true;
     
         } catch (Exception) {
-            
             return false;
         }
     }

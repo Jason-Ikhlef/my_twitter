@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $this->_t = 'Tweet Academy | Index'; // Normal que le $this soit souligné au jaune, NO PANIC.
 
@@ -11,7 +11,7 @@ $tweet = new TweetManager;
     <div class="w-full border-t">
         <form id="newTweet">
             <div class="flex mt-4">
-                <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2">
+                <a href="profil"><img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
                 <textarea name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></textarea>
             </div>
             <div class="flex justify-between my-auto">
@@ -23,9 +23,9 @@ $tweet = new TweetManager;
         </form>
     </div>
 
-    <?php if ($tweets): ?>
-    <?php foreach ($tweets as $data): ?>
-        <div class="w-full hover:bg-gray-100 border-y">
+    <?php if ($tweets) : ?>
+        <?php foreach ($tweets as $data) : ?>
+            <div class="w-full hover:bg-gray-100 border-y">
                 <div class="flex p-4">
                     <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
                     <p class="font-bold mt-3 ml-2">
@@ -38,7 +38,7 @@ $tweet = new TweetManager;
                         <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                     </p>
                 </div>
-                <?php if ($data->origin()) :?>
+                <?php if ($data->origin()) : ?>
                     <div class="border w-fit mt-4 rounded-xl mx-auto">
                         <div class="flex flex-col w-full">
                             <div class="flex p-4 w-full">
@@ -90,7 +90,7 @@ $tweet = new TweetManager;
                     </div>
                 </div>
             </div>
-    <?php endforeach ?>
+        <?php endforeach ?>
     <?php endif ?>
 </div>
 
