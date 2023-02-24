@@ -23,5 +23,27 @@ $( document ).ready(function() {
       $("#signInOverlay").removeClass("block");
       $("#signInOverlay").addClass("hidden");
   });
+    
+  //Retweet popup display
+
+    $(".retweetButton").on("click",function(){
+      if($('#retweetOverlay').hasClass('block')){
+
+        $('#retweetOverlay').removeClass('block')
+        $('#retweetOverlay').addClass('hidden')
+      } else {
+
+        $('#retweetOverlay').removeClass('hidden')
+        $('#retweetOverlay').addClass('block')
+      }
+    })
+
+
+    $('body').on('keyup',function(e){
+      if(e.code == 'Escape'){
+          $('#retweetOverlay').removeClass('block')
+          $('#retweetOverlay').addClass('hidden')
+      }
+    })
 
 })
