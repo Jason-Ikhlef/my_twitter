@@ -7,20 +7,25 @@ $tweet = new TweetManager;
 
 ?>
 
-<div class="feed">
-    <div class="w-full">
+<div class="feed border">
+    <div class="w-full border-t">
         <form id="newTweet">
-            <div class="flex">
-                <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
-                <textarea name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="border bg-blue-100 resize-none w-full h-20"></textarea> <br>
+            <div class="flex mt-4">
+                <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2">
+                <textarea name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></textarea>
             </div>
-            <button class="ConfirmNewTweet" style="cursor: pointer;" name="sendNewTweet" type="button">Submit</button>
+            <div class="flex justify-between my-auto">
+                <div class="flex ml-12 mt-2 mb-4">
+                    <i class="fa-sharp fa-regular fa-image text-blue-500 hover:bg-blue-100 rounded-full p-4"></i>
+                </div>
+                <button class="ConfirmNewTweet cursor-pointer bg-blue-500 text-white px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200" name="sendNewTweet" type="button">Tweeter</button>
+            </div>
         </form>
     </div>
 
     <?php if ($tweets): ?>
     <?php foreach ($tweets as $data): ?>
-        <div class="w-full border hover:bg-gray-100">
+        <div class="w-full hover:bg-gray-100 border-y">
                 <div class="flex p-4">
                     <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
                     <p class="font-bold mt-3 ml-2">
@@ -73,12 +78,12 @@ $tweet = new TweetManager;
                         </div>
                     </form>
                 </div>
-                <div class="hidden relative bg-gray-200 rounded-xl" id="retweetOverlay">
-                    <div class="flex border">
+                <div class="hidden absolute bg-gray-200 rounded-xl z-10" id="retweetOverlay">
+                    <div class="flex border cursor-pointer hover:bg-gray-100">
                         <i class="fa-solid fa-retweet"></i>
                         <p>Retweeter</p>
                     </div>
-                    <div class="flex">
+                    <div class="flex cursor-pointer hover:bg-gray-100">
                         <i class="fa-solid fa-pen"></i>
                         <p>Citer le tweet</p>
                     </div>
@@ -87,3 +92,5 @@ $tweet = new TweetManager;
     <?php endforeach ?>
     <?php endif ?>
 </div>
+
+<!--  -->
