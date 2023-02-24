@@ -6,7 +6,7 @@ abstract class Model {
 
     private static function setDb() {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'root');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'AJR2042ci6');
         
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -24,7 +24,7 @@ abstract class Model {
 
         try {
 
-            $password = hash('ripemd160', $password);
+            $password = hash('ripemd160', $password . "vive le projet tweet_academy");
 
             $req = self::$_db->prepare(
 
@@ -204,11 +204,11 @@ abstract class Model {
 
         try {
 
-            $password = hash('ripemd160', $password);
+            $password = hash('ripemd160', $password . "vive le projet tweet_academy");
 
             $req = self::$_db->prepare(
 
-                "SELECT * FROM users WHERE email = :email AND password = :password"
+                "SELECT id, nickname, email, follows, picture, date FROM users WHERE email = :email AND password = :password"
 
             );
 
@@ -275,7 +275,7 @@ abstract class Model {
         }
     }
 
-    protected function getAllByIdQuery(int $id, string $obj) {
+    protected function getAllByIdQuery(int $id, string $obj, string $table) {
 
         $tweet = [];
 
@@ -283,7 +283,7 @@ abstract class Model {
 
             $query = self::$_db->prepare(
 
-                "SELECT * FROM tweets
+                "SELECT * FROM $table
                 WHERE id = :id"
 
             );

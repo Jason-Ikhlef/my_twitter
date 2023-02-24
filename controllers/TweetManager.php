@@ -81,7 +81,7 @@ class TweetManager extends Model {
     public function getAllById($id, $obj) {
 
         $this->getDb();
-        $data = $this->getAllByIdQuery($id, $obj);
+        $data = $this->getAllByIdQuery($id, $obj, "tweets");
 
         if ($data) {
 

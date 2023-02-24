@@ -1,4 +1,4 @@
-$("#loginBtn").click(function (e) {
+$("#login-btn").click(function (e) {
     e.preventDefault()
     const form = $('#login-form')
     let str = form.serialize()
@@ -9,6 +9,8 @@ $("#loginBtn").click(function (e) {
         success: function (data) {
             if (data == 1) {
                 setTimeout('document.location.href="index.php"',  1000)
+            } else {
+                alert(data)
             }
         }
     })
