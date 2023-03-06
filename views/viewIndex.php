@@ -52,6 +52,9 @@ $tweet = new TweetManager;
                                     <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
                                 </p>
                                 <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-b-xl">
+                                <form action="tweet" method="post" class="tweetMainForm">
+                                    <button class="seeComments" style="cursor: pointer;" value="<?= $data->origin() ?>" name="seeComments" type="submit">Voir ce tweet</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -89,7 +92,7 @@ $tweet = new TweetManager;
                             </button>
                             <p class="ml-1">12</p>
                         </div>
-                        <form action="tweet" method="post" id="tweetMainForm">
+                        <form action="tweet" method="post" class="tweetMainForm">
                             <button class="seeComments" style="cursor: pointer;" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
                         </form>
                 </div>
@@ -97,5 +100,3 @@ $tweet = new TweetManager;
         <?php endforeach ?>
     <?php endif ?>
 </div>
-
-<!--  -->
