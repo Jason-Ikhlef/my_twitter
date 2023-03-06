@@ -26,16 +26,18 @@ $( document ).ready(function() {
     
   //Retweet popup display
 
-    $(".retweetButton").on("click",function(){
-      if($('#retweetOverlay').hasClass('block')){
+    $(".retweetButton").each(function(e){
+      $(this).on('click', function() {
+        if($(this).next().hasClass('block')){
 
-        $('#retweetOverlay').removeClass('block')
-        $('#retweetOverlay').addClass('hidden')
-      } else {
-
-        $('#retweetOverlay').removeClass('hidden')
-        $('#retweetOverlay').addClass('block')
-      }
+          $(this).next().removeClass('block')
+          $(this).next().addClass('hidden')
+        } else {
+  
+          $(this).next().removeClass('hidden')
+          $(this).next().addClass('block')
+        }
+      })
     })
 
 
@@ -45,5 +47,4 @@ $( document ).ready(function() {
           $('#retweetOverlay').addClass('hidden')
       }
     })
-
 })

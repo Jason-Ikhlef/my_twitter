@@ -37,8 +37,8 @@ CREATE TABLE `tweets` (
   `liked_id` LONGTEXT,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL
-  FOREIGN KEY (`id`) REFERENCES `tweets`(`comments`) ON DELETE CASCADE,
+  FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`comments`) REFERENCES `tweets`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `likes` (

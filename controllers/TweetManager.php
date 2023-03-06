@@ -52,10 +52,10 @@ class TweetManager extends Model {
         }
     }
 
-    function quoteTweet($origin, $message, $user_id = 1, $images = '') {
+    function quoteTweet($origin, $message, $images = '') {
 
         $this->getDb();
-        $data = $this->quoteTweetQuery($origin, $message, $user_id, $images);
+        $data = $this->quoteTweetQuery($origin, $message, $images);
 
         if ($data) {
 

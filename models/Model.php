@@ -8,7 +8,7 @@ abstract class Model
     private static function setDb()
     {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'root');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'dorian1', '123');
 
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -191,7 +191,7 @@ abstract class Model
             $query = self::$_db->prepare(
 
                 'SELECT user_id FROM tweets
-                WHERE origin = :origin'
+                WHERE id = :origin'
 
             );
 
@@ -275,7 +275,7 @@ abstract class Model
             $query = self::$_db->prepare(
 
                 "INSERT INTO tweets (origin, user_id, message, images)
-            VALUES (:origin, :user_id, :message, :images)"
+                VALUES (:origin, :user_id, :message, :images)"
 
             );
 
@@ -342,5 +342,10 @@ abstract class Model
         } catch (Exception) {
             return false;
         }
+    }
+
+    protected function newLike() {
+
+
     }
 }
