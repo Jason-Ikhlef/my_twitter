@@ -223,7 +223,7 @@ abstract class Model {
 
         } catch (Exception) {
         
-        return false;
+            return false;
         
         }
     }
@@ -302,5 +302,36 @@ abstract class Model {
                 
                 return false;
             }
+    }
+
+    protected function editUserDataQuery ($id, $nickname, $email, $avatar, $password, $newPassword = NULL) {
+
+        try {
+            
+            if ($newPassword != null || $newPassword != ""){
+
+                $password = hash('ripemd160', $newPassword . "vive le projet tweet_academy");  
+            } else {
+                
+                $password = hash('ripemd160', $password . "vive le projet tweet_academy");
+            }
+
+            if ($avatar == ""){
+                $avatar = NULL;
+            }
+
+            $query = self::$_db->prepare(
+
+                "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, password = :password WHERE id = :id"
+
+            );
+
+            $query->execute(["nickname" => $nickname, "email" => $email, "avatar" => $avatar, "password" => $password, "id" => $id]);
+
+            return true;
+        } catch (Exception) {
+
+            return "Echec de la modification";
+        }
     }
 }

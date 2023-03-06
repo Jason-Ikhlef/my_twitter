@@ -15,6 +15,7 @@
     <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
     <script src="./AJAX/javascript/do.login.js" defer></script>
     <script src="./AJAX/javascript/do.register.js" defer></script>
+    <script src="./AJAX/javascript/do.editUser.js" defer></script>
     <title><?= $t ?></title>
 </head>
 

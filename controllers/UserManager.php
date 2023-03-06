@@ -89,6 +89,37 @@ class UserManager extends Model {
             return false;
         }
     }
+
+    public function editUserData($id, $nickname, $email, $avatar, $password, $newPassword){
+
+        if (!is_int($id) && !is_string($nickname) && !is_string($avatar) && !is_string($password) && !is_string($newPassword)) {
+
+            return "Les données sont incorrectes";
+        } else if (preg_match('/^[a-zA-Z0-9_]+$/', $nickname) == false) {
+
+            return "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres ou des underscores";
+        } else {
+
+            $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+            $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+            if ($sanitizedEmail !== $email || $isEmail === false){
+
+                return "Format de l'adresse mail invalide";
+            }
+        }
+
+        $this->getDb();
+        $data = $this->loginQuery($email, $password);
+
+        if ($data === false){
+            return false;
+        } else {
+            $data = $this->editUserDataQuery($id, $nickname, $email, $avatar, $password, $newPassword);
+            return $data;
+        }
+
+    }
 }
 
 
