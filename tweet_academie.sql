@@ -34,7 +34,7 @@ CREATE TABLE `tweets` (
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `images` VARCHAR(2048),
   `comments` INT DEFAULT NULL,
-  `liked_id` LONGTEXT,
+  `liked_id` LONGTEXT DEFAULT "-",
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL,
@@ -46,8 +46,8 @@ CREATE TABLE `likes` (
   `user_id` INT,
   `tweet_id` INT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
-  FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION,
+  FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `retweets` (
@@ -58,5 +58,3 @@ CREATE TABLE `retweets` (
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-INSERT INTO `users` (`id`, `nickname`, `email`, `password`, `follows`, `picture`, `date`) VALUES (NULL, 'dorian', 'dorian@dorian.fr', 'dorian', NULL, NULL, current_timestamp());

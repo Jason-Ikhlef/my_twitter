@@ -129,6 +129,19 @@ class TweetManager extends Model {
             return false;
         }
     }
+
+    public function newLike($tweet_id) {
+
+        $this->getDb();
+        $data = $this->newLikeQuery($tweet_id);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>

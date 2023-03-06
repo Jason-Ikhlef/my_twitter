@@ -344,8 +344,62 @@ abstract class Model
         }
     }
 
-    protected function newLike() {
+    protected function newLikeQuery($tweet_id) {
 
+        session_start();
 
+        $user_id = $_SESSION['user_id'];
+
+        try {
+
+            $query = self::$_db->prepare(
+    
+                "INSERT INTO likes (user_id, tweet_id)
+                VALUES (:user_id, :tweet_id)"
+    
+            );
+    
+            $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
+
+            $query = self::$_db->prepare(
+    
+                "SELECT id FROM likes
+                WHERE user_id = :user_id AND tweet_id = :tweet_id"
+            );
+    
+            $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
+
+            $likeId = $query->fetchAll();
+
+            $query = self::$_db->prepare(
+    
+                "SELECT liked_id FROM tweets
+                WHERE id = :tweet_id"
+            );
+    
+            $query->execute(["tweet_id" => $tweet_id]);
+
+            $value = $query->fetchAll();
+            
+            $query = self::$_db->prepare(
+    
+                "UPDATE tweets
+                SET liked_id = :liked_id
+                WHERE id = :tweet_id"
+    
+            );
+    
+            $query->execute(["tweet_id" => $tweet_id, "liked_id" => $value[0][0].$likeId[0][0]."-"]);
+
+            return true;
+    
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    protected function isLiked() {
+
+        
     }
 }

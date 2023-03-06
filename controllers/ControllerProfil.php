@@ -22,14 +22,16 @@ class ControllerProfil
     private function profil()
     {
         session_start();
+
         if (isset($_SESSION["user_id"]) && !isset($_POST["disconnect"])) {
 
             $this->_view = new View('Profil');
             $this->_view->generate(array("" => ""));
         } else {
 
-            $this->_view = new View('Index');
-            $this->_view->generate(array("" => ""));
+            session_start();
+            
+            header('Location:index');
         }
     }
 }
