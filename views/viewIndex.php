@@ -64,7 +64,7 @@ $tweet = new TweetManager;
                         <div class="retweet">
                             <button value="<?= $data->id() ?>" name="retweetButton" class=" flex retweetButton" >
                                 <i class="fa-solid fa-retweet mt-1"></i>
-                                <p class="ml-1">12</p>
+                                <p class="ml-1"><?= $tweet->retweetsNumber($data->id()) ?></p>
                             </button>
                             <div class="retweetOverlay hidden absolute bg-gray-200 rounded-xl z-10">
                                 <div class="flex border cursor-pointer hover:bg-gray-100">

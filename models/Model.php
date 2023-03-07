@@ -449,4 +449,19 @@ abstract class Model
             return false;
         }
     }
+
+    protected function countElementsQuery($table, $column, $id) {
+
+        $query = self::$_db->prepare(
+        
+            "SELECT COUNT(*) FROM $table
+            WHERE $column = :$column"
+
+        );
+
+        $query->execute([$column => $id]);
+        $data = $query->fetchAll();
+
+        return $data;
+    }
 }

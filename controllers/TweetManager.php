@@ -169,6 +169,19 @@ class TweetManager extends Model {
             return false;
         }
     }
+
+    public function retweetsNumber($tweet_id) {
+
+        $this->getDb();
+        $data = $this->countElementsQuery("tweets", "origin", $tweet_id);
+
+        if ($data) {
+
+            return $data[0][0];
+        } else {
+            return 0;
+        }
+    }
 }
 
 ?>
