@@ -40,12 +40,12 @@
                 </div>
             </div>
         </div>
-        <div class="h-fit col-span-3 lg:col-span-6 rounded-3xl mt-2 xl:pl-[150px] xl:ml-12">
+        <div class="h-fit col-span-3 lg:col-span-6 rounded-3xl mt-2 xl:pl-[150px] xl:ml-12 max-sm:col-span-4">
             <div class="flex">
                 <label for="searchTweets">
                     <i class="fa-solid fa-magnifying-glass p-4 mx-auto text-left hover:bg-gray-100 rounded-tl-lg rounded-bl-lg m-2.5 p-2"></i>
-                </label> 
-                <input type="text" class="bg-gray-200 p-5 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7 mt-5 " name="searchTweets" placeholder="Recherche Twitter"  id="searchTweets">
+                </label>
+                <input type="text" class="bg-gray-200 p-5 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7 mt-5 " name="searchTweets" placeholder="Recherche Twitter" id="searchTweets">
                 <i class="fa-solid fa-gear hover:bg-gray-200 m-2.5 rounded-full p-4 button cursor-pointer"></i>
             </div>
 
@@ -75,10 +75,10 @@
                 </div>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate ratione vitae pariatur, nemo velit similique quam tempora ducimus architecto porro perspiciatis adipisci animi neque iure inventore recusandae, optio dignissimos voluptatibus.
             </div> -->
-        </div> 
+        </div>
         <div class="hidden lg:flex col-span-3 w-full mx-auto">
             <div class="border h-fit mt-4 mr-4 ml-4 p-4 rounded-lg fixed lg:w-[290px] xl:w-[350px] justify-center">
-               <h1 class="font-bold">Nouveau sur Twitter ?</h1>
+                <h1 class="font-bold">Nouveau sur Twitter ?</h1>
                 <p class="italic text-gray-500">Inscrivez-vous pour profiter de votre propre fil personnalisé !</p>
                 <div class="my-2">
                     <button class="bg-white rounded-3xl hover:bg-gray-100 text-center p-2 border w-full signInButton">Créer un compte</button>
