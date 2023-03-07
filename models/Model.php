@@ -363,7 +363,7 @@ abstract class Model
 
             $query = self::$_db->prepare(
     
-                "SELECT id FROM likes
+                "SELECT user_id FROM likes
                 WHERE user_id = :user_id AND tweet_id = :tweet_id"
             );
     
@@ -398,8 +398,21 @@ abstract class Model
         }
     }
 
-    protected function isLiked() {
+    protected function isLikedQuery($tweet_id) {
 
-        
+        $user_id = $_SESSION['user_id'];
+
+        $query = self::$_db->prepare(
+    
+            "SELECT id FROM tweets
+            WHERE liked_id LIKE :user_id
+            AND id = :tweet_id"
+
+        );
+
+        $query->execute(["user_id" => "%-$user_id-%", "tweet_id" => $tweet_id]);
+        $data = $query->fetchAll();
+
+        return $data;
     }
 }

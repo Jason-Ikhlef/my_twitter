@@ -142,6 +142,20 @@ class TweetManager extends Model {
             return false;
         }
     }
+
+    public function isLiked($tweet_id) {
+
+        $this->getDb();
+        $data = $this->isLikedQuery($tweet_id);
+        
+        if (!empty($data)) {
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
 
 ?>
