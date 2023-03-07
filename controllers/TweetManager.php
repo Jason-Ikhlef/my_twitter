@@ -156,6 +156,19 @@ class TweetManager extends Model {
         }
 
     }
+
+    public function dislike($tweet_id) {
+
+        $this->getDb();
+        $data = $this->dislikeQuery($tweet_id);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>

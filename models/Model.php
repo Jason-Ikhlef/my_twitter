@@ -344,7 +344,7 @@ abstract class Model
         }
     }
 
-    protected function newLikeQuery($tweet_id) {
+    protected function newLikeQuery(int $tweet_id) {
 
         session_start();
 
@@ -414,5 +414,39 @@ abstract class Model
         $data = $query->fetchAll();
 
         return $data;
+    }
+
+    protected function dislikeQuery(int $tweet_id) {
+
+        session_start();
+        $user_id = $_SESSION['user_id'];
+
+        try {
+
+            $query = self::$_db->prepare(
+        
+                "DELETE FROM likes
+                WHERE user_id = :user_id AND tweet_id = :tweet_id"
+
+            );
+
+            $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
+
+            $query = self::$_db->prepare(
+        
+                "UPDATE tweets
+                SET liked_id = REPLACE(liked_id, '-$user_id-', '-')
+                WHERE id = :tweet_id"
+
+            );
+
+            $query->execute(["tweet_id" => $tweet_id]);
+
+            return true;
+
+        } catch(Exception) {
+
+            return false;
+        }
     }
 }
