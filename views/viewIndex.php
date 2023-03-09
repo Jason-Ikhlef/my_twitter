@@ -14,6 +14,7 @@ $tweet = new TweetManager;
                 <a href="profil"><img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
                 <textarea name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></textarea>
             </div>
+            <div class="absolute flex flex-col w-1/5 bg-white max-h-48 ml-10 border border-1 border-gray-400 overflow-auto"></div>
             <div class="flex justify-between my-auto">
                 <div class="flex ml-12 mt-2 mb-4">
                     <i class="fa-sharp fa-regular fa-image text-blue-500 hover:bg-blue-100 rounded-full p-4"></i>
@@ -58,26 +59,26 @@ $tweet = new TweetManager;
                 <?php endif ?>
                 <div class="m-4 border flex gap-8">
                     <div class="flex cursor-pointer hover:text-blue-400 relative">
-                            <button value="<?= $data->id() ?>" name="retweetButton" class=" flex retweetButton" >
-                                <i class="fa-solid fa-retweet mt-1"></i>
-                                <p class="ml-1">12</p>
-                            </button>
-                        </div>
-                        <div class="flex cursor-pointer hover:text-green-400">
-                            <button value="<?= $data->id() ?>" name="commentButton" type="button" class="commentButton">
-                                <i class="fa-regular fa-comment mt-1"></i>
-                            </button>
+                        <button value="<?= $data->id() ?>" name="retweetButton" class=" flex retweetButton">
+                            <i class="fa-solid fa-retweet mt-1"></i>
                             <p class="ml-1">12</p>
-                        </div>
-                        <div class="flex cursor-pointer hover:text-pink-400">
-                            <button value="<?= $data->id() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton">
-                                <i class="fa-solid fa-heart mt-1"></i>
-                            </button>
-                            <p class="ml-1">12</p>
-                        </div>
-                        <form action="tweet" method="post" id="tweetMainForm">
-                            <button class="seeComments" style="cursor: pointer;" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
-                        </form>
+                        </button>
+                    </div>
+                    <div class="flex cursor-pointer hover:text-green-400">
+                        <button value="<?= $data->id() ?>" name="commentButton" type="button" class="commentButton">
+                            <i class="fa-regular fa-comment mt-1"></i>
+                        </button>
+                        <p class="ml-1">12</p>
+                    </div>
+                    <div class="flex cursor-pointer hover:text-pink-400">
+                        <button value="<?= $data->id() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton">
+                            <i class="fa-solid fa-heart mt-1"></i>
+                        </button>
+                        <p class="ml-1">12</p>
+                    </div>
+                    <form action="tweet" method="post" id="tweetMainForm">
+                        <button class="seeComments" style="cursor: pointer;" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
+                    </form>
                 </div>
                 <div class="hidden absolute bg-gray-200 rounded-xl z-10" id="retweetOverlay">
                     <div class="flex border cursor-pointer hover:bg-gray-100">
