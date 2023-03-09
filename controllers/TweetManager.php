@@ -195,6 +195,19 @@ class TweetManager extends Model {
             return 0;
         }
     }
+
+    public function likesNumber($tweet_id) {
+
+        $this->getDb();
+        $data = $this->countElementsQuery("likes", "tweet_id", $tweet_id);
+
+        if ($data) {
+
+            return $data[0][0];
+        } else {
+            return 0;
+        }
+    }
 }
 
 ?>

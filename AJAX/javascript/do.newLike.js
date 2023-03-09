@@ -10,6 +10,7 @@ $(".likeButton").on("click", function(e) {
 
                 if (data == 1) {
 
+                    e.target.parentNode.parentNode.lastElementChild.innerHTML++;
                     e.target.classList.remove('fa-regular')
                     e.target.classList.add('fa-solid')
                     e.target.parentNode.parentNode.classList.add("text-pink-400")

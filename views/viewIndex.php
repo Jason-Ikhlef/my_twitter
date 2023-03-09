@@ -90,7 +90,7 @@ $tweet = new TweetManager;
                             <button value= <?= implode("-", ["tweet_id" => $data->id(), "user_id" => $data->user_id()]) ?> name="likeButton" type="button" class="likeButton">
                                 <i class= "<?= $tweet->isLiked($data->id()) ? "fa-heart mt-1 fa-solid" : "fa-heart mt-1 fa-regular" ?>"></i>
                             </button>
-                            <p class="ml-1">12</p>
+                            <p class="ml-1"><?= $tweet->likesNumber($data->id()) ?></p>
                         </div>
                         <form action="tweet" method="post" class="tweetMainForm">
                             <button class="seeComments" style="cursor: pointer;" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
