@@ -1,49 +1,72 @@
-$( document ).ready(function() {
+$(document).ready(function () {
+    //Log in popup display
 
-  //Log in popup display
+    $(".logInButton").on("click", function () {
+        $("#loginOverlay").removeClass("hidden");
+        $("#loginOverlay").addClass("block");
+    });
 
-  $(".button").on("click", function() {
-      $("#loginOverlay").removeClass("hidden");
-      $("#loginOverlay").addClass("block");
-  });
+    $(".logInClose").on("click", function () {
+        $("#loginOverlay").removeClass("block");
+        $("#loginOverlay").addClass("hidden");
+    });
 
-  $(".close").on("click", function() {
-      $("#loginOverlay").removeClass("block");
-      $("#loginOverlay").addClass("hidden");
-  });
+    $(".logInSwitchButton").on("click", function () {
+        $("#loginOverlay").removeClass("block");
+        $("#loginOverlay").addClass("hidden");
 
-  //Sign in popup display
+        $("#signInOverlay").removeClass("hidden");
+        $("#signInOverlay").addClass("block");
+    });
 
-  $(".signInButton").on("click", function() {
-      $("#signInOverlay").removeClass("hidden");
-      $("#signInOverlay").addClass("block");
-  });
+    //Sign in popup display
 
-  $(".signInClose").on("click", function() {
-      $("#signInOverlay").removeClass("block");
-      $("#signInOverlay").addClass("hidden");
-  });
-    
-  //Retweet popup display
+    $(".signInButton").on("click", function () {
+        $("#signInOverlay").removeClass("hidden");
+        $("#signInOverlay").addClass("block");
+    });
 
-    $(".retweetButton").on("click",function(){
-      if($('#retweetOverlay').hasClass('block')){
+    $(".signInClose").on("click", function () {
+        $("#signInOverlay").removeClass("block");
+        $("#signInOverlay").addClass("hidden");
+    });
 
-        $('#retweetOverlay').removeClass('block')
-        $('#retweetOverlay').addClass('hidden')
-      } else {
+    $(".signInSwitchButton").on("click", function () {
+        $("#signInOverlay").removeClass("block");
+        $("#signInOverlay").addClass("hidden");
 
-        $('#retweetOverlay').removeClass('hidden')
-        $('#retweetOverlay').addClass('block')
-      }
-    })
+        $("#loginOverlay").removeClass("hidden");
+        $("#loginOverlay").addClass("block");
+    });
 
+    //Retweet popup display
 
-    $('body').on('keyup',function(e){
-      if(e.code == 'Escape'){
-          $('#retweetOverlay').removeClass('block')
-          $('#retweetOverlay').addClass('hidden')
-      }
-    })
+    $(".retweetButton").on("click", function () {
+        if ($("#retweetOverlay").hasClass("block")) {
+            $("#retweetOverlay").removeClass("block");
+            $("#retweetOverlay").addClass("hidden");
+        } else {
+            $("#retweetOverlay").removeClass("hidden");
+            $("#retweetOverlay").addClass("block");
+        }
+    });
 
-})
+    $("body").on("keyup", function (e) {
+        if (e.code == "Escape") {
+            $("#retweetOverlay").removeClass("block");
+            $("#retweetOverlay").addClass("hidden");
+        }
+    });
+
+    //Edit profil popup
+
+    $(".editButton").on("click", function () {
+        $("#editOverlay").removeClass("hidden");
+        $("#editOverlay").addClass("block");
+    });
+
+    $(".editClose").on("click", function () {
+        $("#editOverlay").removeClass("block");
+        $("#editOverlay").addClass("hidden");
+    });
+});

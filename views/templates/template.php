@@ -81,7 +81,7 @@
                 <h1 class="font-bold">Nouveau sur Twitter ?</h1>
                 <p class="italic text-gray-500">Inscrivez-vous pour profiter de votre propre fil personnalisé !</p>
                 <div class="my-2">
-                    <button class="bg-white rounded-3xl hover:bg-gray-100 text-center p-2 border w-full signInButton">Créer un compte</button>
+                    <button class="rounded-3xl hover:bg-gray-100 text-center p-2 border w-full signInButton">Créer un compte</button>
                 </div>
                 <p>En vous inscrivant, vous acceptez les <a href="" class="text-blue-400">Conditions d'utilisation</a> et la <a href="" class="text-blue-400">Politique de confidentialité,</a> notamment l'<a href="" class="text-blue-400">Utilisation des cookies</a></p>
                 <div class="ml-4 mt-4 italic text-gray-500 text-sm">
@@ -103,7 +103,7 @@
                     <p class="font-bold text-xl">Ne manquez pas ce qui se passe.</p>
                     <p class="italic">Les utilisateurs de Twitter sont les premiers à savoir.</p>
                 </div>
-                <button class="rounded-3xl text-white border w-1/2 lg:1/6 mt-4 mb-4 ml-4 md:w-3/12 xl:w-2/12 button">Se connecter</button>
+                <button class="rounded-3xl text-white border w-1/2 lg:1/6 mt-4 mb-4 ml-4 md:w-3/12 xl:w-2/12 logInButton">Se connecter</button>
                 <form method="post">
                     <button name="logout">Logout</button>
                 </form>
@@ -116,7 +116,7 @@
 
     <div id="loginOverlay" class="fixed w-full h-auto p-10 bg-gray-500/50 inset-0 z-1 hidden">
         <div class="popup bg-white flex flex-col justify-center items-center w-auto m-auto max-w-md h-auto rounded-lg text-black p-1">
-            <button class="close self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
+            <button class="logInClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
             <form class="logInForm flex flex-col justify-center items-center w-full mb-8" autocomplete="off" id="login-form">
                 <i class="fa-brands fa-twitter fa-2xl self-center mb-17 mt-2 text-blue-500"></i>
                 <div class="logInText my-8 w-2/3">
@@ -138,7 +138,7 @@
             </form>
             <div class="signUp mb-5 w-2/3 flex flex-col justify-center items-center">
                 <p>Vous n'avez pas de compte ?</p>
-                <a class="text-blue-500 cursor-pointer ">Inscrivez-vous</a>
+                <a class="text-blue-500 cursor-pointer logInSwitchButton">Inscrivez-vous</a>
             </div>
         </div>
     </div>
@@ -181,7 +181,7 @@
             </form>
             <div class="signUp mb-5 w-2/3 flex flex-col justify-center items-center">
                 <p>Vous avez déjà un compte ?</p>
-                <a href="#" class="text-blue-500">Connectez-vous</a>
+                <a class="text-blue-500 signInSwitchButton cursor-pointer">Connectez-vous</a>
             </div>
         </div>
     </div>
