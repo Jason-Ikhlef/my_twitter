@@ -182,6 +182,19 @@ class TweetManager extends Model {
             return 0;
         }
     }
+
+    public function commentsNumber($tweet_id) {
+
+        $this->getDb();
+        $data = $this->countElementsQuery("tweets", "comments", $tweet_id);
+
+        if ($data) {
+
+            return $data[0][0];
+        } else {
+            return 0;
+        }
+    }
 }
 
 ?>

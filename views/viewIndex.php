@@ -84,7 +84,7 @@ $tweet = new TweetManager;
                             <button value="<?= $data->id() ?>" name="commentButton" type="button" class="commentButton">
                                 <i class="fa-regular fa-comment mt-1"></i>
                             </button>
-                            <p class="ml-1">12</p>
+                            <p class="ml-1"><?= $tweet->commentsNumber($data->id()) ?></p>
                         </div>
                         <div class="<?= $tweet->isLiked($data->id()) ? "flex cursor-pointer hover:text-pink-500 text-pink-400" : "flex cursor-pointer hover:text-pink-400"?>">
                             <button value= <?= implode("-", ["tweet_id" => $data->id(), "user_id" => $data->user_id()]) ?> name="likeButton" type="button" class="likeButton">
