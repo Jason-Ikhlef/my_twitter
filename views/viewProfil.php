@@ -18,7 +18,7 @@ endif
 
 <br>
 
-<form action="#" method="post" id="editForm">
+<form action="#" method="post" id="editForm" enctype='multipart/form-data'>
 
     <label for="nickname">Pseudo : </label>
     <input type="text" name="nickname" id="nickname" value="<?= $_SESSION["user_data"][1]?>">
@@ -31,7 +31,7 @@ endif
     <br>
 
     <label for="avatar">Profil picture</label>
-    <input type="text" name="avatar" id="avatar" value="<?= $_SESSION["user_data"][4] ?>">
+    <input type="file" name="avatar" id="avatar" value="<?= $_SESSION["user_data"][4] ?>">
 
     <br>
 

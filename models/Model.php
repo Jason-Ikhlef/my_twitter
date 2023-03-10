@@ -152,17 +152,18 @@ abstract class Model {
                 
             $req = self::$_db->prepare(
 
-                "SELECT nickname FROM users WHERE nickname = :nickname"
-
+                "SELECT nickname, id FROM users WHERE nickname = :nickname"
             );
 
             $req->execute(["nickname" => $nickname]);
             $req = $req->fetch();
 
             if (empty($req)) {
+
                 return false;
             } else {
-                return true;
+
+                return $req;
             }
 
         } catch (Exception) {

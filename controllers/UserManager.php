@@ -90,9 +90,11 @@ class UserManager extends Model {
         }
     }
 
-    public function editUserData($id, $nickname, $email, $avatar, $password, $newPassword){
+    public function editUserData($id, $nickname, $email, $password, $newPassword, $avatar = null){
 
-        if (!is_int($id) && !is_string($nickname) && !is_string($avatar) && !is_string($password) && !is_string($newPassword)) {
+        $nickname = trim($nickname);
+
+        if (!is_int($id) && !is_string($nickname) && !is_string($password) && !is_string($newPassword)) {
 
             return "Les données sont incorrectes";
         } else if (preg_match('/^[a-zA-Z0-9_]+$/', $nickname) == false) {
@@ -113,10 +115,20 @@ class UserManager extends Model {
         $data = $this->loginQuery($email, $password);
 
         if ($data === false){
+        
             return false;
         } else {
-            $data = $this->editUserDataQuery($id, $nickname, $email, $avatar, $password, $newPassword);
-            return $data;
+
+            $data = $this->nicknameCheckQuery($nickname);
+            
+            if ($data == false || $data["id"] == $_SESSION["user_id"]){
+                
+                $data = $this->editUserDataQuery($id, $nickname, $email, $avatar, $password, $newPassword);
+                return $data;
+            } else {
+                
+                return "Pseudonyme déjà utilisé";
+            }
         }
 
     }
