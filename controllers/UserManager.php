@@ -89,6 +89,25 @@ class UserManager extends Model {
             return false;
         }
     }
+
+    // AT
+
+    public function linkFromAt() {
+
+        session_start();
+
+        $id = $_SESSION["user_id"];
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($id, "User", "users", "id");
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }
 
 

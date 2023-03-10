@@ -18,6 +18,7 @@
     <script src="./AJAX/javascript/do.comment.js" defer></script>
     <script src="./AJAX/javascript/do.newLike.js" defer></script>
     <script src="./AJAX/javascript/do.dislike.js" defer></script>
+    <script src="./AJAX/javascript/do.linkToAt.js" defer></script>
     <title><?= $t ?></title>
 </head>
 

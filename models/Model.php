@@ -1,5 +1,8 @@
 <?php
 
+include_once("User.php");
+include_once("Tweet.php");
+
 abstract class Model
 {
 
@@ -289,7 +292,7 @@ abstract class Model
     }
 
 
-    protected function getAllByIdQuery(int $id, string $obj, string $table, string $column) {
+    protected function getAllByIdQuery($id, string $obj, string $table, string $column) {
 
         $tweet = [];
 
@@ -450,7 +453,7 @@ abstract class Model
         }
     }
 
-    protected function countElementsQuery($table, $column, $id) {
+    protected function countElementsQuery(string $table, string $column, int $id) {
 
         $query = self::$_db->prepare(
         
