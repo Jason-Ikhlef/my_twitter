@@ -15,6 +15,15 @@ $("#editBtn").click(function (e) {
 
     if (file !== undefined) {
 
+        let fileType = file["type"];
+        let validImageTypes = ["image/jpeg", "image/png"];
+    
+        if ($.inArray(fileType, validImageTypes) < 0) {
+            
+            console.log("Le fichier joint n'est pas de type jpeg ou png")
+            return
+        }
+
         let reader = new FileReader();
 
         reader.readAsDataURL(file);
@@ -32,8 +41,6 @@ $("#editBtn").click(function (e) {
 })
 
 function myAjax (data){
-
-    // console.log(data);
         
     $.ajax({
         type: "post",

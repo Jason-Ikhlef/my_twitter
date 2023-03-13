@@ -317,15 +317,28 @@ abstract class Model {
                 $password = hash('ripemd160', $password . "vive le projet tweet_academy");
             }
 
+            if ($avatar == null) {
+
+                $req = "UPDATE users SET nickname = :nickname, email = :email, password = :password WHERE id = :id";
+
+                $exec = ["nickname" => $nickname, "email" => $email, "password" => $password, "id" => $id];
+            } else {
+                
+                $req = "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, password = :password WHERE id = :id";
+
+                $exec = ["nickname" => $nickname, "email" => $email, "avatar" => $avatar, "password" => $password, "id" => $id];
+            }
+
             $query = self::$_db->prepare(
 
-                "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, password = :password WHERE id = :id"
+                $req
 
             );
 
-            $query->execute(["nickname" => $nickname, "email" => $email, "avatar" => $avatar, "password" => $password, "id" => $id]);
+            $query->execute($exec);
 
             return true;
+            
         } catch (Exception) {
 
             return "Echec de la modification";

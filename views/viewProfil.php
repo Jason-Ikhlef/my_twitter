@@ -13,9 +13,12 @@ if ($_SESSION["user_data"]) : ?>
 
 <?php
     endforeach;
-endif
+endif;
 
 ?>
+
+<img src="<?php echo "../../img/" . $_SESSION["user_data"][4]; ?>" />
+
 
 <br>
 

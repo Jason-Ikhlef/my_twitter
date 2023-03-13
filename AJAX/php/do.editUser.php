@@ -5,32 +5,6 @@ include_once ("../../controllers/UserManager.php");
 
 session_start();
 
-$data = explode("," , $_POST["avatar"])[1];
-$data = base64_decode($data);
-
-$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-$charactersLength = strlen($characters);
-$randomString = '';
-for ($i = 0; $i < 2; $i++) {
-    $randomString .= $characters[random_int(0, $charactersLength - 1)];
-}
-
-echo $randomString;
-
-$link = "/var/www/html/img/";
-
-$im = imagecreatefromstring($data);
-if ($im !== false) {
-    header('Content-Type: image/png');
-    imagepng($im, $link . $randomString);
-    imagedestroy($im);
-}
-else {
-    echo 'An error occurred.';
-}
-
-var_dump($_POST["str"]["password"]);
-
 if (isset($_POST["password"]) && $_POST["password"] == "" || isset($_POST["str"]["password"]) && $_POST["str"]["password"] == ""){
 
     echo "Mot de passe requis";
