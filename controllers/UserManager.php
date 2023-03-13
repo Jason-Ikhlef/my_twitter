@@ -91,10 +91,10 @@ class UserManager extends Model {
     }
 
     public function editUserData($id, $nickname, $email, $password, $newPassword, $avatar = null){
-
+        
         $nickname = trim($nickname);
 
-        if (!is_int($id) && !is_string($nickname) && !is_string($password) && !is_string($newPassword)) {
+        if (!is_int($id) && !is_string($nickname) && !is_string($password) && !is_string($newPassword) && !is_string($avatar)) {
 
             return "Les données sont incorrectes";
         } else if (preg_match('/^[a-zA-Z0-9_]+$/', $nickname) == false) {

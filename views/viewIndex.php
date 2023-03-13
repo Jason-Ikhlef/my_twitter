@@ -9,7 +9,7 @@ $tweet = new TweetManager;
 
 <div class="feed border">
     <div class="w-full border-t">
-        <form id="newTweet">
+        <form id="newTweet" >
             <div class="flex mt-4">
                 <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2">
                 <textarea name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></textarea>

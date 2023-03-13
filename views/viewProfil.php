@@ -10,6 +10,7 @@ if ($_SESSION["user_data"]) : ?>
         }
         echo $value ?> <br>
 
+
 <?php
     endforeach;
 endif
@@ -18,7 +19,7 @@ endif
 
 <br>
 
-<form action="#" method="post" id="editForm" enctype='multipart/form-data'>
+<form action="#" method="post" id="editForm" enctype="multipart/form-data">
 
     <label for="nickname">Pseudo : </label>
     <input type="text" name="nickname" id="nickname" value="<?= $_SESSION["user_data"][1]?>">

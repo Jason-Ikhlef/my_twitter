@@ -4,8 +4,13 @@ $("#editBtn").click(function (e) {
 
     e.preventDefault();
 
-    const form = $("#editForm")
-    let str = form.serialize()
+    let str = {
+        nickname : $("#editForm #nickname").val(),
+        email : $("#editForm #email").val(),
+        password : $("#editForm #password").val(),
+        newPassword : $("#editForm #newPassword").val(),
+    }
+
     let file = document.getElementById("avatar").files[0]
 
     if (file !== undefined) {
@@ -17,7 +22,6 @@ $("#editBtn").click(function (e) {
     
             data = { str, avatar: reader.result }
             myAjax(data)
-
         })
 
     } else {
@@ -28,6 +32,8 @@ $("#editBtn").click(function (e) {
 })
 
 function myAjax (data){
+
+    // console.log(data);
         
     $.ajax({
         type: "post",

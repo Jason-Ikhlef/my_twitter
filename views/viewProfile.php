@@ -27,7 +27,7 @@
                 <p>Identifiant</p>
             </div>
         </div>
-        <form method="post">
+        <form method="post" >
             <button name="logout">Logout</button>
         </form>
 </body>

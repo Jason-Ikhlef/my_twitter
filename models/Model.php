@@ -317,10 +317,6 @@ abstract class Model {
                 $password = hash('ripemd160', $password . "vive le projet tweet_academy");
             }
 
-            if ($avatar == ""){
-                $avatar = NULL;
-            }
-
             $query = self::$_db->prepare(
 
                 "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, password = :password WHERE id = :id"
