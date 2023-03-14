@@ -14,7 +14,9 @@
             <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-full max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3" src="https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/1619987722169-VV6ZASHHZNRBJW9X0PLK/Key_Art_02_layeredjpg.jpg?format=1500w">
         </div>
         <div class="editButton flex justify-end">
-            <button class="editButton bg-white border-2 border-gray-200 rounded-xl w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
+            <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
+            <!-- Bouton follow -->
+            <!-- <button class="editButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Suivre</button> -->
         </div>
         <div class="userInfo ml-8 mt-4">
             <p class="font-bold"><?= $_SESSION["user_data"]["nickname"] ?></p>
