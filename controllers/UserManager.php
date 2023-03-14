@@ -141,6 +141,9 @@ class UserManager extends Model
 
                     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     $charactersLength = strlen($characters);
+
+                    anchor:
+
                     $randomString = '';
 
                     for ($i = 0; $i < 2; $i++) {
@@ -150,6 +153,11 @@ class UserManager extends Model
 
                     $link = "/var/www/html/img/";
 
+                    if (!file_exists($link . $randomString)) {
+
+                        goto anchor;
+                    }
+                    
                     $im = imagecreatefromstring($data);
 
                     if ($im !== false) {
@@ -159,7 +167,7 @@ class UserManager extends Model
                         imagedestroy($im);
 
                     } else {
-                        
+
                         echo 'An error occurred.';
                     }
 

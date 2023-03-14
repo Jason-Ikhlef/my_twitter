@@ -31,4 +31,5 @@ if ($data === false){
 } else {
 
     echo "Changements effectués";
+    echo $data;
 }
