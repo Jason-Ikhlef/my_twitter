@@ -99,7 +99,7 @@ class UserManager extends Model
         }
     }
 
-    public function editUserData($id, $nickname, $email, $password, $newPassword, $avatar = null)
+    public function editUserData($id, $nickname, $email, $password, $newPassword, $avatar = null, $banner = null)
     {
 
         $nickname = trim($nickname);
@@ -133,57 +133,73 @@ class UserManager extends Model
 
             if ($data == false || $data["id"] == $_SESSION["user_id"]) {
 
-                if ($avatar !== null) {
+                if ($avatar !== null && $banner !== null){
 
                     $data = explode(",", $_POST["avatar"])[1];
 
-                    $data = base64_decode($data);
+                    $avatar = $this->uploadImg ($data);
 
-                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $charactersLength = strlen($characters);
+                    $data = explode(",", $_POST["banner"])[1];
 
-                    anchor:
+                    $banner = $this->uploadImg ($data);
 
-                    $randomString = '';
-
-                    for ($i = 0; $i < 2; $i++) {
-
-                        $randomString .= $characters[random_int(0, $charactersLength - 1)];
-                    }
-
-                    $link = "/var/www/html/img/";
-
-                    if (!file_exists($link . $randomString)) {
-
-                        goto anchor;
-                    }
+                } else if ($avatar !== null) {
                     
-                    $im = imagecreatefromstring($data);
+                    $data = explode(",", $_POST["avatar"])[1];
 
-                    if ($im !== false) {
+                    $avatar = $this->uploadImg ($data);
+                } else if ($banner !== null){
 
-                        header('Content-Type: image/png');
-                        imagepng($im, $link . $randomString);
-                        imagedestroy($im);
+                    $data = explode(",", $_POST["banner"])[1];
 
-                    } else {
-
-                        echo 'An error occurred.';
-                    }
-
-                    $avatar = $randomString;
-
-                } else {
-                    
-                    $avatar = null;
+                    $banner = $this->uploadImg ($data);
                 }
-                
-                $data = $this->editUserDataQuery($id, $nickname, $email, $avatar, $password, $newPassword);
+
+                $data = $this->editUserDataQuery($id, $nickname, $email, $avatar, $banner, $password, $newPassword);
                 return $data;
             } else {
 
                 return "Pseudonyme déjà utilisé";
             }
+        }
+    }
+
+    public function uploadImg ($data){
+
+        $data = base64_decode($data);
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+
+        anchor:
+
+        $randomString = '';
+
+        for ($i = 0; $i < 2; $i++) {
+
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+
+        $link = "/var/www/html/img/";
+
+        if (file_exists($link . $randomString)) {
+
+            goto anchor;
+        }
+
+        $im = imagecreatefromstring($data);
+
+        if ($im !== false) {
+
+            header('Content-Type: image/png');
+            imagepng($im, $link . $randomString);
+            imagedestroy($im);
+
+            return $randomString;
+
+        } else {
+
+            echo 'An error occurred.';
         }
     }
 }

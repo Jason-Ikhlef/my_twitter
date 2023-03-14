@@ -7,11 +7,7 @@ $("#login-btn").click(function (e) {
         url: "./AJAX/php/do.login.php",
         data: str,
         success: function (data) {
-            if (data == 1) {
-                setTimeout('document.location.href="index.php"',  1000)
-            } else {
-                alert(data)
-            }
+            console.log(data);
         }
     })
 })

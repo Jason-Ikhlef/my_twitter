@@ -39,6 +39,11 @@ endif;
 
     <br>
 
+    <label for="banner">Banner</label>
+    <input type="file" name="banner" id="banner" value="<?= $_SESSION["user_data"][5] ?>">
+
+    <br>
+
     <label for="password">Mot de passe :</label>
     <input type="password" name="password" id="password">
 

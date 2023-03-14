@@ -305,7 +305,7 @@ abstract class Model {
             }
     }
 
-    protected function editUserDataQuery ($id, $nickname, $email, $avatar, $password, $newPassword = NULL) {
+    protected function editUserDataQuery ($id, $nickname, $email, $avatar, $banner, $password, $newPassword = null) {
 
         try {
             
@@ -317,16 +317,28 @@ abstract class Model {
                 $password = hash('ripemd160', $password . "vive le projet tweet_academy");
             }
 
-            if ($avatar == null) {
+            if ($avatar !== null && $banner !== null) {
 
-                $req = "UPDATE users SET nickname = :nickname, email = :email, password = :password WHERE id = :id";
+                $req = "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, banner = :banner, password = :password WHERE id = :id";
 
-                $exec = ["nickname" => $nickname, "email" => $email, "password" => $password, "id" => $id];
-            } else {
+                $exec = ["nickname" => $nickname, "email" => $email, "avatar" => $avatar, "password" => $password, "banner" => $banner, "id" => $id];
+
+            } else if ($avatar !== null) {
                 
                 $req = "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, password = :password WHERE id = :id";
 
                 $exec = ["nickname" => $nickname, "email" => $email, "avatar" => $avatar, "password" => $password, "id" => $id];
+
+            } else if ($banner !== null) {
+
+                $req = "UPDATE users SET nickname = :nickname, email = :email, banner = :banner, password = :password WHERE id = :id";
+
+                $exec = ["nickname" => $nickname, "email" => $email, "banner" => $banner, "password" => $password, "id" => $id];
+            } else {
+
+                $req = "UPDATE users SET nickname = :nickname, email = :email, password = :password WHERE id = :id";
+
+                $exec = ["nickname" => $nickname, "email" => $email, "password" => $password, "id" => $id];
             }
 
             $query = self::$_db->prepare(
@@ -334,6 +346,8 @@ abstract class Model {
                 $req
 
             );
+
+            
 
             $query->execute($exec);
 

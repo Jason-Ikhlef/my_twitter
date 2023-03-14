@@ -11,14 +11,22 @@ if (isset($_POST["password"]) && $_POST["password"] == "" || isset($_POST["str"]
     return;
 }
 
-if (isset($_POST["avatar"])){
+if (isset($_POST["avatar"]) && isset($_POST["banner"])){
 
     $controller = new UserManager;
-    $data = $controller->editUserData($_SESSION["user_data"][0], $_POST["str"]["nickname"], $_POST["str"]["email"], $_POST["str"]["password"], $_POST["str"]["newPassword"], $_POST["avatar"]);
+    $data = $controller->editUserData($_SESSION["user_id"], $_POST["str"]["nickname"], $_POST["str"]["email"], $_POST["str"]["password"], $_POST["str"]["newPassword"], $_POST["avatar"], $_POST["banner"]);
+} else if (isset($_POST["avatar"])){
+
+    $controller = new UserManager;
+    $data = $controller->editUserData($_SESSION["user_id"], $_POST["str"]["nickname"], $_POST["str"]["email"], $_POST["str"]["password"], $_POST["str"]["newPassword"], $_POST["avatar"], null);
+} else if (isset($_POST["banner"])) {
+
+    $controller = new UserManager;
+    $data = $controller->editUserData($_SESSION["user_id"], $_POST["str"]["nickname"], $_POST["str"]["email"], $_POST["str"]["password"], $_POST["str"]["newPassword"], null, $_POST["banner"]);
 } else {
 
     $controller = new UserManager;
-    $data = $controller->editUserData($_SESSION["user_data"][0], $_POST["nickname"], $_POST["email"], $_POST["password"], $_POST["newPassword"]);
+    $data = $controller->editUserData($_SESSION["user_id"], $_POST["nickname"], $_POST["email"], $_POST["password"], $_POST["newPassword"], null, null);
 }
 
 
@@ -31,5 +39,4 @@ if ($data === false){
 } else {
 
     echo "Changements effectués";
-    echo $data;
 }
