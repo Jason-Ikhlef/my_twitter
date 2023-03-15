@@ -17,7 +17,12 @@ class View {
         if ($template == 'Profil') {
             $view = $this->generateFile('views/templates/templateProfil.php', array('t' => $this->_t, "content" => $content));
         } else {
-            $view = $this->generateFile('views/templates/template.php', array('t' => $this->_t, "content" => $content));
+            if(isset($_SESSION["user_id"]) && !isset($_POST["disconnect"])){
+                $view = $this->generateFile('views/templates/templateLoggedIn.php', array('t' => $this->_t, "content" => $content));
+            }
+            else {
+                $view = $this->generateFile('views/templates/template.php', array('t' => $this->_t, "content" => $content));
+            }
         }
 
         echo $view;
