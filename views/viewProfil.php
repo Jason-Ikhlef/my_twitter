@@ -1,22 +1,4 @@
-<br>
-
-<?php
-
-if ($_SESSION["user_data"]) : ?>
-
-    <?php foreach ($_SESSION["user_data"] as $value) :
-        if ($value == "") {
-            $value = "NULL";
-        }
-        echo $value ?> <br>
-
-
-<?php
-    endforeach;
-endif;
-
-?>
-    <div class="w-full flex flex-col items-center top-0">
+<!-- <div class="w-full flex flex-col items-center top-0">
         <div class="profileTop flex w-1/3 border-b-4">
             <i class="fa-solid fa-arrow-left mx-4 self-center"></i>
             <div>
@@ -42,7 +24,7 @@ endif;
         <form method="post">
             <button name="logout">Logout</button>
         </form>
-    </div>
+    </div> -->
 <div class="w-full flex flex-col top-0">
     <div class="profileTop flex w-1/3 border-b-4 max-sm:w-auto">
         <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
