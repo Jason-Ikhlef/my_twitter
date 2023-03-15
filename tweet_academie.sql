@@ -62,15 +62,6 @@ CREATE TABLE likes (
   FOREIGN KEY (tweet_id)            REFERENCES tweets(id)
 );
 
-CREATE TABLE retweets (
-  id                INT             NOT NULL AUTO_INCREMENT,
-  tweet_id          INT,
-  user_id           INT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (user_id)             REFERENCES users(id),
-  FOREIGN KEY (tweet_id)            REFERENCES tweets(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 INSERT INTO users (nickname, email, password) VALUES 
 ('dorian', 'dorian@dorian.fr','fb3f844b2fa8214975077fa3ebe813d7414363b2'),
 ('quentin', 'quentin@quentin.fr','9ecce358db7662fa81ebd9500e6306d04ad1b90b'),
