@@ -1,10 +1,10 @@
 $(".ConfirmNewTweet").on("click", function(e) {
     e.preventDefault();
-    const form = $('#newTweet')
-
+    const message = $('#tweetMessage')
+    
     $.ajax({
         type: "POST",
-        data: form.serialize(),
+        data: {message : message.text().trim()},
         url: "./AJAX/php/do.newTweet.php",
         success: function(data) {
             

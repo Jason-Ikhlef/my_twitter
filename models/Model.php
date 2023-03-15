@@ -240,38 +240,11 @@ abstract class Model
         }
     }
 
-    protected function retweetQuery(int $tweet_id)
-    {
-
-        session_start();
-
-        try {
-
-            $user_id = $_SESSION['user_id'];
-            // $user_id = 2;
-
-            $query = self::$_db->prepare(
-
-                "INSERT INTO retweets (tweet_id, user_id)
-                VALUES ($tweet_id, $user_id)"
-
-            );
-
-            $query->execute();
-
-            return true;
-        } catch (Exception) {
-
-            return false;
-        }
-    }
-
-    protected function quoteTweetQuery(int $origin, string $message, $images = '') {
+    protected function retweetQuery(int $origin, string $message = '', $images = '') {
 
         session_start();
 
         $user_id = $_SESSION['user_id'];
-        // $user_id = 2;
 
         try {
 

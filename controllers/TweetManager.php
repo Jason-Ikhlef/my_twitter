@@ -39,23 +39,10 @@ class TweetManager extends Model {
         }
     }
 
-    public function retweet($tweet_id) {
+    function retweet($origin, $message = '', $images = '') {
 
         $this->getDb();
-        $data = $this->retweetQuery($tweet_id);
-
-        if ($data) {
-
-            return $data;
-        } else {
-            return false;
-        }
-    }
-
-    function quoteTweet($origin, $message, $images = '') {
-
-        $this->getDb();
-        $data = $this->quoteTweetQuery($origin, $message, $images);
+        $data = $this->retweetQuery($origin, $message, $images);
 
         if ($data) {
 

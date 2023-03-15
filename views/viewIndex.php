@@ -10,7 +10,7 @@ $tweet = new TweetManager;
 <div class="feed border">
     <div class="w-full border-t">
         <form id="newTweet">
-            <div class="flex mt-4">
+            <div id="tweetMessage" class="flex mt-4">
                 <a href="profil"><img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
                 <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></div >
             </div>
@@ -26,6 +26,25 @@ $tweet = new TweetManager;
     <?php if ($tweets) : ?>
         <?php foreach ($tweets as $data) : ?>
             <div class="w-full hover:bg-gray-100 border-y">
+                <?php if (empty($data->message()) && $data->origin()) { ?>
+                    <?php if ($_SESSION['user_id'] == $data->user_id()) {?>
+                        <p cl>Tu as retweeté</p>
+                    <?php } else {?>
+                        <p><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
+                    <?php } ?>
+                    <div class="flex p-4">
+                        <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
+                        <p class="font-bold mt-3 ml-2">
+                            <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
+                        </p>
+                    </div>
+                    <div class="tweet-main">
+                        <p class="ml-20">
+                            <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
+                            <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                        </p>
+                    </div>
+                <?php } else { ?>
                 <div class="flex p-4">
                     <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
                     <p class="font-bold mt-3 ml-2">
@@ -59,6 +78,7 @@ $tweet = new TweetManager;
                         </div>
                     </div>
                 <?php endif ?>
+                <?php } ?>
                 <div class="m-4 border flex gap-8">
                     <div class="flex cursor-pointer hover:text-blue-400 relative">
                         <div class="retweet">
@@ -67,9 +87,11 @@ $tweet = new TweetManager;
                                 <p class="ml-1"><?= $tweet->retweetsNumber($data->id()) ?></p>
                             </button>
                             <div class="retweetOverlay hidden absolute bg-gray-200 rounded-xl z-10">
-                                <div class="flex border cursor-pointer hover:bg-gray-100">
-                                    <i class="fa-solid fa-retweet"></i>
-                                    <p>Retweeter</p>
+                                <div class="flex cursor-pointer hover:bg-gray-100">
+                                    <button value="<?= $data->id() ?>" name="retweetButton" type="button" class="retweetButton">
+                                        <i class="fa-solid fa-pen"></i>
+                                        Retweeter
+                                    </button>
                                 </div>
                                 <div class="flex cursor-pointer hover:bg-gray-100">
                                     <button value="<?= $data->id() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton">

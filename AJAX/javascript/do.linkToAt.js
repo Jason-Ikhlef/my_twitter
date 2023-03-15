@@ -77,7 +77,7 @@ $(div).on("input", function() {
                     newRange.collapse(true);
                     newSelection.removeAllRanges();
                     newSelection.addRange(newRange);
-
+                    
                     console.log(data);
                 }
                 
