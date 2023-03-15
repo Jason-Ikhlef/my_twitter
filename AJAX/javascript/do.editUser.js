@@ -104,6 +104,7 @@ function myAjax(data) {
         url: "./AJAX/php/do.editUser.php",
         data: data,
         success: function (data) {
+            location.reload()
             console.log(data)
         }
     });

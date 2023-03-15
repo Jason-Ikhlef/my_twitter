@@ -18,7 +18,7 @@ endif;
 ?>
 
 <img src="<?php echo "../../img/" . $_SESSION["user_data"][4]; ?>" />
-
+<img src="<?php echo "../../img/" . $_SESSION["user_data"][5]; ?>" />
 
 <br>
 

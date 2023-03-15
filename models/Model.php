@@ -209,7 +209,7 @@ abstract class Model {
 
             $req = self::$_db->prepare(
 
-                "SELECT id, nickname, email, follows, picture, date FROM users WHERE email = :email AND password = :password"
+                "SELECT id, nickname, email, follows, picture, banner, date FROM users WHERE email = :email AND password = :password"
 
             );
 
