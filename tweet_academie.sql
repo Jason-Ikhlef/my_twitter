@@ -33,11 +33,12 @@ CREATE TABLE `tweets` (
   `message` VARCHAR(140) NOT NULL,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `images` VARCHAR(2048),
-  `comments` LONGTEXT,
-  `liked_id` LONGTEXT,
+  `comments` INT DEFAULT NULL,
+  `liked_id` LONGTEXT DEFAULT "-",
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
-  FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`comments`) REFERENCES `tweets`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `likes` (
@@ -45,8 +46,8 @@ CREATE TABLE `likes` (
   `user_id` INT,
   `tweet_id` INT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
-  FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION,
+  FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `retweets` (
@@ -54,8 +55,6 @@ CREATE TABLE `retweets` (
   `tweet_id` INT,
   `user_id` INT,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-INSERT INTO `users` (`id`, `nickname`, `email`, `password`, `follows`, `picture`, `date`) VALUES (NULL, 'dorian', 'dorian@dorian.fr', 'dorian', NULL, NULL, current_timestamp());
