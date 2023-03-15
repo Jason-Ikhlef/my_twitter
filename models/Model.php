@@ -11,7 +11,7 @@ abstract class Model
     private static function setDb()
     {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'dorian1', '123');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'root');
 
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -48,7 +48,8 @@ abstract class Model
         }
     }
 
-    protected function newTweetQuery(string $message, $images = '') {
+    protected function newTweetQuery(string $message, $images = '')
+    {
 
         session_start();
 
@@ -241,7 +242,8 @@ abstract class Model
         }
     }
 
-    protected function retweetQuery(int $origin, string $message = '', $images = '') {
+    protected function retweetQuery(int $origin, string $message = '', $images = '')
+    {
 
         session_start();
 
@@ -266,7 +268,8 @@ abstract class Model
     }
 
 
-    protected function getAllByIdQuery($id, string $obj, string $table, string $column) {
+    protected function getAllByIdQuery($id, string $obj, string $table, string $column)
+    {
 
         $tweet = [];
 
@@ -288,15 +291,14 @@ abstract class Model
 
             $query->closeCursor();
             return $tweet;
-
-
         } catch (Exception) {
-            
+
             return false;
         }
     }
 
-    protected function newCommentQuery(string $message, $tweet_id, $images = '') {
+    protected function newCommentQuery(string $message, $tweet_id, $images = '')
+    {
 
         session_start();
 
@@ -306,22 +308,22 @@ abstract class Model
         try {
 
             $query = self::$_db->prepare(
-    
+
                 "INSERT INTO tweets (user_id, message, images, comments)
                 VALUES (:user_id, :message, :images, :comment)"
-    
+
             );
-    
+
             $query->execute(["user_id" => $user_id, "message" => $message, "images" => $images, "comment" => $tweet_id]);
-    
+
             return true;
-    
         } catch (Exception) {
             return false;
         }
     }
 
-    protected function newLikeQuery(int $tweet_id) {
+    protected function newLikeQuery(int $tweet_id)
+    {
 
         session_start();
 
@@ -330,57 +332,57 @@ abstract class Model
         try {
 
             $query = self::$_db->prepare(
-    
+
                 "INSERT INTO likes (user_id, tweet_id)
                 VALUES (:user_id, :tweet_id)"
-    
+
             );
-    
+
             $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
 
             $query = self::$_db->prepare(
-    
+
                 "SELECT user_id FROM likes
                 WHERE user_id = :user_id AND tweet_id = :tweet_id"
             );
-    
+
             $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
 
             $likeId = $query->fetchAll();
 
             $query = self::$_db->prepare(
-    
+
                 "SELECT liked_id FROM tweets
                 WHERE id = :tweet_id"
             );
-    
+
             $query->execute(["tweet_id" => $tweet_id]);
 
             $value = $query->fetchAll();
-            
+
             $query = self::$_db->prepare(
-    
+
                 "UPDATE tweets
                 SET liked_id = :liked_id
                 WHERE id = :tweet_id"
-    
+
             );
-    
-            $query->execute(["tweet_id" => $tweet_id, "liked_id" => $value[0][0].$likeId[0][0]."-"]);
+
+            $query->execute(["tweet_id" => $tweet_id, "liked_id" => $value[0][0] . $likeId[0][0] . "-"]);
 
             return true;
-    
         } catch (Exception) {
             return false;
         }
     }
 
-    protected function isLikedQuery($tweet_id) {
+    protected function isLikedQuery($tweet_id)
+    {
 
         $user_id = $_SESSION['user_id'];
 
         $query = self::$_db->prepare(
-    
+
             "SELECT id FROM tweets
             WHERE liked_id LIKE :user_id
             AND id = :tweet_id"
@@ -393,7 +395,8 @@ abstract class Model
         return $data;
     }
 
-    protected function dislikeQuery(int $tweet_id) {
+    protected function dislikeQuery(int $tweet_id)
+    {
 
         session_start();
         $user_id = $_SESSION['user_id'];
@@ -401,7 +404,7 @@ abstract class Model
         try {
 
             $query = self::$_db->prepare(
-        
+
                 "DELETE FROM likes
                 WHERE user_id = :user_id AND tweet_id = :tweet_id"
 
@@ -410,7 +413,7 @@ abstract class Model
             $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
 
             $query = self::$_db->prepare(
-        
+
                 "UPDATE tweets
                 SET liked_id = REPLACE(liked_id, '-$user_id-', '-')
                 WHERE id = :tweet_id"
@@ -420,17 +423,17 @@ abstract class Model
             $query->execute(["tweet_id" => $tweet_id]);
 
             return true;
-
-        } catch(Exception) {
+        } catch (Exception) {
 
             return false;
         }
     }
 
-    protected function countElementsQuery(string $table, string $column, int $id) {
+    protected function countElementsQuery(string $table, string $column, int $id)
+    {
 
         $query = self::$_db->prepare(
-        
+
             "SELECT COUNT(*) FROM $table
             WHERE $column = :$column"
 
@@ -442,15 +445,16 @@ abstract class Model
         return $data;
     }
 
-    protected function editUserDataQuery ($id, $nickname, $email, $avatar, $banner, $password, $newPassword = null) {
+    protected function editUserDataQuery($id, $nickname, $email, $avatar, $banner, $password, $newPassword = null)
+    {
 
         try {
-            
-            if ($newPassword != null || $newPassword != ""){
 
-                $password = hash('ripemd160', $newPassword . "vive le projet tweet_academy");  
+            if ($newPassword != null || $newPassword != "") {
+
+                $password = hash('ripemd160', $newPassword . "vive le projet tweet_academy");
             } else {
-                
+
                 $password = hash('ripemd160', $password . "vive le projet tweet_academy");
             }
 
@@ -459,13 +463,11 @@ abstract class Model
                 $req = "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, banner = :banner, password = :password WHERE id = :id";
 
                 $exec = ["nickname" => $nickname, "email" => $email, "avatar" => $avatar, "password" => $password, "banner" => $banner, "id" => $id];
-
             } else if ($avatar !== null) {
-                
+
                 $req = "UPDATE users SET nickname = :nickname, email = :email, picture = :avatar, password = :password WHERE id = :id";
 
                 $exec = ["nickname" => $nickname, "email" => $email, "avatar" => $avatar, "password" => $password, "id" => $id];
-
             } else if ($banner !== null) {
 
                 $req = "UPDATE users SET nickname = :nickname, email = :email, banner = :banner, password = :password WHERE id = :id";
@@ -484,12 +486,11 @@ abstract class Model
 
             );
 
-            
+
 
             $query->execute($exec);
 
             return true;
-            
         } catch (Exception) {
 
             return "Echec de la modification";

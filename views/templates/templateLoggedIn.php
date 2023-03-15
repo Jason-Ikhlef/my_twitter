@@ -15,6 +15,11 @@
     <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
     <script src="./AJAX/javascript/do.login.js" defer></script>
     <script src="./AJAX/javascript/do.register.js" defer></script>
+    <script src="./AJAX/javascript/do.editUser.js" defer></script>
+    <script src="./AJAX/javascript/do.comment.js" defer></script>
+    <script src="./AJAX/javascript/do.newLike.js" defer></script>
+    <script src="./AJAX/javascript/do.dislike.js" defer></script>
+    <script src="./AJAX/javascript/do.linkToAt.js" defer></script>
     <title><?= $t ?></title>
 </head>
 
@@ -68,7 +73,7 @@
 
                 </div>
 
-                
+
                 <div class="mb-4 logoutDisplayOverlay">
                     <div class="hidden shadow cursor-pointer hover:bg-gray-200 rounded-3xl text-center mb-4" id="logoutPopup">
                         <form method="post">
@@ -100,8 +105,8 @@
             <div class="h-fit mr-4 ml-4 p-4 rounded-lg fixed lg:w-[290px] xl:w-[350px] mx-auto">
                 <label for="searchTweets">
                     <i class="fa-solid fa-magnifying-glass p-4 mx-auto text-left hover:bg-gray-100 rounded-full m-2.5 p-2 cursor-pointer"></i>
-                </label> 
-                <input type="text" class="bg-gray-200 p-5 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7" name="searchTweets" placeholder="Recherche Twitter"  id="searchTweets">
+                </label>
+                <input type="text" class="bg-gray-200 p-5 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7" name="searchTweets" placeholder="Recherche Twitter" id="searchTweets">
             </div>
         </div>
 
@@ -112,7 +117,7 @@
     </div>
 
     <!-- Tweet Submenu Popup -->
-    
+
     <div id="tweetSubmenuOverlay" class="fixed w-full h-auto p-10 bg-gray-500/50 inset-0 z-1 hidden">
         <div class="popup bg-white flex flex-col justify-center items-center w-auto m-auto max-w-md h-auto rounded-lg text-black p-1">
             <button class="tweetSubmenuClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
@@ -130,7 +135,7 @@
                     </div>
                     <button class="ConfirmNewTweet cursor-pointer bg-blue-500 text-white px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200" name="sendNewTweet" type="button">Tweeter</button>
                 </div>
-        </form>
+            </form>
         </div>
     </div>
 

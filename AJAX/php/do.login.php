@@ -14,7 +14,7 @@ if (!empty($_POST["email"] && !empty($_POST["password"]))) {
         echo "Identifiants incorrects";
     } else {
         $_SESSION["user_id"] = $data["id"];
-        $_SESSION["user_data"] = array("id" => $data["id"], "nickname" => $data["nickname"], "email" => $data["email"], "follows" => $data["follows"], "picture" => $data["picture"], "date" => $data["date"]);
+        $_SESSION["user_data"] = array("id" => $data["id"], "nickname" => $data["nickname"], "email" => $data["email"], "follows" => $data["follows"], "picture" => $data["picture"], "banner" => $data["banner"], "date" => $data["date"]);
         echo true;
     }
 } else {
