@@ -85,7 +85,7 @@
                     <p class="font-bold text-xl">Ne manquez pas ce qui se passe.</p>
                     <p class="italic">Les utilisateurs de Twitter sont les premiers à savoir.</p>
                 </div>
-                <button class="rounded-3xl text-white border w-1/2 lg:1/6 mt-4 mb-4 ml-4 md:w-3/12 xl:w-2/12 button">Se connecter</button>
+                <button class="rounded-3xl text-white border w-1/2 lg:1/6 mt-4 mb-4 ml-4 md:w-3/12 xl:w-2/12 button logInButton">Se connecter</button>
                 <button class="text-block bg-white rounded-3xl mr-4 w-1/2 lg:1/6 mt-4 mb-4 md:w-3/12 xl:w-2/12 signInButton">S'inscrire</button>
             </div>
         </div>

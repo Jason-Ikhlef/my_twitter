@@ -1,19 +1,3 @@
-
-$( document ).ready(function() {
-  //Log in popup display
-
-  $(".button").on("click", function() {
-      $("#loginOverlay").removeClass("hidden");
-      $("#loginOverlay").addClass("block");
-      $('body').addClass('overflow-hidden')
-  });
-
-  $(".close").on("click", function() {
-      $("#loginOverlay").removeClass("block");
-      $("#loginOverlay").addClass("hidden");
-      $('body').removeClass('overflow-hidden')
-  });
-  
 $(document).ready(function () {
     //Log in popup display
 
@@ -51,12 +35,7 @@ $(document).ready(function () {
     
   //Retweet popup display
     
-    $(".retweetButton").each(function(e){
-      $(this).on('click', function() {
-        if($(this).next().hasClass('block')){
-
-
-    $(".retweetButton").each(function(e){
+  $(".retweetButton").each(function(e){
       $(this).on('click', function() {
         if($(this).next().hasClass('block')){
 
@@ -76,7 +55,6 @@ $(document).ready(function () {
         $('.retweetOverlay').addClass('hidden')
       }
     })
-  })
 
   // Comment popup display
 
@@ -92,8 +70,8 @@ $(document).ready(function () {
         $(this).next().addClass('block')
         $('body').addClass('overflow-hidden')
       }
-
     })
+  })
 
     $('.commentClose').on('click',function(){
       $('.commentOverlay').removeClass('block')
@@ -260,5 +238,4 @@ $('.postTweet').on('input',function (e) {
         $("#editOverlay").removeClass("block");
         $("#editOverlay").addClass("hidden");
     });
-});
-
+  });
