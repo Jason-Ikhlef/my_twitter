@@ -4,7 +4,7 @@ class TweetManager extends Model {
 
     // Tweet table Functions Here ...
 
-    public function newTweet($message, $user_id = 1, $images = '') {
+    public function newTweet($message, $images = '') {
 
         if (empty($message)) {
 
@@ -15,7 +15,7 @@ class TweetManager extends Model {
         }
 
         $this->getDb();
-        $data = $this->newTweetQuery($message, $user_id, $images);
+        $data = $this->newTweetQuery($message, $images);
 
         if ($data) {
 
@@ -78,10 +78,49 @@ class TweetManager extends Model {
         }
     }
 
-    public function getAllById($id, $obj) {
+    public function newComment($message, $tweet_id, $images = '') {
+        
+        $this->getDb();
+        $data = $this->newCommentQuery($message, $tweet_id, $images);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function getComments() {
 
         $this->getDb();
-        $data = $this->getAllByIdQuery($id, $obj, "tweets");
+        $data = $this->getAllByIdQuery($_POST['seeComments'], 'Tweet', 'tweets', 'comments');
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function aboveCommentsTweet() {
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($_POST['seeComments'], 'Tweet', 'tweets', 'id');
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function getAllTweetsDataById($id, $obj) {
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($id, $obj, 'tweets', 'id');
 
         if ($data) {
 
