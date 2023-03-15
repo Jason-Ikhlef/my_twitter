@@ -130,7 +130,7 @@ $tweet = new TweetManager;
                 <div class="flex p-4">
                     <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
                     <p class="font-bold mt-3 ml-2">
-                        <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
+                        <?= $user->nicknameFromId($data->user_id())[0]->nickname(); ?> 
                     </p>
                 </div>
                 <div class="tweet-main">
