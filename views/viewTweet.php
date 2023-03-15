@@ -13,6 +13,16 @@ $tweet = new TweetManager;
     <div class="tweet-main">
         <?= $tweet->aboveCommentsTweet()[0]->message()?>
     </div>
+    <?php if ($tweet->aboveCommentsTweet()[0]->origin()) :?>
+        <div class="tweet-quote">
+            <div class="nickname-quoteTweet">
+                <?= $user->nicknameFromId($tweet->idUserFromOrigin($tweet->aboveCommentsTweet()[0]->origin())[0]->user_id())[0]->nickname() ?>
+            </div>
+            <div class="message-quoteTweet">
+                <?= $tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->message() ?>
+            </div>
+        </div>
+    <?php endif ?>
     <div class="tweet-footer">
         nbr rt, nbr like
     </div>
@@ -28,16 +38,6 @@ $tweet = new TweetManager;
                 <div class="tweet-main">
                     <?= $data->message() ?>
                 </div>
-                <?php if ($data->origin()) :?>
-                    <div class="tweet-quote">
-                        <div class="nickname-quoteTweet">
-                            <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
-                        </div>
-                        <div class="message-quoteTweet">
-                            <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
-                        </div>
-                    </div>
-                <?php endif ?>
                 <div style="margin-top: 10px;" class="tweet-footer">
                         <button class="retweetButton" style="cursor: pointer;" value="<?= $data->id() ?>" name="retweetButton" >Retweet</button>
                         <button class="commentButton" style="cursor: pointer;" value="<?= $data->id() ?>" name="commentButton" type="button">Commenter</button>
@@ -49,4 +49,4 @@ $tweet = new TweetManager;
             </div>
             <br>
     <?php endforeach ?>
-    <?php endif ?>
+<?php endif ?>

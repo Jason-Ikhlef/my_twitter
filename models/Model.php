@@ -1,5 +1,8 @@
 <?php
 
+include_once("User.php");
+include_once("Tweet.php");
+
 abstract class Model
 {
 
@@ -8,7 +11,7 @@ abstract class Model
     private static function setDb()
     {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'root');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'dorian1', '123');
 
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -192,7 +195,7 @@ abstract class Model
             $query = self::$_db->prepare(
 
                 'SELECT user_id FROM tweets
-                WHERE origin = :origin'
+                WHERE id = :origin'
 
             );
 
@@ -238,45 +241,18 @@ abstract class Model
         }
     }
 
-    protected function retweetQuery(int $tweet_id)
-    {
-
-        session_start();
-
-        try {
-
-            $user_id = $_SESSION['user_id'];
-            // $user_id = 2;
-
-            $query = self::$_db->prepare(
-
-                "INSERT INTO retweets (tweet_id, user_id)
-                VALUES ($tweet_id, $user_id)"
-
-            );
-
-            $query->execute();
-
-            return true;
-        } catch (Exception) {
-
-            return false;
-        }
-    }
-
-    protected function quoteTweetQuery(int $origin, string $message, $images = '') {
+    protected function retweetQuery(int $origin, string $message = '', $images = '') {
 
         session_start();
 
         $user_id = $_SESSION['user_id'];
-        // $user_id = 2;
 
         try {
 
             $query = self::$_db->prepare(
 
                 "INSERT INTO tweets (origin, user_id, message, images)
-            VALUES (:origin, :user_id, :message, :images)"
+                VALUES (:origin, :user_id, :message, :images)"
 
             );
 
@@ -290,7 +266,7 @@ abstract class Model
     }
 
 
-    protected function getAllByIdQuery(int $id, string $obj, string $table, string $column) {
+    protected function getAllByIdQuery($id, string $obj, string $table, string $column) {
 
         $tweet = [];
 
@@ -343,6 +319,127 @@ abstract class Model
         } catch (Exception) {
             return false;
         }
+    }
+
+    protected function newLikeQuery(int $tweet_id) {
+
+        session_start();
+
+        $user_id = $_SESSION['user_id'];
+
+        try {
+
+            $query = self::$_db->prepare(
+    
+                "INSERT INTO likes (user_id, tweet_id)
+                VALUES (:user_id, :tweet_id)"
+    
+            );
+    
+            $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
+
+            $query = self::$_db->prepare(
+    
+                "SELECT user_id FROM likes
+                WHERE user_id = :user_id AND tweet_id = :tweet_id"
+            );
+    
+            $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
+
+            $likeId = $query->fetchAll();
+
+            $query = self::$_db->prepare(
+    
+                "SELECT liked_id FROM tweets
+                WHERE id = :tweet_id"
+            );
+    
+            $query->execute(["tweet_id" => $tweet_id]);
+
+            $value = $query->fetchAll();
+            
+            $query = self::$_db->prepare(
+    
+                "UPDATE tweets
+                SET liked_id = :liked_id
+                WHERE id = :tweet_id"
+    
+            );
+    
+            $query->execute(["tweet_id" => $tweet_id, "liked_id" => $value[0][0].$likeId[0][0]."-"]);
+
+            return true;
+    
+        } catch (Exception) {
+            return false;
+        }
+    }
+
+    protected function isLikedQuery($tweet_id) {
+
+        $user_id = $_SESSION['user_id'];
+
+        $query = self::$_db->prepare(
+    
+            "SELECT id FROM tweets
+            WHERE liked_id LIKE :user_id
+            AND id = :tweet_id"
+
+        );
+
+        $query->execute(["user_id" => "%-$user_id-%", "tweet_id" => $tweet_id]);
+        $data = $query->fetchAll();
+
+        return $data;
+    }
+
+    protected function dislikeQuery(int $tweet_id) {
+
+        session_start();
+        $user_id = $_SESSION['user_id'];
+
+        try {
+
+            $query = self::$_db->prepare(
+        
+                "DELETE FROM likes
+                WHERE user_id = :user_id AND tweet_id = :tweet_id"
+
+            );
+
+            $query->execute(["user_id" => $user_id, "tweet_id" => $tweet_id]);
+
+            $query = self::$_db->prepare(
+        
+                "UPDATE tweets
+                SET liked_id = REPLACE(liked_id, '-$user_id-', '-')
+                WHERE id = :tweet_id"
+
+            );
+
+            $query->execute(["tweet_id" => $tweet_id]);
+
+            return true;
+
+        } catch(Exception) {
+
+            return false;
+        }
+    }
+
+    protected function countElementsQuery(string $table, string $column, int $id) {
+
+        $query = self::$_db->prepare(
+        
+            "SELECT COUNT(*) FROM $table
+            WHERE $column = :$column"
+
+        );
+
+        $query->execute([$column => $id]);
+        $data = $query->fetchAll();
+
+        return $data;
     }
 
     protected function editUserDataQuery ($id, $nickname, $email, $avatar, $banner, $password, $newPassword = null) {

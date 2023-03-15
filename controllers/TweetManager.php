@@ -39,23 +39,10 @@ class TweetManager extends Model {
         }
     }
 
-    public function retweet($tweet_id) {
+    function retweet($origin, $message = '', $images = '') {
 
         $this->getDb();
-        $data = $this->retweetQuery($tweet_id);
-
-        if ($data) {
-
-            return $data;
-        } else {
-            return false;
-        }
-    }
-
-    function quoteTweet($origin, $message, $user_id = 1, $images = '') {
-
-        $this->getDb();
-        $data = $this->quoteTweetQuery($origin, $message, $user_id, $images);
+        $data = $this->retweetQuery($origin, $message, $images);
 
         if ($data) {
 
@@ -127,6 +114,85 @@ class TweetManager extends Model {
             return $data;
         } else {
             return false;
+        }
+    }
+
+    public function newLike($tweet_id) {
+
+        $this->getDb();
+        $data = $this->newLikeQuery($tweet_id);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function isLiked($tweet_id) {
+
+        $this->getDb();
+        $data = $this->isLikedQuery($tweet_id);
+        
+        if (!empty($data)) {
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function dislike($tweet_id) {
+
+        $this->getDb();
+        $data = $this->dislikeQuery($tweet_id);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function retweetsNumber($tweet_id) {
+
+        $this->getDb();
+        $data = $this->countElementsQuery("tweets", "origin", $tweet_id);
+
+        if ($data) {
+
+            return $data[0][0];
+        } else {
+            return 0;
+        }
+    }
+
+    public function commentsNumber($tweet_id) {
+
+        $this->getDb();
+        $data = $this->countElementsQuery("tweets", "comments", $tweet_id);
+
+        if ($data) {
+
+            return $data[0][0];
+        } else {
+            return 0;
+        }
+    }
+
+    public function likesNumber($tweet_id) {
+
+        $this->getDb();
+        $data = $this->countElementsQuery("likes", "tweet_id", $tweet_id);
+
+        if ($data) {
+
+            return $data[0][0];
+        } else {
+            return 0;
         }
     }
 }

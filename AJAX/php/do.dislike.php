@@ -5,4 +5,5 @@ include_once('../../controllers/TweetManager.php');
 
 $controller = new TweetManager;
 
-echo $controller->newComment($_POST['form'], $_POST['tweet_id']);
+
+echo $controller->dislike(explode("-", ($_POST['ids']))[0]);

@@ -5,4 +5,4 @@ include_once('../../controllers/TweetManager.php');
 
 $controller = new TweetManager;
 
-echo $controller->quoteTweet($_POST['tweet_id'], explode("=", $_POST['form'])[1]);
+echo $controller->retweet($_POST['tweet_id'], $_POST['form']);

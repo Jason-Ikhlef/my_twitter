@@ -28,6 +28,30 @@ CREATE TABLE users (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE `tweets` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `origin` INT DEFAULT NULL,
+  `user_id` INT,
+  `message` VARCHAR(140) NOT NULL,
+  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `images` VARCHAR(2048),
+  `comments` INT DEFAULT NULL,
+  `liked_id` LONGTEXT DEFAULT "-",
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`origin`) REFERENCES `tweets`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`comments`) REFERENCES `tweets`(`id`) ON DELETE CASCADE
+);
+
+CREATE TABLE `likes` (
+  `id` INT  NOT NULL AUTO_INCREMENT,
+  `user_id` INT,
+  `tweet_id` INT,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION,
+  FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`id`) ON DELETE CASCADE
+);
+
 CREATE TABLE messages(
     id              INT             NOT NULL AUTO_INCREMENT,
     message         VARCHAR(140)    NOT NULL,
@@ -37,29 +61,6 @@ CREATE TABLE messages(
     PRIMARY KEY (id),
     FOREIGN KEY (conversation_id)   REFERENCES conversations(id),
     FOREIGN KEY (user_id)           REFERENCES users(id)
-);
-
-CREATE TABLE tweets (
-    id              INT             NOT NULL AUTO_INCREMENT,
-    origin          INT             DEFAULT NULL,
-    user_id         INT,
-    message         VARCHAR(140)    NOT NULL,
-    date            DATETIME        DEFAULT CURRENT_TIMESTAMP,
-    images          VARCHAR(2048),
-    comments        LONGTEXT,
-    liked_id        LONGTEXT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id)           REFERENCES users(id),
-    FOREIGN KEY (origin)            REFERENCES tweets(id) ON DELETE SET NULL
-);
-
-CREATE TABLE likes (
-  id                INT             NOT NULL AUTO_INCREMENT,
-  user_id           INT,
-  tweet_id          INT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (user_id)             REFERENCES users(id),
-  FOREIGN KEY (tweet_id)            REFERENCES tweets(id)
 );
 
 INSERT INTO users (nickname, email, password) VALUES 

@@ -1,10 +1,10 @@
 $(".commentButton").on("click", function(e) {
     e.preventDefault();
-    const form = $('#newTweet')
+    const message = $('#tweetMessage')
 
     $.ajax({
         type: "POST",
-        data: {tweet_id : e.target.parentNode.value, form : decodeURI(form.serialize())},
+        data: {tweet_id : e.target.parentNode.value, form : message.text().trim()},
         url: "./AJAX/php/do.comment.php",
         success: function(data) {
             

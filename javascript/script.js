@@ -55,11 +55,15 @@ $(document).ready(function () {
       $(this).on('click', function() {
         if($(this).next().hasClass('block')){
 
+
+    $(".retweetButton").each(function(e){
+      $(this).on('click', function() {
+        if($(this).next().hasClass('block')){
+
           $(this).next().removeClass('block')
           $(this).next().addClass('hidden')
-        } 
-        else {
-  
+        } else {
+        
           $(this).next().removeClass('hidden')
           $(this).next().addClass('block')
         }
@@ -88,6 +92,7 @@ $(document).ready(function () {
         $(this).next().addClass('block')
         $('body').addClass('overflow-hidden')
       }
+
     })
 
     $('.commentClose').on('click',function(){
@@ -107,7 +112,6 @@ $(document).ready(function () {
         $('body').removeClass('overflow-hidden')
       }
     })
-  })
 
   // Tweet Submenu display
 
@@ -257,3 +261,4 @@ $('.postTweet').on('input',function (e) {
         $("#editOverlay").addClass("hidden");
     });
 });
+
