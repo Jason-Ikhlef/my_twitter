@@ -195,6 +195,23 @@ class TweetManager extends Model {
             return 0;
         }
     }
+
+    public function spanMessage(string $msg) {
+
+        $words = explode(" ", $msg);
+
+        foreach ($words as $word) {
+
+            if (str_starts_with($word, "@")) {
+                $msg = str_replace($word, '<a href="profil" class="toProfile text-blue-700 hover:underline underline-offset-1">' . $word . "</a>", $msg);
+                
+            } else if (str_starts_with($word, "#")) {
+                $msg = str_replace($word, '<a href="tweet" class="toProfile text-blue-700 hover:underline underline-offset-1">' . $word . "</a>", $msg);
+            }
+        }
+
+        return $msg;
+    }
 }
 
 ?>

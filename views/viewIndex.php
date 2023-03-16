@@ -51,7 +51,7 @@ $tweet = new TweetManager;
                         </div>
                         <div class="tweet-main">
                             <p class="ml-20">
-                                <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
+                                <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
                                 <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                             </p>
                         </div>
@@ -104,7 +104,7 @@ $tweet = new TweetManager;
                 </div>
                 <div class="tweet-main">
                     <p class="ml-20">
-                        <?= $data->message() ?>
+                        <?= $tweet->spanMessage($data->message()) ?>
                         <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                     </p>
                 </div>
@@ -119,7 +119,7 @@ $tweet = new TweetManager;
                             </div>
                             <div>
                                 <p class="ml-2 mb-2">
-                                    <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
+                                    <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
                                 </p>
                                 <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-b-xl">
                                 <form action="tweet" method="post" class="tweetMainForm">
@@ -168,9 +168,9 @@ $tweet = new TweetManager;
                         <button class="seeComments" style="cursor: pointer;" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
                     </form>
                 </div>
-</div>
-<?php } ?>
-<?php endforeach ?>
-<?php endif ?>
+            </div>
+            <?php } ?>
+        <?php endforeach ?>
+    <?php endif ?>
 <?php endif ?>
 </div>

@@ -9,7 +9,7 @@ $(".retweetButton").on("click", function(e) {
 
             if (data == 1) {
 
-                // success
+                
             } else {
 
                 // pop-up erreur

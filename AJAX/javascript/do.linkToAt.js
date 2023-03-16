@@ -28,7 +28,12 @@ $(div).on("input", function() {
                     const word = words[i];
                     if (word.startsWith("@")) {
                         const span = document.createElement("span");
-                        span.className = "myAt";
+                        span.classList.add("myAt", "text-blue-700");
+                        span.textContent = word + " ";
+                        newContent.appendChild(span);
+                    } else if (word.startsWith("#")) {
+                        const span = document.createElement("span");
+                        span.classList.add("myHtag", "text-blue-700");
                         span.textContent = word + " ";
                         newContent.appendChild(span);
                     } else {
