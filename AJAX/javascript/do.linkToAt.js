@@ -77,11 +77,18 @@ $(div).on("input", function() {
                                 let spanValue = childNode.innerText.replace("@", "")
                                 Object.values(JSON.parse(data)).forEach(e => {
                                     if (e[n].includes(spanValue)) {
-                                        $('.atPopup').html($('.atPopup').html() + `<p class="${e[n]}" style="cursor:pointer;">${e[n]}</p>` )
+                                        $('.atPopup').html($('.atPopup').html() + `<p class="followedName" style="cursor:pointer;">${e[n]}</p>` )
                                     }
                                     n++
                                 })
                                 $('.atPopup').show()
+                                $('.followedName').each(function(index) {
+                                    
+                                    $(this).on('click', e => {
+
+                                        childNode.innerText = '@' + $(this).text();
+                                    })
+                                }) 
                                 foundStart = true;
                             }
                             currentOffset += length;
