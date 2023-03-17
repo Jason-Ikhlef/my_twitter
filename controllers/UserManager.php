@@ -221,4 +221,31 @@ class UserManager extends Model
             echo 'An error occurred.';
         }
     }
+
+    public function getUserById ($id){
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($id, 'User', 'users', "id");
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function getPictureFromId ($id){
+
+        $this->getDb();
+        
+        $data = $this->getAllByIdQuery($id, 'User', 'users', "id");
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }

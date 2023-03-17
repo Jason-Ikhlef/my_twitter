@@ -7,6 +7,7 @@ class User {
     private $_password;
     private $_follows;
     private $_picture;
+    private $_banner;
     private $_date;
     public function __construct(array $data) {
 
@@ -70,6 +71,11 @@ class User {
         $this->_picture = $picture;
     }
 
+    public function setBanner ($banner) {
+
+        $this->_banner = $banner;
+    }
+
     public function setDate($date) {
 
         $this->_date = $date;
@@ -106,6 +112,11 @@ class User {
     public function picture() {
         
         return $this->_picture;
+    }
+
+    public function banner() {
+        
+        return $this->_banner;
     }
 
     public function date() {

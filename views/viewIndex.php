@@ -39,12 +39,12 @@ $tweet = new TweetManager;
                 <div class="w-full hover:bg-gray-100 border-y">
                     <?php if (empty($data->message()) && $data->origin()) { ?>
                         <?php if ($_SESSION['user_id'] == $data->user_id()) { ?>
-                            <p cl>Tu as retweeté</p>
+                            <p>Tu as retweeté</p>
                         <?php } else { ?>
                             <p><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
                         <?php } ?>
                         <div class="flex p-4">
-                            <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
+                            <img src="<?php "../../img/" . $data[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
                             <p class="font-bold mt-3 ml-2">
                                 <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
                             </p>
@@ -97,10 +97,13 @@ $tweet = new TweetManager;
                 </div>
             <?php } else { ?>
                 <div class="flex p-4">
-                    <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
-                    <p class="font-bold mt-3 ml-2">
-                        <?= $user->nicknameFromId($data->user_id())[0]->nickname(); ?>
-                    </p>
+                    <img src="<?= "../../img/" . $user->getPictureFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
+                    <form class="displayProfil" method="get" action="profil">
+                        <input class="displayProfilHidden" type="hidden" name="id" value="<?= $data->user_id() ?>">
+                        <button class="displayProfilBtn" class="font-bold mt-3 ml-2">
+                            <?= $user->nicknameFromId($data->user_id())[0]->nickname(); ?>
+                        </button>
+                    </form>
                 </div>
                 <div class="tweet-main">
                     <p class="ml-20">
