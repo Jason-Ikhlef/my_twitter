@@ -496,4 +496,53 @@ abstract class Model
             return "Echec de la modification";
         }
     }
+
+    protected function followQuery($id, $userid)
+    {
+
+        $query = self::$_db->prepare(
+
+            "SELECT follows FROM users 
+            WHERE id = :id"
+
+        );
+
+        $query->execute(["id" => $userid]);
+        $follow = $query->fetch();
+
+        $follow = explode("-", $follow[0]);
+
+        array_shift($follow);
+
+        if (!in_array($id, $follow)) {
+
+            array_push($follow, $id);
+
+            $follow[0] = "-" . $follow[0];
+
+            $follow = implode("-", $follow);
+
+            $query = self::$_db->prepare(
+
+                "UPDATE users SET follows = '$follow'
+                WHERE id = :id"
+
+            );
+
+            $query->execute(["id" => $userid]);
+            
+        }
+
+        $query = self::$_db->prepare(
+
+            "SELECT follows FROM users 
+            WHERE id = :id"
+
+        );
+
+        $query->execute(["id" => $userid]);
+        $follow = $query->fetch();
+
+        return $follow;
+    }
 }

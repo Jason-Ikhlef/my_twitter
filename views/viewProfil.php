@@ -2,9 +2,7 @@
 
 $user = new UserManager;
 
-$userID = $_SESSION["profil_id"];
-
-$data = $user->getUserById($userID);
+$data = $user->getUserById($_SESSION["profil_id"]);
 
 ?>
 <div class="w-full flex flex-col top-0">
@@ -22,11 +20,15 @@ $data = $user->getUserById($userID);
         <div class="profilePicture">
             <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-full max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3" src="<?= "../../img/" . $data[0]->picture() ?>">
         </div>
-        <div class="editButton flex justify-end">
-            
+        <div class="flex justify-end">
+        <?php if ($_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
             <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
+        <?php } else { ?>
             <!-- Bouton follow -->
-            <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Suivre</button>
+            <form id="followForm" method="post">
+                <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Suivre</button>
+            </form>
+        <?php } ?>
         </div>
         <div class="userInfo ml-8 mt-4">
             <p class="font-bold"><?= $data[0]->nickname() ?></p>

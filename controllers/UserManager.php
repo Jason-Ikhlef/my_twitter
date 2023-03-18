@@ -248,4 +248,18 @@ class UserManager extends Model
             return false;
         }
     }
+
+    public function follow ($id, $userid) {
+
+        $this->getDb();
+        
+        $data = $this->followQuery($id, $userid);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }

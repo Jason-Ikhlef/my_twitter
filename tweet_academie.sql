@@ -21,7 +21,7 @@ CREATE TABLE users (
     nickname        VARCHAR(42)     NOT NULL,
     email           VARCHAR(320)    NOT NULL UNIQUE,
     password        VARCHAR(40)     NOT NULL,
-    follows         LONGTEXT,
+    follows         LONGTEXT        DEFAULT "-",
     picture         VARCHAR(2048)   DEFAULT "01",
     banner          VARCHAR(2048)   DEFAULT NULL,
     date            DATETIME        DEFAULT CURRENT_TIMESTAMP,
