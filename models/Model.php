@@ -11,7 +11,7 @@ abstract class Model
     private static function setDb()
     {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'AJR2042ci6');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'dorian1', '123');
 
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -303,7 +303,6 @@ abstract class Model
         session_start();
 
         $user_id = $_SESSION['user_id'];
-        // $user_id = 1;
 
         try {
 
@@ -494,6 +493,34 @@ abstract class Model
             return "Echec de la modification";
         }
     }
+
+    protected function htagQuery(string $hashtag, string $obj) {
+
+        $tweets = [];
+
+        try {
+
+            $query = self::$_db->prepare(
+
+                "SELECT * FROM tweets
+                WHERE message LIKE :message"
+
+            );
+
+            $query->execute(['message' => "%$hashtag%"]);
+
+            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $tweets[] = new $obj($data);
+            }
+
+            $query->closeCursor();
+            return $tweets;
+        } catch (Exception) {
+
+            return false;
+        }
+     }  
 
     protected function getFollowQuery($userid)
     {

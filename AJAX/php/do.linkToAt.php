@@ -14,7 +14,7 @@ if ($users) {
     foreach ($users as $k => $user) {
 
         $k = $k + 1;
-    
+        
         $nicknames[] = [$k => $controller->nicknameFromId($user)[0]->nickname()];
     }
 

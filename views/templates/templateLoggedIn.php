@@ -9,7 +9,6 @@
     <link rel="icon" href="./style/assets/icone-twitter-ronde.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/176eaa1f6f.js" crossorigin="anonymous"></script>
-    <script src="./javascript/script.js" defer></script>
     <script src="./AJAX/javascript/do.newTweet.js" defer></script>
     <script src="./AJAX/javascript/do.retweet.js" defer></script>
     <script src="./AJAX/javascript/do.quoteTweet.js" defer></script>
@@ -20,6 +19,7 @@
     <script src="./AJAX/javascript/do.newLike.js" defer></script>
     <script src="./AJAX/javascript/do.dislike.js" defer></script>
     <script src="./AJAX/javascript/do.linkToAt.js" defer></script>
+    <script src="./javascript/script.js" defer></script>
     <script src="./AJAX/javascript/do.displayProfil.js" defer></script>
     <script src="./AJAX/javascript/do.follow.js" defer></script>
     <title><?= $t ?></title>

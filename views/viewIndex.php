@@ -18,6 +18,12 @@ $tweet = new TweetManager;
                     <a href="profil"><img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
                     <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
                 </div>
+
+                <div class="atPopup hidden relative bg-gray-200 rounded-xl z-10">
+                    *
+                </div>
+                <div class="absolute flex flex-col w-1/5 bg-white max-h-48 ml-10 border border-1 border-gray-400 overflow-auto"></div>
+
                 <div class="flex justify-between my-auto">
                     <div class="flex ml-12 mt-2 mb-4">
                         <label for="imgInTweet" class="text-blue-500 hover:bg-blue-100 rounded-full p-2 cursor-pointer">
@@ -47,7 +53,9 @@ $tweet = new TweetManager;
                         <!-- message si l'utilisateur co ou un utilisateur à retweeté  -->
 
                         <?php if ($_SESSION['user_id'] == $data->user_id()) { ?>
+
                             <p class='text-blue-400 italic ml-4 mt-2'>Vous avez retweeté</p>
+
                         <?php } else { ?>
                             <p class='text-blue-400 italic ml-4 mt-2'><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
                         <?php } ?>
@@ -67,7 +75,7 @@ $tweet = new TweetManager;
 
                         <div class="tweet-main">
                             <p class="ml-20">
-                                <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
+                                <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
                                 <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                             </p>
                         </div>
@@ -219,7 +227,7 @@ $tweet = new TweetManager;
                 </div>
                 <div class="tweet-main">
                     <p class="ml-20">
-                        <?= $data->message() ?>
+                        <?= $tweet->spanMessage($data->message()) ?>
                         <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                     </p>
                 </div>
@@ -235,7 +243,7 @@ $tweet = new TweetManager;
                             </div>
                             <div>
                                 <p class="ml-2 mb-2">
-                                    <?= $tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message() ?>
+                                    <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
                                 </p>
                                 <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-b-xl">
                                 <form action="tweet" method="post" class="tweetMainForm">
@@ -365,9 +373,8 @@ $tweet = new TweetManager;
                     </form>
 
                 </div>
-</div>
-<?php } ?>
-<?php endforeach ?>
-<?php endif ?>
+            <?php } ?>
+        <?php endforeach ?>
+    <?php endif ?>
 <?php endif ?>
 </div>

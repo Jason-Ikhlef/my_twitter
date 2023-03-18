@@ -6,6 +6,11 @@ $user = new UserManager;
 $tweet = new TweetManager;
 
 ?>
+
+<div class="tweet">
+    <div class="tweet-header">
+        <?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?>
+
 <div class='flex'>
     <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
     <p class="text-xl font-bold pl-3 pt-3">Tweet</p>
@@ -18,6 +23,7 @@ $tweet = new TweetManager;
             <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
             <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
         </div>
+
     </div>
     <div class="tweet-main ml-2">
         <?= $tweet->aboveCommentsTweet()[0]->message()?>

@@ -2,33 +2,32 @@
 
 require_once('./views/View.php');
 
-class ControllerIndex
+class ControllerHashtag
 {
     private $_view;
     private $_tweetManager;
-
     public function __construct($url) {
 
         if (!is_array($url)) {
-            $this->baseIndex();
+            $this->viewHashTag();
             return;
         }
 
         if (isset($url) && count(array($url)[0]) > 1) {
             throw new Exception('Page introuvable');
         } else {
-            $this->baseIndex();
+            $this->viewHashTag();
         }
     }
 
-    private function baseIndex() {
+    private function viewHashTag() {
 
         session_start();
-        
-        $this->_tweetManager = new TweetManager;
-        $tweets = $this->_tweetManager->getLastTweets();
 
-        $this->_view = new View('Index');
-        $this->_view->generate(['tweets' => $tweets]);
+        $this->_tweetManager = new TweetManager;
+        $tweets = $this->_tweetManager->htag("#" . explode("=", $_SERVER['REQUEST_URI'])[1]);
+
+        $this->_view = new View('Hashtag');
+        $this->_view->generate(["tweets" => $tweets]);
     }
 }
