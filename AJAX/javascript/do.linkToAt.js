@@ -82,7 +82,7 @@ $(div).on("input", function() {
                                     n++
                                 })
                                 $('.atPopup').show()
-                                $('.followedName').each(function(index) {
+                                $('.followedName').each(function() {
                                     
                                     $(this).on('click', e => {
 

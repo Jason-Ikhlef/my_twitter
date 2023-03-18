@@ -42,7 +42,7 @@ $tweet = new TweetManager;
                 <div class="w-full hover:bg-gray-100 border-y">
                     <?php if (empty($data->message()) && $data->origin()) { ?>
                         <?php if ($_SESSION['user_id'] == $data->user_id()) { ?>
-                            <p cl>Tu as retweeté</p>
+                            <p>Vous avez retweeté</p>
                         <?php } else { ?>
                             <p><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
                         <?php } ?>
@@ -171,7 +171,6 @@ $tweet = new TweetManager;
                         <button class="seeComments" style="cursor: pointer;" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
                     </form>
                 </div>
-            </div>
             <?php } ?>
         <?php endforeach ?>
     <?php endif ?>

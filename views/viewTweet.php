@@ -6,6 +6,7 @@ $user = new UserManager;
 $tweet = new TweetManager;
 
 ?>
+
 <div class="tweet">
     <div class="tweet-header">
         <?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?>
