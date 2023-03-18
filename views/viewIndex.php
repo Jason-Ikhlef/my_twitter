@@ -308,7 +308,7 @@ $tweet = new TweetManager;
                                                     <?= $tweet->spanMessage($data->message()) ?>
                                                 </p>
                                             </div>                                
-                                            <button value="<?= $data->id() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton bg-blue-600 hover:bg-red-200 w-fit p-2 rounded-3xl mt-6 self-end mb-2 mr-2">
+                                            <button value="<?= $data->id() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton bg-blue-600 hover:bg-blue-200 w-fit p-2 rounded-3xl mt-6 self-end mb-2 mr-2">
                                                 <p class='text-white'>Tweeter</p>
                                             </button>
                                         </div>
@@ -336,14 +336,14 @@ $tweet = new TweetManager;
                                     <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
                                     <div class='flex flex-col'>
                                         <p class="font-bold mt-3 ml-2">
-                                            nom du boug (tweet de base)
+                                            <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                                         </p>
                                         <p class="w-full mt-2 pl-4 pr-4 rounded-xl border">
-                                            tweet du mec (tweet de base)
+                                            <?= $tweet->spanMessage($data->message()) ?>
                                         </p>
                                         <p class='text-gray-400 italic'>En réponse à 
                                             <span class='text-blue-400'>
-                                                nom du boug (tweet de base)
+                                                <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                                             </span> 
                                         </p>
                                     </div>
@@ -355,7 +355,7 @@ $tweet = new TweetManager;
                                     <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
                                     <div contenteditable="true" name="newComment" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text" id='newCommentArea'></div>
                                 </div>
-                                <button value="<?= $data->origin() ?>" name="commentButton" type="button" class="commentButton cursor-pointer bg-blue-500 text-white w-fit px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200 self-end mb-2 mr-2">
+                                <button value="<?= $data->id() ?>" name="commentButton" type="button" class="commentButton cursor-pointer bg-blue-500 text-white w-fit px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200 self-end mb-2 mr-2">
                                     Répondre
                                 </button>
                             </div>
