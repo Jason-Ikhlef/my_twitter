@@ -1,6 +1,7 @@
 <?php
 
 $user = new UserManager;
+$this->_t = 'Tweet Academy | Profil';
 
 (!isset($_SESSION["profil_id"])) ? ($_SESSION["profil_id"] = $_SESSION["user_id"]) : null;
 
@@ -11,7 +12,7 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
 ?>
 
 <div class="w-full flex flex-col top-0">
-    <div class="profileTop flex w-1/3 border-b-4 max-sm:w-auto">
+    <div class="profileTop flex w-1/3 max-sm:w-auto">
         <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
         <div>
             <p><?= $data[0]->nickname() ?></p>
