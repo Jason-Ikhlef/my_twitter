@@ -1,6 +1,6 @@
 <?php
 
-include_once("User.php");
+include_once("g.php");
 include_once("Tweet.php");
 
 abstract class Model
@@ -497,7 +497,7 @@ abstract class Model
         }
     }
 
-    protected function followQuery($id, $userid)
+    protected function getFollowQuery($userid)
     {
 
         $query = self::$_db->prepare(
@@ -513,6 +513,13 @@ abstract class Model
         $follow = explode("-", $follow[0]);
 
         array_shift($follow);
+
+        return $follow;
+    }
+
+    protected function setFollowQuery ($id, $follow) {
+
+        var_dump($follow);
 
         if (!in_array($id, $follow)) {
 
@@ -532,17 +539,5 @@ abstract class Model
             $query->execute(["id" => $userid]);
             
         }
-
-        $query = self::$_db->prepare(
-
-            "SELECT follows FROM users 
-            WHERE id = :id"
-
-        );
-
-        $query->execute(["id" => $userid]);
-        $follow = $query->fetch();
-
-        return $follow;
     }
 }

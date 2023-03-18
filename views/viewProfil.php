@@ -2,7 +2,26 @@
 
 $user = new UserManager;
 
-$data = $user->getUserById($_SESSION["profil_id"]);
+if (isset($_SESSION["profil_id"])){
+
+    $data = $user->getUserById($_SESSION["profil_id"]);
+
+    if (strlen($data[0]->follows()) == 1){
+            
+        $follows = 0;
+    } else {
+
+        $follows = explode("-", $follows);
+
+        array_shift($follows);
+
+        $follows = count($follows);
+    }
+} else {
+
+    $data = $user->getUserById($_SESSION["user_id"]);
+}
+
 
 ?>
 <div class="w-full flex flex-col top-0">
@@ -21,10 +40,9 @@ $data = $user->getUserById($_SESSION["profil_id"]);
             <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-full max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3" src="<?= "../../img/" . $data[0]->picture() ?>">
         </div>
         <div class="flex justify-end">
-        <?php if ($_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
+        <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
             <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
         <?php } else { ?>
-            <!-- Bouton follow -->
             <form id="followForm" method="post">
                 <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Suivre</button>
             </form>
@@ -45,7 +63,11 @@ $data = $user->getUserById($_SESSION["profil_id"]);
                 <p class="ml-2 leading-5">A rejoint Twitter en <?= $joinDate ?></p>
             </div>
             <div class="followers flex mt-4 max-sm:flex-col">
-                <p class="mr-4"><?= $_SESSION["user_data"]["follows"] ?>Nb abonnement</p>
+                <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
+                    <p class="mr-4"><?= $_SESSION["user_data"]["follows"] ?> abonnement(s) </p>
+            <?php } else { ?>
+                    <p class="mr-4"><?= $follows ?> abonnement(s) </p>
+                    <?php } ?>
                 <p class="ml-4 max-sm:ml-0">Nb followers</p>
             </div>
         </div>

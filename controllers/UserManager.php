@@ -228,7 +228,7 @@ class UserManager extends Model
         $data = $this->getAllByIdQuery($id, 'User', 'users', "id");
 
         if ($data) {
-
+            
             return $data;
         } else {
             return false;
@@ -249,11 +249,11 @@ class UserManager extends Model
         }
     }
 
-    public function follow ($id, $userid) {
+    public function getFollow ($userid) {
 
         $this->getDb();
         
-        $data = $this->followQuery($id, $userid);
+        $data = $this->getFollowQuery($userid);
 
         if ($data) {
 
