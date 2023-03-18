@@ -265,7 +265,7 @@ $tweet = new TweetManager;
 
                             <!-- Partie des retweets -->
 
-                            <button value="<?= $data->id() ?>" name="retweetButtonPopup" class="flex retweetButtonPopup hover:text-blue-400">
+                            <button value="<?= $data->id() ?>" name="retweetButtonPopup" class="<?= $tweet->isRetweeted($data->id()) ? "flex retweetButtonPopup text-blue-400" : "flex retweetButtonPopup hover:text-blue-400"  ?>">
                                 <i class="fa-solid fa-retweet mt-1"></i>
                                 <p class="ml-1"><?= $tweet->retweetsNumber($data->id()) ?></p>
                             </button>
