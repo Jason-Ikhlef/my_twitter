@@ -1,8 +1,10 @@
-$(".displayProfilBtn").click(function (e) {
+$(".displayProfil").click(function (e) {
 
     e.preventDefault()
 
-    data = {user_id: e.target.previousElementSibling.value }
+    value = $(e.target.closest("form")[0]).val();
+
+    data = {user_id: value }
 
     console.log(data);
 
