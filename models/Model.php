@@ -485,8 +485,6 @@ abstract class Model
 
             );
 
-
-
             $query->execute($exec);
 
             return true;
@@ -522,5 +520,105 @@ abstract class Model
 
             return false;
         }
+     }  
+
+    protected function getFollowQuery($userid)
+    {
+
+        $query = self::$_db->prepare(
+
+            "SELECT follows FROM users 
+            WHERE id = :id"
+
+        );
+
+        $query->execute(["id" => $userid]);
+        $follow = $query->fetch();
+
+        $follow = explode("-", $follow[0]);
+
+        array_shift($follow);
+
+        return $follow;
+    }
+
+    protected function setFollowQuery ($followId, $currentUser) {
+
+        $followList = $this->getFollowQuery($currentUser);
+
+        if (!in_array($followId, $followList)) {
+
+            array_push($followList, $followId);
+        } else {
+
+            $followList = array_diff($followList, array($followId));
+        }
+
+        $followList = implode("-", $followList);
+
+        $followList = $followList . "-";
+
+        if (substr($followList, 0, 1) !== "-") {
+
+            $followList = "-" . $followList;
+        }
+
+        $query = self::$_db->prepare(
+
+            "UPDATE users SET follows = :follows
+            WHERE id = :id"
+
+        );
+
+        $query->execute(["id" => $currentUser, "follows" => $followList]);
+
+        return true;
+    }
+
+    protected function getFollowInfoQuery ($currentUser, $checkID, $count) {
+
+        $followList = $this->getFollowQuery($currentUser);
+
+        if (in_array($checkID, $followList)) {
+
+            $isFollow = true;
+        } else {
+
+            $isFollow = false;
+        }
+
+        if (strlen($count) == 1){
+                
+            $follows = 0;
+        } else {
+        
+            $follows = explode("-", $count);
+
+            
+            $follows = array_unique($follows);
+            
+            array_shift($follows);
+        
+            $follows = count($follows);
+        }
+        
+        return [$isFollow, $follows];
+    }
+
+    protected function getFollowersQuery ($id) {
+
+        $query = self::$_db->prepare(
+
+            "SELECT COUNT(*) FROM users
+            WHERE follows LIKE :id"
+
+        );
+
+        
+        $query->execute(["id" => "%-" . $id . "-%"]);
+
+        $data = $query->fetch();
+
+        return $data;
     }
 }

@@ -20,6 +20,8 @@
     <script src="./AJAX/javascript/do.dislike.js" defer></script>
     <script src="./AJAX/javascript/do.linkToAt.js" defer></script>
     <script src="./javascript/script.js" defer></script>
+    <script src="./AJAX/javascript/do.displayProfil.js" defer></script>
+    <script src="./AJAX/javascript/do.follow.js" defer></script>
     <title><?= $t ?></title>
 </head>
 
@@ -35,10 +37,12 @@
                 <div>
 
                     <i class="fa-brands fa-twitter w-fit hover:bg-blue-100 px-3 py-2 text-blue-500 rounded-full mx-auto text-2xl cursor-pointer xl:ml-1.5"></i>
-                    <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer ">
-                        <i class="fa-solid fa-house p-4 mx-auto rounded-full hover:bg-gray-100"></i>
-                        <p class="hidden xl:block font-bold text-xl mt-3">Accueil</p>
-                    </div>
+                    <a href="index">
+                        <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer ">
+                            <i class="fa-solid fa-house p-4 mx-auto rounded-full hover:bg-gray-100"></i>
+                            <p class="hidden xl:block font-bold text-xl mt-3">Accueil</p>
+                        </div>
+                    </a>
                     <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer ">
                         <i class="fa-regular fa-hashtag p-4 mx-auto rounded-full hover:bg-gray-100"></i>
                         <p class="hidden xl:block text-xl mt-3 ">Explorer</p>
@@ -51,10 +55,12 @@
                         <i class="fa-regular fa-envelope p-4 mx-auto rounded-full hover:bg-gray-100"></i>
                         <p class="hidden xl:block text-xl mt-3 ">Messages</p>
                     </div>
-                    <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer ">
-                        <i class="fa-regular fa-user p-4 mx-auto rounded-full hover:bg-gray-100"></i>
-                        <p class="hidden xl:block text-xl mt-3 ">Profil</p>
-                    </div>
+                    <a href="profil">
+                        <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer ">
+                            <i class="fa-regular fa-user p-4 mx-auto rounded-full hover:bg-gray-100"></i>
+                            <p class="hidden xl:block text-xl mt-3 ">Profil</p>
+                        </div>
+                    </a>
                     <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer ">
                         <i class="fa-solid fa-images p-4 mx-auto rounded-full hover:bg-gray-100"></i>
                         <p class="hidden xl:block text-xl mt-3 ">Thèmes</p>
@@ -81,10 +87,10 @@
                         </form>
                     </div>
                     <div class="hidden xl:flex hover:bg-gray-200 rounded-3xl cursor-pointer shadow">
-                        <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2">
+                        <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
                         <div class="mr-10">
-                            <p class="font-bold mt-1">Le Bg</p>
-                            <p class="italic text-gray-500 text-sm mt-2 mb-2">@LeBg</p>
+                            <p class="font-bold mt-1"><?= $_SESSION["user_data"]['nickname'] ?></p>
+                            <p class="italic text-gray-500 text-sm mt-2 mb-2">@<?= $_SESSION["user_data"]['nickname'] ?></p>
                         </div>
                         <i class="fa-solid fa-ellipsis my-auto mr-2"></i>
                     </div>
@@ -95,7 +101,6 @@
         </div>
 
         <div class="h-fit col-span-3 lg:col-span-6 rounded-3xl mt-2 xl:pl-[150px] xl:ml-12">
-            <p class="text-xl font-bold pl-3 pt-3">Accueil</p>
 
             <?= $content ?>
 
@@ -123,12 +128,17 @@
             <button class="tweetSubmenuClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
             <form id="newTweet">
                 <div class="flex mt-4">
-                    <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                    <textarea name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="postTweet resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></textarea>
+                    <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
+                    <div contenteditable="true" name="newSubmenuTweet" placeholder="Quoi de neuf ?" class="newSubmenuTweet w-full h-10  border mt-5 mr-2 focus:outline-none"></div>
                 </div>
                 <div class="flex justify-between my-auto">
                     <div class="flex ml-12 mt-2 mb-4">
-                        <i class="fa-sharp fa-regular fa-image text-blue-500 hover:bg-blue-100 rounded-full p-4 cursor-pointer"></i>
+                        <label for="imgInSubmenuTweet" class="text-blue-500 hover:bg-blue-100 rounded-full p-2 cursor-pointer">
+                            <i class="fa-sharp fa-regular fa-image text-blue-500 hover:bg-blue-100 rounded-full p-2 cursor-pointer"></i>
+                        </label>
+                        <form id="putImginSubmenuTweet">
+                            <input title="" class="absolute w-2 h-2 bg-inherit file:bg-inherit text-transparent file:text-transparent file:border-0 file:text-inherit" accept="image/png,image/jpeg,image/webp,image/jpg" type="file" id="imgInSubmenuTweet">
+                        </form>
                     </div>
                     <div class='hidden w-[140px] bg-gray-200 h-2 checkNbOfCaracters self-center'>
                         <div class="subMenuCountCaracters w-[0px] h-2"></div>

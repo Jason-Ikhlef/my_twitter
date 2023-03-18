@@ -221,4 +221,79 @@ class UserManager extends Model
             echo 'An error occurred.';
         }
     }
+
+    public function getUserById ($id){
+
+        $this->getDb();
+        $data = $this->getAllByIdQuery($id, 'User', 'users', "id");
+
+        if ($data) {
+            
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function getPictureFromId ($id){
+
+        $this->getDb();
+        
+        $data = $this->getAllByIdQuery($id, 'User', 'users', "id");
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function getFollow ($userid) {
+
+        $this->getDb();
+        
+        $data = $this->getFollowQuery($userid);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function setFollow ($FollowId, $currentUser) {
+
+        $this->getDb();
+        
+        $data = $this->setFollowQuery($FollowId, $currentUser);
+
+        if ($data) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getFollowInfo ($currentUser, $checkID, $count){
+
+        $this->getDb();
+        
+        $data = $this->getFollowInfoQuery($currentUser, $checkID, $count);
+
+        return $data;   
+    }
+
+    public function getFollowers ($id) {
+
+        $this->getDb();
+        
+        $data = $this->getFollowersQuery($id);
+
+        return $data[0];
+    }
+
+    
 }
