@@ -277,13 +277,22 @@ class UserManager extends Model
         }
     }
 
-    public function getFollowInfo ($currentUser, $checkID){
+    public function getFollowInfo ($currentUser, $checkID, $count){
 
         $this->getDb();
         
-        $data = $this->getFollowInfoQuery($currentUser, $checkID);
+        $data = $this->getFollowInfoQuery($currentUser, $checkID, $count);
 
         return $data;   
+    }
+
+    public function getFollowers ($id) {
+
+        $this->getDb();
+        
+        $data = $this->getFollowersQuery($id);
+
+        return $data[0];
     }
 
     

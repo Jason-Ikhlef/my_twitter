@@ -26,10 +26,6 @@ if (!empty($_POST["email"] && !empty($_POST["password"]))) {
             $data["follows"] = count($data["follows"]);
         }
         
-
-        var_dump($data["follows"]); 
-
-
         $_SESSION["user_id"] = $data["id"];
         $_SESSION["user_data"] = array("id" => $data["id"], "nickname" => $data["nickname"], "email" => $data["email"], "follows" => $data["follows"], "picture" => $data["picture"], "banner" => $data["banner"], "date" => $data["date"]);
         echo true;

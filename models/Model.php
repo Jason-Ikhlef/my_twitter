@@ -486,8 +486,6 @@ abstract class Model
 
             );
 
-
-
             $query->execute($exec);
 
             return true;
@@ -531,6 +529,8 @@ abstract class Model
 
         $followList = implode("-", $followList);
 
+        $followList = $followList . "-";
+
         if (substr($followList, 0, 1) !== "-") {
 
             $followList = "-" . $followList;
@@ -548,16 +548,50 @@ abstract class Model
         return true;
     }
 
-    protected function getFollowInfoQuery ($currentUser, $checkID) {
+    protected function getFollowInfoQuery ($currentUser, $checkID, $count) {
 
         $followList = $this->getFollowQuery($currentUser);
 
         if (in_array($checkID, $followList)) {
 
-            return true;
+            $isFollow = true;
         } else {
 
-            return false;
+            $isFollow = false;
         }
+
+        if (strlen($count) == 1){
+                
+            $follows = 0;
+        } else {
+        
+            $follows = explode("-", $count);
+
+            
+            $follows = array_unique($follows);
+            
+            array_shift($follows);
+        
+            $follows = count($follows);
+        }
+        
+        return [$isFollow, $follows];
+    }
+
+    protected function getFollowersQuery ($id) {
+
+        $query = self::$_db->prepare(
+
+            "SELECT COUNT(*) FROM users
+            WHERE follows LIKE :id"
+
+        );
+
+        
+        $query->execute(["id" => "%-" . $id . "-%"]);
+
+        $data = $query->fetch();
+
+        return $data;
     }
 }

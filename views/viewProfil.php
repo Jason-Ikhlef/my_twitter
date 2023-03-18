@@ -2,29 +2,14 @@
 
 $user = new UserManager;
 
-if (isset($_SESSION["profil_id"])){
+(!isset($_SESSION["profil_id"])) ? ($_SESSION["profil_id"] = $_SESSION["user_id"]) : null;
 
-    $data = $user->getUserById($_SESSION["profil_id"]);
-    $isFollowed = $user->getFollowInfo($_SESSION["user_id"], $_SESSION["profil_id"]);
-    var_dump($isFollowed);
-} else {
-
-    $data = $user->getUserById($_SESSION["user_id"]);
-}
-
-if (strlen($data[0]->follows()) == 1){
-                
-    $follows = 0;
-} else {
-
-    $follows = explode("-", $data[0]->follows());
-
-    array_shift($follows);
-
-    $follows = count($follows);
-}
+$data = $user->getUserById($_SESSION["profil_id"]);
+$followInfos = $user->getFollowInfo($_SESSION["user_id"], $_SESSION["profil_id"], $data[0]->follows());
+$followers = $user->getFollowers($_SESSION["profil_id"]);
 
 ?>
+
 <div class="w-full flex flex-col top-0">
     <div class="profileTop flex w-1/3 border-b-4 max-sm:w-auto">
         <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
@@ -44,12 +29,12 @@ if (strlen($data[0]->follows()) == 1){
         <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
             <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
         <?php } else { ?>
-            <?php if(!$isFollowed) {?>
-            <form id="followForm" method="post">
+            <?php if(!$followInfos[0]) {?>
+            <form id="followForm">
                 <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Suivre</button>
             </form>
             <?php } else { ?>
-            <form id="unfollowForm" method="post">
+            <form id="unfollowForm">
                 <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Ne plus suivre</button>
             </form>
             <?php } ?>
@@ -70,8 +55,8 @@ if (strlen($data[0]->follows()) == 1){
                 <p class="ml-2 leading-5">A rejoint Twitter en <?= $joinDate ?></p>
             </div>
             <div class="followers flex mt-4 max-sm:flex-col">
-                    <p class="mr-4"><?= $follows ?> abonnement(s) </p>
-                <p class="ml-4 max-sm:ml-0">Nb followers</p>
+                <p class="follows mr-4"><span><?= $followInfos[1] ?></span> abonnement(s) </p>
+                <p class="followed ml-4 max-sm:ml-0"> <span><?= $followers ?></span> abonné(s) </p>
             </div>
         </div>
     </div>
