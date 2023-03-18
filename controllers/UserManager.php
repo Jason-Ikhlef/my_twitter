@@ -262,4 +262,18 @@ class UserManager extends Model
             return false;
         }
     }
+
+    public function setFollow ($FollowId, $currentUser) {
+
+        $this->getDb();
+        
+        $data = $this->setFollowQuery($FollowId, $currentUser);
+
+        if ($data) {
+
+            return $data;
+        } else {
+            return false;
+        }
+    }
 }

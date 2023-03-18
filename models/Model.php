@@ -1,6 +1,6 @@
 <?php
 
-include_once("g.php");
+include_once("User.php");
 include_once("Tweet.php");
 
 abstract class Model
@@ -517,26 +517,30 @@ abstract class Model
         return $follow;
     }
 
-    protected function setFollowQuery ($id, $follow) {
+    protected function setFollowQuery ($followId, $currentUser) {
 
-        var_dump($follow);
+        $followList = $this->getFollowQuery($currentUser);
 
-        if (!in_array($id, $follow)) {
+        var_dump($followList);
 
-            array_push($follow, $id);
+        if (in_array($followId, $followList)) {
 
-            $follow[0] = "-" . $follow[0];
+            array_push($followList, $followId);
 
-            $follow = implode("-", $follow);
+            $followList[0] = "-" . $followList[0];
+
+            $followList = implode("-", $followList);
+
+            var_dump($followList);
 
             $query = self::$_db->prepare(
 
-                "UPDATE users SET follows = '$follow'
+                "UPDATE users SET follows = :follows
                 WHERE id = :id"
 
             );
 
-            $query->execute(["id" => $userid]);
+            $query->execute(["id" => $currentUser, "follows" => $followList]);
             
         }
     }

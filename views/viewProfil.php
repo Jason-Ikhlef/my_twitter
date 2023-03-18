@@ -5,23 +5,22 @@ $user = new UserManager;
 if (isset($_SESSION["profil_id"])){
 
     $data = $user->getUserById($_SESSION["profil_id"]);
-
-    if (strlen($data[0]->follows()) == 1){
-            
-        $follows = 0;
-    } else {
-
-        $follows = explode("-", $follows);
-
-        array_shift($follows);
-
-        $follows = count($follows);
-    }
 } else {
 
     $data = $user->getUserById($_SESSION["user_id"]);
 }
 
+if (strlen($data[0]->follows()) == 1){
+                
+    $follows = 0;
+} else {
+
+    $follows = explode("-", $data[0]->follows());
+
+    array_shift($follows);
+
+    $follows = count($follows);
+}
 
 ?>
 <div class="w-full flex flex-col top-0">
@@ -63,11 +62,7 @@ if (isset($_SESSION["profil_id"])){
                 <p class="ml-2 leading-5">A rejoint Twitter en <?= $joinDate ?></p>
             </div>
             <div class="followers flex mt-4 max-sm:flex-col">
-                <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
-                    <p class="mr-4"><?= $_SESSION["user_data"]["follows"] ?> abonnement(s) </p>
-            <?php } else { ?>
                     <p class="mr-4"><?= $follows ?> abonnement(s) </p>
-                    <?php } ?>
                 <p class="ml-4 max-sm:ml-0">Nb followers</p>
             </div>
         </div>
