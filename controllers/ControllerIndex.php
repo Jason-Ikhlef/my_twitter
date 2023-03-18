@@ -24,6 +24,11 @@ class ControllerIndex
     private function baseIndex() {
 
         session_start();
+
+        if (isset($_SESSION["profil_id"])){
+
+            unset($_SESSION["profil_id"]);
+        }
         
         $this->_tweetManager = new TweetManager;
         $tweets = $this->_tweetManager->getLastTweets();

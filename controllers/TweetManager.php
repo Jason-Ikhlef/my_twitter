@@ -14,6 +14,11 @@ class TweetManager extends Model {
             return 'Message trop long';
         }
 
+        if ($images !== "") {
+
+            $images = explode(",", $images)[1];
+        }
+
         $this->getDb();
         $data = $this->newTweetQuery($message, $images);
 

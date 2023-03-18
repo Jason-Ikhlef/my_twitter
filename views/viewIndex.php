@@ -5,11 +5,6 @@ $this->_t = 'Tweet Academy | Index'; // Normal que le $this soit souligné au ja
 $user = new UserManager;
 $tweet = new TweetManager;
 
-if (isset($_SESSION["profil_id"])){
-
-    unset($_SESSION["profil_id"]);
-}
-
 ?>
 
 <p class="text-xl font-bold pl-3 pt-3">Accueil</p>
@@ -51,6 +46,7 @@ if (isset($_SESSION["profil_id"])){
 
     <?php if (isset($_SESSION["user_id"]) && !isset($_POST["disconnect"])) : ?>
         <?php if ($tweets) : ?>
+            
             <?php foreach ($tweets as $data) : ?>
                 <div class="w-full hover:bg-gray-100 border-y">
                     <?php if (empty($data->message()) && $data->origin()) { ?>
@@ -85,7 +81,7 @@ if (isset($_SESSION["profil_id"])){
                         <div class="tweet-main">
                             <p class="ml-20">
                                 <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
-                                <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                                <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                             </p>
                         </div>
 
@@ -237,7 +233,7 @@ if (isset($_SESSION["profil_id"])){
                 <div class="tweet-main">
                     <p class="ml-20">
                         <?= $tweet->spanMessage($data->message()) ?>
-                        <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                        <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                     </p>
                 </div>
                 <?php if ($data->origin()) : ?>

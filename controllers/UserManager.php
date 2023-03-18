@@ -183,45 +183,6 @@ class UserManager extends Model
         }
     }
 
-    public function uploadImg ($data){
-
-        $data = base64_decode($data);
-
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-
-        anchor:
-
-        $randomString = '';
-
-        for ($i = 0; $i < 2; $i++) {
-
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
-
-        $link = "/var/www/html/img/";
-
-        if (file_exists($link . $randomString)) {
-
-            goto anchor;
-        }
-
-        $im = imagecreatefromstring($data);
-
-        if ($im !== false) {
-
-            header('Content-Type: image/png');
-            imagepng($im, $link . $randomString);
-            imagedestroy($im);
-
-            return $randomString;
-
-        } else {
-
-            echo 'An error occurred.';
-        }
-    }
-
     public function getUserById ($id){
 
         $this->getDb();
