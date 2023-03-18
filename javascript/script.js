@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     //Retweet popup display
 
-    $(".retweetButton").each(function (e) {
+    $(".retweetButton").each(function () {
         $(this).on("click", function () {
             if ($(this).next().hasClass("block")) {
                 $(this).next().removeClass("block");
@@ -49,12 +49,20 @@ $(document).ready(function () {
         if (e.code == "Escape") {
             $(".retweetOverlay").removeClass("block");
             $(".retweetOverlay").addClass("hidden");
+            $('.popupRT').removeClass('block')
+            $('.popupRT').addClass('hidden')
         }
     });
 
+    $('.closeQuote').on('click',function(){
+        $('.popupRT').removeClass('block')
+        $('.popupRT').addClass('hidden')
+        $('body').removeClass('overflow-hidden')
+    })
+
     // Comment popup display
 
-    $(".commentButton").each(function (e) {
+    $(".commentBtnOverlay").each(function () {
         $(this).on("click", function () {
             if ($(this).next().hasClass("block")) {
                 $(this).next().removeClass("block");
@@ -65,19 +73,45 @@ $(document).ready(function () {
                 $(this).next().addClass("block");
                 $("body").addClass("overflow-hidden");
             }
+            $('body').on('keyup',function(e){
+                if(e.code == 'Escape'){
+                    $('.commentBtnOverlay').next().removeClass('block')
+                    $('.commentBtnOverlay').next().addClass('hidden')
+                }
+            })
         });
     });
 
+    $(".displayQuoteTweet").each(function(){
+        $(this).on('click',function(){
+            if ($(this).next().hasClass("block")) {
+                $(this).next().removeClass("block");
+                $(this).next().addClass("hidden");
+                $("body").removeClass("overflow-hidden");
+            } else {
+                $(this).next().removeClass("hidden");
+                $(this).next().addClass("block");
+                $("body").addClass("overflow-hidden");
+            }
+            $('body').on('keyup',function(e){
+                if(e.code == 'Escape'){
+                    $('.commentBtnOverlay').next().removeClass('block')
+                    $('.commentBtnOverlay').next().addClass('hidden')
+                }
+            })
+        })
+    })
+
     $(".commentClose").on("click", function () {
-        $(".commentOverlay").removeClass("block");
-        $(".commentOverlay").addClass("hidden");
+        $(".commentTweet").removeClass("block");
+        $(".commentTweet").addClass("hidden");
         $("body").removeClass("overflow-hidden");
     });
 
     $("body").on("keyup", function (e) {
         if (e.code == "Escape") {
-            $(".commentOverlay").removeClass("block");
-            $(".commentOverlay").addClass("hidden");
+            $(".commentTweet").removeClass("block");
+            $(".commentTweet").addClass("hidden");
             $("#tweetSubmenuOverlay").removeClass("block");
             $("#tweetSubmenuOverlay").addClass("hidden");
             $("#logoutPopup").removeClass("block");
@@ -112,13 +146,15 @@ $(document).ready(function () {
     // let caractersCount
     // let subMenuCaractersCount
 
-    // if($('.postTweet')[0].value == ""){
+    // console.log($('.newTweetArea'));
+    // if($('.newTweetArea')[0].value == ""){
     //     $('.ConfirmNewTweet').css('pointer-events','none')
     //     $('.ConfirmNewTweet').css('background-color','rgb(191 219 254)')
     // }
 
-    // $('.postTweet').on('input',function (e) {
-
+    // $('.newTweeetArea').on('input',function (e) {
+    //     console.log('oui');
+    // })
     //   caractersCount = $('.postTweet')[0].value.length
     //   subMenuCaractersCount = $('.postTweet')[1].value.length
 
