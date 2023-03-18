@@ -5,11 +5,7 @@ include_once("../../controllers/UserManager.php");
 
 session_start();
 
-$_SESSION["profil_id"] = $_GET["user_id"];
-
 $controller = new UserManager;
-$data = $controller->nicknameFromId($_GET["user_id"]);
+$data = $controller->nicknameCheck($_GET["nickname"]);
 
-echo $data[0]->nickname();
-
-?>
+$_SESSION["profil_id"] = $data["id"];

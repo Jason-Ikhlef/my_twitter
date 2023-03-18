@@ -547,22 +547,23 @@ abstract class Model
         $followList = $this->getFollowQuery($currentUser);
 
         if (!in_array($followId, $followList)) {
-
+            
             array_push($followList, $followId);
+            $followList = array_diff($followList, array("", "-"));
         } else {
-
-            $followList = array_diff($followList, array($followId));
+            
+            $followList = array_diff($followList, array($followId, ""));
         }
-
+        
         $followList = implode("-", $followList);
 
-        $followList = $followList . "-";
+        if (strlen($followList) >= 1){
 
-        if (substr($followList, 0, 1) !== "-") {
-
-            $followList = "-" . $followList;
+            $followList = $followList . "-";
         }
 
+        $followList = "-" . $followList;
+        
         $query = self::$_db->prepare(
 
             "UPDATE users SET follows = :follows

@@ -22,6 +22,7 @@
     <script src="./javascript/script.js" defer></script>
     <script src="./AJAX/javascript/do.displayProfil.js" defer></script>
     <script src="./AJAX/javascript/do.follow.js" defer></script>
+    <script src="./AJAX/javascript/do.clickOnAt.js"></script>
     <title><?= $t ?></title>
 </head>
 

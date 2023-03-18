@@ -11,8 +11,6 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
 
 $currendID = $_SESSION["profil_id"];
 
-unset($_SESSION["profil_id"]);
-
 ?>
 
 <div class="w-full flex flex-col top-0">

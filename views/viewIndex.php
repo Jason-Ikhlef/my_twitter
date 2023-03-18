@@ -5,6 +5,11 @@ $this->_t = 'Tweet Academy | Index'; // Normal que le $this soit souligné au ja
 $user = new UserManager;
 $tweet = new TweetManager;
 
+if (isset($_SESSION["profil_id"])){
+
+    unset($_SESSION["profil_id"]);
+}
+
 ?>
 
 <p class="text-xl font-bold pl-3 pt-3">Accueil</p>
@@ -377,6 +382,7 @@ $tweet = new TweetManager;
                     </form>
 
                 </div>
+            </div>
             <?php } ?>
         <?php endforeach ?>
     <?php endif ?>

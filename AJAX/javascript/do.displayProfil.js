@@ -13,7 +13,7 @@ $(".displayProfil").click(function (e) {
         url: "./AJAX/php/do.displayProfil.php",
         data: data,
         success: function (data) {
-            document.location.href="profil"
+            document.location.href="profil?"+data
         }
     })
 })
