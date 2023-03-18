@@ -20,7 +20,7 @@ $tweet = new TweetManager;
                 </div>
 
                 <div class="atPopup hidden relative bg-gray-200 rounded-xl z-10">
-                    *
+                    
                 </div>
                 <div class="absolute flex flex-col w-1/5 bg-white max-h-48 ml-10 border border-1 border-gray-400 overflow-auto"></div>
 
@@ -92,7 +92,7 @@ $tweet = new TweetManager;
                         <div class="m-4 border flex gap-8">
                             <div class="flex cursor-pointer relative">
                                 <div class="retweet">
-                                    <button value="<?= $data->origin() ?>" name="retweetButton" class=" flex retweetButton hover:text-blue-400">
+                                    <button value="<?= $data->origin() ?>" name="retweetButtonPopup" class=" flex retweetButtonPopup hover:text-blue-400">
                                         <i class="fa-solid fa-retweet mt-1"></i>
                                         <p class="ml-1 "><?= $tweet->retweetsNumber($data->origin()) ?></p>
                                     </button>
@@ -265,7 +265,7 @@ $tweet = new TweetManager;
 
                             <!-- Partie des retweets -->
 
-                            <button value="<?= $data->id() ?>" name="retweetButton" class="flex retweetButton hover:text-blue-400">
+                            <button value="<?= $data->id() ?>" name="retweetButtonPopup" class="flex retweetButtonPopup hover:text-blue-400">
                                 <i class="fa-solid fa-retweet mt-1"></i>
                                 <p class="ml-1"><?= $tweet->retweetsNumber($data->id()) ?></p>
                             </button>
@@ -292,23 +292,23 @@ $tweet = new TweetManager;
                                             <button class="closeQuote self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
                                             <div class='flex mt-2'>
                                                 <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                                                <div contenteditable="true" name="newQuoteRetweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newQuoteRetweet resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
+                                                <div id="quoteRetweetMsg" contenteditable="true" name="newQuoteRetweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newQuoteRetweet resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
                                             </div>
                                             <div class='border rounded-xl text-sm ml-16'>
                                                 <div class='flex gap-2'>
                                                     <img src="https://via.placeholder.com/150" alt="avatar" class="w-8 h-8 rounded-full m-2">
                                                     <p class="font-bold mt-2">
-                                                        nom du boug (tweet de base)
+                                                        <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                                                     </p>
                                                     <p class='italic text-gray-400 mt-2'>
-                                                        @nom du boug (tweet de base)
+                                                    <?= "@" . $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                                                     </p>
                                                 </div>
                                                 <p class="w-full mt-2 pl-4 pr-4">
-                                                    tweet du boug (tweet de base)
+                                                    <?= $tweet->spanMessage($data->message()) ?>
                                                 </p>
                                             </div>                                
-                                            <button value="<?= $data->origin() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton bg-blue-600 hover:bg-red-200 w-fit p-2 rounded-3xl mt-6 self-end mb-2 mr-2">
+                                            <button value="<?= $data->id() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton bg-blue-600 hover:bg-red-200 w-fit p-2 rounded-3xl mt-6 self-end mb-2 mr-2">
                                                 <p class='text-white'>Tweeter</p>
                                             </button>
                                         </div>

@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     //Retweet popup display
 
-    $(".retweetButton").each(function () {
+    $(".retweetButtonPopup").each(function () {
         $(this).on("click", function () {
             if ($(this).next().hasClass("block")) {
                 $(this).next().removeClass("block");
@@ -240,7 +240,7 @@ $(document).ready(function () {
 
     //Retweet popup display
 
-    $(".retweetButton").on("click", function () {
+    $(".retweetButtonPopup").on("click", function () {
         if ($("#retweetOverlay").hasClass("block")) {
             $("#retweetOverlay").removeClass("block");
             $("#retweetOverlay").addClass("hidden");

@@ -6,7 +6,7 @@ $(".retweetButton").on("click", function(e) {
         data: {tweet_id : e.target.value},
         url: "./AJAX/php/do.retweet.php",
         success: function(data) {
-
+            console.log('simpleRt');
             if (data == 1) {
 
                 
