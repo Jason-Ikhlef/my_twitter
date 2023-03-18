@@ -5,6 +5,8 @@ $user = new UserManager;
 if (isset($_SESSION["profil_id"])){
 
     $data = $user->getUserById($_SESSION["profil_id"]);
+    $isFollowed = $user->getFollowInfo($_SESSION["user_id"], $_SESSION["profil_id"]);
+    var_dump($isFollowed);
 } else {
 
     $data = $user->getUserById($_SESSION["user_id"]);
@@ -42,9 +44,15 @@ if (strlen($data[0]->follows()) == 1){
         <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
             <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
         <?php } else { ?>
+            <?php if(!$isFollowed) {?>
             <form id="followForm" method="post">
                 <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Suivre</button>
             </form>
+            <?php } else { ?>
+            <form id="followForm" method="post">
+                <button class="unfollowButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Ne plus suivre</button>
+            </form>
+            <?php } ?>
         <?php } ?>
         </div>
         <div class="userInfo ml-8 mt-4">

@@ -271,9 +271,20 @@ class UserManager extends Model
 
         if ($data) {
 
-            return $data;
+            return true;
         } else {
             return false;
         }
     }
+
+    public function getFollowInfo ($currentUser, $checkID){
+
+        $this->getDb();
+        
+        $data = $this->getFollowInfoQuery($currentUser, $checkID);
+
+        return $data;   
+    }
+
+    
 }

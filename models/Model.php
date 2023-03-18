@@ -521,17 +521,13 @@ abstract class Model
 
         $followList = $this->getFollowQuery($currentUser);
 
-        var_dump($followList);
-
-        if (in_array($followId, $followList)) {
+        if (!in_array($followId, $followList)) {
 
             array_push($followList, $followId);
 
             $followList[0] = "-" . $followList[0];
 
             $followList = implode("-", $followList);
-
-            var_dump($followList);
 
             $query = self::$_db->prepare(
 
@@ -541,7 +537,21 @@ abstract class Model
             );
 
             $query->execute(["id" => $currentUser, "follows" => $followList]);
-            
+
+        }
+        return true;
+    }
+
+    protected function getFollowInfoQuery ($currentUser, $checkID) {
+
+        $followList = $this->getFollowQuery($currentUser);
+
+        if (in_array($checkID, $followList)) {
+
+            return true;
+        } else {
+
+            return false;
         }
     }
 }
