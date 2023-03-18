@@ -524,21 +524,27 @@ abstract class Model
         if (!in_array($followId, $followList)) {
 
             array_push($followList, $followId);
+        } else {
 
-            $followList[0] = "-" . $followList[0];
-
-            $followList = implode("-", $followList);
-
-            $query = self::$_db->prepare(
-
-                "UPDATE users SET follows = :follows
-                WHERE id = :id"
-
-            );
-
-            $query->execute(["id" => $currentUser, "follows" => $followList]);
-
+            $followList = array_diff($followList, array($followId));
         }
+
+        $followList = implode("-", $followList);
+
+        if (substr($followList, 0, 1) !== "-") {
+
+            $followList = "-" . $followList;
+        }
+
+        $query = self::$_db->prepare(
+
+            "UPDATE users SET follows = :follows
+            WHERE id = :id"
+
+        );
+
+        $query->execute(["id" => $currentUser, "follows" => $followList]);
+
         return true;
     }
 

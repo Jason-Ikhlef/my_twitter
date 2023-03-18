@@ -49,8 +49,8 @@ if (strlen($data[0]->follows()) == 1){
                 <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Suivre</button>
             </form>
             <?php } else { ?>
-            <form id="followForm" method="post">
-                <button class="unfollowButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Ne plus suivre</button>
+            <form id="unfollowForm" method="post">
+                <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Ne plus suivre</button>
             </form>
             <?php } ?>
         <?php } ?>
