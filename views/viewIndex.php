@@ -65,10 +65,15 @@ $tweet = new TweetManager;
 
                             <!-- Pseudo + image (en placeholder pour l'instant) de l'utilisateur -->
                         <div class="flex p-4">
-                            <img src="<?php "../../img/" . $data[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
-                            <p class="font-bold mt-3 ml-2">
-                                <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
-                            </p>
+                            <img src="<?= "../../img/" . $user->nicknameFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
+                            
+                            <form class="displayProfil" method="get" action="profil">
+                                <input class="displayProfilHidden" type="hidden" name="id" value="<?= $data->user_id() ?>">
+                                <button class="displayProfilBtn" class="font-bold mt-3 ml-2">
+                                    <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
+                                </button>
+                            </form>
+                                
                         </div>
 
                             <!-- Tweet de l'utilisateur -->
@@ -378,3 +383,4 @@ $tweet = new TweetManager;
     <?php endif ?>
 <?php endif ?>
 </div>
+                </div>

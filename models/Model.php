@@ -139,7 +139,7 @@ abstract class Model
 
             $query = self::$_db->prepare(
 
-                'SELECT nickname FROM users
+                'SELECT nickname, picture FROM users
                 WHERE id = :id'
 
             );
