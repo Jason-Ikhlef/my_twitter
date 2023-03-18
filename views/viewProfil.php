@@ -1,22 +1,23 @@
 <?php
 
 $user = new UserManager;
+$this->_t = 'Tweet Academy | Profil';
 
 ?>
 <div class="w-full flex flex-col top-0">
-    <div class="profileTop flex w-1/3 border-b-4 max-sm:w-auto">
+    <div class="profileTop flex w-1/3 max-sm:w-auto">
         <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
         <div>
-            <p><?= $_SESSION["user_data"]["nickname"] ?></p>
-            <p class="text-xs italic">Nb d'abonnés</p>
+            <p class="text-xl font-bold pl-3 pt-3"><?= $_SESSION["user_data"]["nickname"] ?></p>
+            <p class="text-xs italic ml-8 mb-2">Nb d'abonnés</p>
         </div>
     </div>
     <div class="profile w-full">
         <div class="banner">
-            <img class="w-full h-48" src="<?= "../../img/" . $_SESSION["user_data"]["banner"] ?>">
+            <img class="w-full h-48 object-cover" src="<?= "../../img/" . $_SESSION["user_data"]["banner"] ?>">
         </div>
         <div class="profilePicture">
-            <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-full max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3" src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>">
+            <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-full max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3 object-cover" src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>">
         </div>
         <div class="editButton flex justify-end">
             <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
