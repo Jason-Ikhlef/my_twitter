@@ -9,6 +9,10 @@ $data = $user->getUserById($_SESSION["profil_id"]);
 $followInfos = $user->getFollowInfo($_SESSION["user_id"], $_SESSION["profil_id"], $data[0]->follows());
 $followers = $user->getFollowers($_SESSION["profil_id"]);
 
+$currendID = $_SESSION["profil_id"];
+
+unset($_SESSION["profil_id"]);
+
 ?>
 
 <div class="w-full flex flex-col top-0">
@@ -27,16 +31,16 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
             <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-full max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3" src="<?= "../../img/" . $data[0]->picture() ?>">
         </div>
         <div class="flex justify-end">
-        <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
+        <?php if (!isset($currendID) || $_SESSION["user_id"] == $currendID) { ?>
             <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
         <?php } else { ?>
             <?php if(!$followInfos[0]) {?>
             <form id="followForm">
-                <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Suivre</button>
+                <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $currendID ?>">Suivre</button>
             </form>
             <?php } else { ?>
             <form id="unfollowForm">
-                <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Ne plus suivre</button>
+                <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $currendID ?>">Ne plus suivre</button>
             </form>
             <?php } ?>
         <?php } ?>

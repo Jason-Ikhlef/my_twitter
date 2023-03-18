@@ -383,4 +383,3 @@ $tweet = new TweetManager;
     <?php endif ?>
 <?php endif ?>
 </div>
-                </div>
