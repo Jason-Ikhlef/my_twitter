@@ -110,8 +110,8 @@ class UserManager extends Model
         $this->getDb();
         $data = $this->getAllByIdQuery($id, "User", "users", "id");
 
-        if ($data) {
-
+        if ($data && $data[0]->follows() != "-") {
+            
             return $data;
         } else {
             return false;
