@@ -52,20 +52,20 @@ $tweet = new TweetManager;
                 <div class="w-full hover:bg-gray-100 border-y tweetForDark">
                     <?php if (empty($data->message()) && $data->origin()) { ?>
 
-                        <!-- message si l'utilisateur co ou un utilisateur à retweeté  -->
 
                         <?php if ($_SESSION['user_id'] != $data->user_id()) { ?>
 
-                            
-                            <p class='text-blue-400 italic'>&ThickSpace;<?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
-
-                        <!-- Partie Tweet (affichée directement sur l'index) -->
-
-
-                            <!-- Pseudo + image (en placeholder pour l'instant) de l'utilisateur -->
-                        <div class="flex p-4">
                             <form class="displayProfil flex cursor-pointer" method="get" action="profil">
                                 <input type="hidden" name="id" value="<?= $data->user_id() ?>">
+                                <p class='text-blue-400 italic hover:underline cursor-pointer ml-2 mt-2'><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté
+                                </p>
+                            </form>
+
+
+
+                        <div class="flex p-4">
+                            <form class="displayProfil flex cursor-pointer" method="get" action="profil">
+                                <input type="hidden" name="id" value="<?= $tweet->idUserFromOrigin($data->origin())[0]->user_id() ?>">
                                 <img src="<?= "../../img/" . $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
                                 <p class="font-bold mt-3 ml-2">
                                     <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
@@ -74,7 +74,6 @@ $tweet = new TweetManager;
                                 
                         </div>
 
-                            <!-- Tweet de l'utilisateur -->
 
                         <div class="tweet-main ml-20">
                             <span>
@@ -85,9 +84,7 @@ $tweet = new TweetManager;
                             </p>
                         </div>
 
-                            <!-- Partie 'fonctionnalitées' du tweet -->
 
-                                <!-- Retweet -->
 
                         <div class="m-4 border flex gap-8">
                             <div class="flex cursor-pointer relative">
@@ -97,7 +94,6 @@ $tweet = new TweetManager;
                                         <p class="ml-1 "><?= $tweet->retweetsNumber($data->origin()) ?></p>
                                     </button>
 
-                                    <!-- Premier popup (qui affiche la possibilité de retweet simple ou citer ) -->
 
                                     <div class="retweetOverlay hidden flex flex-col absolute bg-gray-200 rounded-xl z-10 p-4 w-[170px]">
                                         <div class="flex cursor-pointer hover:text-gray-500 w-full mb-1">
@@ -112,24 +108,21 @@ $tweet = new TweetManager;
                                                 <p>Citer le tweet</p>
                                             </button>
                                             
-                                    <!-- Deuxième popup (qui affiche le tweet de l'utilisateur + la possiblité d'écrire) -->
 
                                             <div class="hidden popupRT fixed cursor-auto w-full h-auto p-10 bg-gray-500/50 inset-0 z-1">
                                                 <div class="popup bg-white flex flex-col m-auto max-w-md h-auto rounded-lg text-black p-1">
                                                     <button class="closeQuote self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
 
-                                                        <!-- Partie retweet (utilisateur connecté) -->
 
                                                     <div class='flex mt-2'>
                                                         <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
                                                         <div contenteditable="true" name="newQuoteRetweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newQuoteRetweet resize-none w-5/6 h-10 mt-5 mr-2 focus:outline-none cursor-text overflow-auto"></div>
                                                     </div>
 
-                                                        <!-- Affichage du tweet qui va être cité -->
 
                                                     <div class='border rounded-xl text-sm ml-16'>
                                                         <div class='flex gap-2'>
-                                                            <img src="https://via.placeholder.com/150" alt="avatar" class="w-8 h-8 rounded-full m-2">
+                                                            <img src="<?= "../../img/" . $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->picture()  ?>" alt="avatar" class="w-8 h-8 rounded-full m-2">
                                                             <p class="font-bold mt-2 ml-2">
                                                                 <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
                                                             </p>
@@ -142,7 +135,6 @@ $tweet = new TweetManager;
                                                         </p>
                                                     </div>
                                                     
-                                                        <!-- Boutton qui va envoyer le retweet -->
 
                                                     <button value="<?= $data->origin() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton bg-blue-500 hover:bg-blue-200 w-fit p-2 rounded-3xl mt-6 self-end mb-2 mr-2">
                                                         <p class='text-white'>Tweeter</p>
@@ -154,7 +146,6 @@ $tweet = new TweetManager;
                                 </div>
                             </div>
                             
-                                <!-- Partie commentaire -->          
 
                             <div class="flex cursor-pointer relative hover:text-green-400">
                                 
@@ -163,13 +154,11 @@ $tweet = new TweetManager;
                                     <p class="ml-1"><?= $tweet->commentsNumber($data->origin()) ?></p>
                                 </button>
 
-                                    <!-- Popup qui va afficher le tweet de base, + la possiblité d'écrire un commentaire -->
 
                                 <div class="hidden commentTweet fixed w-full cursor-auto h-auto p-10 bg-gray-500/50 inset-0 z-1">
                                     <div class="popup bg-white flex flex-col m-auto max-w-md h-auto rounded-lg text-black p-1">
                                         <button class="commentClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
 
-                                        <!-- Affichage du tweet de base -->
 
                                         <div class='flex'>
                                             <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2">
@@ -187,21 +176,10 @@ $tweet = new TweetManager;
                                                 </p>
                                             </div>
                                         </div>
-
-                                        <!-- Possibilité d'écrire un commentaire -->
-
-                                        <div class='flex'>
-                                            <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                                            <div contenteditable="true" name="newCommentArea" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-5/6 h-10 mt-5 mr-2 focus:outline-none cursor-text overflow-auto"></div>
-                                        </div>
-                                        <button value="<?= $data->origin() ?>" name="commentButton" type="button" class="commentButton cursor-pointer bg-blue-500 text-white w-fit px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200 self-end mb-2 mr-2">
-                                            Répondreez:kjfbsdjhf,bd
-                                        </button>
                                     </div>
                                 </div>                                
                             </div>
                             
-                                <!-- Partie like -->
 
                             <div class="<?= $tweet->isLiked($data->origin()) ? "flex cursor-pointer hover:text-pink-500 text-pink-400" : "flex cursor-pointer hover:text-pink-400" ?>">
                                 <button value=<?= implode("-", ["tweet_id" => $data->origin(), "user_id" => $data->user_id()]) ?> name="likeButton" type="button" class="likeButton flex">
@@ -210,7 +188,6 @@ $tweet = new TweetManager;
                                 <p class="ml-1"><?= $tweet->likesNumber($data->origin()) ?></p>
                             </div>
 
-                                <!-- Partie Voir plus -->
 
                             <form action="tweet" method="post" class="tweetMainForm">
                                 <button class="seeComments cursor-pointer" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
@@ -220,7 +197,6 @@ $tweet = new TweetManager;
                 </div>
             <?php } else { ?>
 
-                <!-- Partie 2 des tweets -->
         
                 <div class="flex p-4">
                     <form class="displayProfil flex cursor-pointer" method="get" action="profil">
@@ -268,14 +244,11 @@ $tweet = new TweetManager;
                     <div class="flex cursor-pointer  relative">
                         <div class="retweet">
 
-                            <!-- Partie des retweets -->
 
                             <button value="<?= $data->id() ?>" name="retweetButtonPopup" class="<?= $tweet->isRetweeted($data->id()) ? "flex retweetButtonPopup text-blue-400" : "flex retweetButtonPopup hover:text-blue-400"  ?>">
                                 <i class="fa-solid fa-retweet mt-1"></i>
                                 <p class="ml-1"><?= $tweet->retweetsNumber($data->id()) ?></p>
                             </button>
-
-                                <!-- Premier popup (possiblité de retweet ou citer) -->
 
                             <div class="retweetOverlay hidden absolute bg-gray-200 rounded-xl z-10 p-4 w-[170px]">
                                 <div class="flex cursor-pointer hover:text-gray-500 mb-1 hover:text-black">
@@ -290,7 +263,6 @@ $tweet = new TweetManager;
                                         <p>Citer le tweet</p>
                                     </button>                      
 
-                                <!-- Deuxième popup (possibilité d'écrire au tweet de base) -->
 
                                     <div class="hidden popupRT fixed cursor-auto w-full h-auto p-10 bg-gray-500/50 inset-0 z-1">
                                         <div class="popup bg-white flex flex-col m-auto max-w-md h-auto rounded-lg text-black p-1">
@@ -306,7 +278,7 @@ $tweet = new TweetManager;
                                                         <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                                                     </p>
                                                     <p class='italic text-gray-400 mt-2'>
-                                                    <?= "@" . $user->nicknameFromId($data->user_id())[0]->nickname() ?>
+                                                    <?= $tweet->spanMessage("@" . $user->nicknameFromId($data->user_id())[0]->nickname()) ?>
                                                     </p>
                                                 </div>
                                                 <p class="w-full mt-2 pl-4 pr-4">
@@ -328,7 +300,6 @@ $tweet = new TweetManager;
                         </div>
                     </div>
 
-                    <!-- Partie commentaire -->
 
                     <div class="flex cursor-pointer hover:text-green-400">
                         <button value="<?= $data->id() ?>" name="commentBtnOverlay" type="button" class="commentBtnOverlay flex">
@@ -336,29 +307,26 @@ $tweet = new TweetManager;
                             <p class="ml-1"><?= $tweet->commentsNumber($data->id()) ?></p>
                         </button>
 
-                        <!-- Popup des commentaires (avec le message de base affiché) -->
-
                         <div class="hidden commentTweet fixed w-full cursor-auto h-auto p-10 bg-gray-500/50 inset-0 z-1">
                             <div class="popup bg-white flex flex-col m-auto max-w-md h-auto rounded-lg text-black p-1">
                                 <button class="commentClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
                                 <div class='flex'>
-                                    <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
+                                    <img src="<?= "../../img/" . $user->getPictureFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
                                     <div class='flex flex-col'>
                                         <p class="font-bold mt-3 ml-2">
                                             <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                                         </p>
-                                        <p class="w-full mt-2 pl-4 pr-4 rounded-xl border">
+                                        <div class="w-full mt-2 pl-4 pr-4 rounded-xl border">
                                             <?= $tweet->spanMessage($data->message()) ?>
-                                        </p>
+                                                    </div>
                                         <p class='text-gray-400 italic'>En réponse à 
                                             <span class='text-blue-400'>
-                                                <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
+                                                <?= $tweet->spanMessage("@". $user->nicknameFromId($data->user_id())[0]->nickname()) ?>
                                             </span> 
                                         </p>
                                     </div>
                                 </div>
 
-                                <!-- Possibilité d'écrire au mec  -->
 
                                 <div class='flex'>
                                     <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
@@ -371,16 +339,12 @@ $tweet = new TweetManager;
                         </div>
                     </div>
 
-                    <!-- Partie likes -->
-
                     <div class="<?= $tweet->isLiked($data->id()) ? "flex cursor-pointer hover:text-pink-500 text-pink-400" : "flex cursor-pointer hover:text-pink-400" ?>">
                         <button value=<?= implode("-", ["tweet_id" => $data->id(), "user_id" => $data->user_id()]) ?> name="likeButton" type="button" class="likeButton">
                             <i class="<?= $tweet->isLiked($data->id()) ? "fa-heart mt-1 fa-solid" : "fa-heart mt-1 fa-regular" ?>"></i>
                         </button>
                         <p class="ml-1"><?= $tweet->likesNumber($data->id()) ?></p>
                     </div>
-
-                    <!-- Partie voir plus -->
 
                     <form action="tweet" method="post" class="tweetMainForm">
                         <button class="seeComments cursor-pointer" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>

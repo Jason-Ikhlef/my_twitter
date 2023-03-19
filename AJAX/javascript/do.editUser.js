@@ -92,7 +92,6 @@ function myAjax(data) {
         data: data,
         success: function (data) {
             location.reload();
-            console.log(data);
         },
     });
 }

@@ -180,7 +180,7 @@ $(document).ready(function () {
     }
 
     $(".tweetArea").on("input", function (e) {
-        caractersCount = $(".tweetArea")[0].innerHTML.length;
+        caractersCount = $(".tweetArea")[0].innerText.length;
 
         if (caractersCount > 0 || subMenuCaractersCount > 0) {
             $(".checkNbOfCaracters").removeClass("hidden");

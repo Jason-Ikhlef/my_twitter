@@ -11,7 +11,7 @@ $(".ConfirmNewTweet").on("click", function (e) {
         let validImageTypes = ["image/jpeg", "image/png"];
 
         if ($.inArray(fileType, validImageTypes) < 0) {
-            console.log("Le fichier joint n'est pas de type jpeg ou png");
+            alert("Le fichier joint n'est pas de type jpeg ou png");
             return;
         }
 
@@ -46,8 +46,7 @@ function myAjaxFunc(data) {
                 window.location.replace('/twitter/index')
 
             } else {
-
-                // pop-up erreur
+                
                 alert(data);
             }
         }

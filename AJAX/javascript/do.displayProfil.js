@@ -6,8 +6,6 @@ $(".displayProfil").click(function (e) {
 
     data = {user_id: value }
 
-    console.log(data);
-
     $.ajax({
         type: "get",
         url: "./AJAX/php/do.displayProfil.php",
