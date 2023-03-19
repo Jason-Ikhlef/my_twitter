@@ -11,7 +11,7 @@ abstract class Model
     private static function setDb()
     {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'AJR2042ci6');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'dorian1', '123');
 
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -48,12 +48,8 @@ abstract class Model
         }
     }
 
-    protected function newTweetQuery(string $message, $images = '')
+    protected function newTweetQuery(int $user_id, string $message, $images = '')
     {
-
-        session_start();
-
-        $user_id = $_SESSION['user_id'];
 
         if ($images !== ""){
 
@@ -430,7 +426,8 @@ abstract class Model
 
     protected function dislikeQuery(int $tweet_id)
     {
-
+        session_start();
+        
         $user_id = $_SESSION['user_id'];
 
         try {

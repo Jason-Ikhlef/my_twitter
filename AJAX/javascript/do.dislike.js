@@ -6,7 +6,7 @@ $(".likeButton").on("click", function(e) {
             data: {ids : e.target.parentNode.value},
             url: "./AJAX/php/do.dislike.php",
             success: function(data) {
-                
+                console.log(data);
                 if (data == 1) {
 
                     e.target.parentNode.parentNode.lastElementChild.innerHTML--

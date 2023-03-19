@@ -69,7 +69,7 @@ $tweet = new TweetManager;
                         <div class="flex p-4">
                             <form class="displayProfil flex cursor-pointer" method="get" action="profil">
                                 <input type="hidden" name="id" value="<?= $data->user_id() ?>">
-                                <img src="<?= "../../img/" . $user->nicknameFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
+                                <img src="<?= "../../img/" . $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
                                 <p class="font-bold mt-3 ml-2">
                                     <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
                                 </p>
@@ -198,7 +198,7 @@ $tweet = new TweetManager;
                                             <div contenteditable="true" name="newCommentArea" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
                                         </div>
                                         <button value="<?= $data->origin() ?>" name="commentButton" type="button" class="commentButton cursor-pointer bg-blue-500 text-white w-fit px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200 self-end mb-2 mr-2">
-                                            Répondre
+                                            Répondreez:kjfbsdjhf,bd
                                         </button>
                                     </div>
                                 </div>                                
@@ -223,7 +223,7 @@ $tweet = new TweetManager;
             <?php } else { ?>
 
                 <!-- Partie 2 des tweets -->
-
+        
                 <div class="flex p-4">
                     <form class="displayProfil flex cursor-pointer" method="get" action="profil">
                         <img src="<?= "../../img/" . $user->getPictureFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
@@ -246,7 +246,7 @@ $tweet = new TweetManager;
                     <div class="border w-fit mt-4 rounded-xl mx-auto">
                         <div class="flex flex-col w-full">
                             <div class="flex p-4 w-full">
-                                <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
+                                <img src="<?= "../../img/" . $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->picture()  ?>" alt="avatar" class="w-12 h-12 rounded-full">
                                 <p class="font-bold mt-3 ml-2">
                                     <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
                                 </p>
@@ -254,8 +254,10 @@ $tweet = new TweetManager;
                             <div>
                                 <p class="ml-2 mb-2">
                                     <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
+                                    <?php if ($data->images() !== "") {?>
+                                        <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                                    <?php } ?>
                                 </p>
-                                <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-b-xl">
                                 <form action="tweet" method="post" class="tweetMainForm">
                                     <button class="seeComments cursor-pointer" value="<?= $data->origin() ?>" name="seeComments" type="submit">Voir ce tweet</button>
                                 </form>
@@ -301,7 +303,7 @@ $tweet = new TweetManager;
                                             </div>
                                             <div class='border rounded-xl text-sm ml-16'>
                                                 <div class='flex gap-2'>
-                                                    <img src="https://via.placeholder.com/150" alt="avatar" class="w-8 h-8 rounded-full m-2 mt-1">
+                                                    <img src="<?= "../../img/" . $user->getPictureFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-8 h-8 rounded-full m-2 mt-1">
                                                     <p class="font-bold mt-2">
                                                         <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
                                                     </p>
@@ -311,6 +313,10 @@ $tweet = new TweetManager;
                                                 </div>
                                                 <p class="w-full mt-2 pl-4 pr-4">
                                                     <?= $tweet->spanMessage($data->message()) ?>
+                                                    
+                                                    <?php if ($data->images() !== "") {?>
+                                                        <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                                                    <?php } ?>
                                                 </p>
                                             </div>                                
                                             <button value="<?= $data->id() ?>" name="quoteTweetButton" type="button" class="quoteTweetButton bg-blue-600 hover:bg-blue-200 w-fit p-2 rounded-3xl mt-6 self-end mb-2 mr-2">

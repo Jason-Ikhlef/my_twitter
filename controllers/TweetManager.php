@@ -4,7 +4,7 @@ class TweetManager extends Model {
 
     // Tweet table Functions Here ...
 
-    public function newTweet($message, $images = '') {
+    public function newTweet($user_id, $message, $images = '') {
 
         if (empty($message)) {
 
@@ -20,7 +20,7 @@ class TweetManager extends Model {
         }
 
         $this->getDb();
-        $data = $this->newTweetQuery($message, $images);
+        $data = $this->newTweetQuery($user_id, $message, $images);
 
         if ($data) {
 

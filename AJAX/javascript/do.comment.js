@@ -1,7 +1,6 @@
 $(".commentButton").on("click", function(e) {
-    e.preventDefault();
     const message = $('#newCommentArea')
-
+    
     $.ajax({
         type: "POST",
         data: {tweet_id : e.target.value, form : message.text().trim()},

@@ -19,19 +19,15 @@ $tweet = new TweetManager;
         <div class="tweet-header flex flex-col gap-2">
             <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
             <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
+            <p class='text-sm italic'><?= $tweet->aboveCommentsTweet()[0]->message() ?></p>
         </div>
     </div>
-
-    <div class="tweet border">
-        <div class='flex'>
-            <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-4">
-            <div class="tweet-header flex flex-col gap-2">
-                <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
-                <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
+        <?php if ($tweet->aboveCommentsTweet()[0]->origin()) :?>
+        <div class="tweet-quote">
+            <div class="message-quoteTweet w-full mt-2 pl-4 pr-4">
+                <?= $tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->message() ?>
             </div>
-
         </div>
-
     <?php endif ?>
     <div class="tweet-footer mt-4 flex gap-4">
                     <button class="retweetButtonPopup flex hover:text-blue-400" value="<?= $tweet->aboveCommentsTweet()[0]->id() ?>" name="retweetButton" >
@@ -108,7 +104,7 @@ $tweet = new TweetManager;
                         </div>
                         <p class='italic'>En réponse à <span class='text-blue-400'><?= "@" . $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></span></p>
                         <div class="tweet-main border w-full">               
-                            <?= $data->message() ?>
+                            <?= $data->message()  ?>
                         </div>
                     </div>
                 </div>
@@ -160,10 +156,41 @@ $tweet = new TweetManager;
 
                                 </div>
                             </div>                      
-                    <button class="commentButton flex hover:text-green-400" value="<?= $data->id() ?>" name="commentButton" type="button">
+                    <button class="commentBtnOverlay flex hover:text-green-400" value="<?= $data->id() ?>" name="commentButton" type="button">
                         <i class="fa-regular fa-comment mt-1"></i>
                         <p class="ml-1"><?= $tweet->commentsNumber($data->id()) ?></p>
                     </button>
+                    <div class="hidden commentTweet fixed w-full cursor-auto h-auto p-10 bg-gray-500/50 inset-0 z-1">
+                            <div class="popup bg-white flex flex-col m-auto max-w-md h-auto rounded-lg text-black p-1">
+                                <button class="commentClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
+                                <div class='flex'>
+                                    <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
+                                    <div class='flex flex-col'>
+                                        <p class="font-bold mt-3 ml-2">
+                                            <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
+                                        </p>
+                                        <p class="w-full mt-2 pl-4 pr-4 rounded-xl border">
+                                            <?= $tweet->spanMessage($data->message()) ?>
+                                        </p>
+                                        <p class='text-gray-400 italic'>En réponse à 
+                                            <span class='text-blue-400'>
+                                                <?= $user->nicknameFromId($data->user_id())[0]->nickname() ?>
+                                            </span> 
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Possibilité d'écrire au mec  -->
+
+                                <div class='flex'>
+                                    <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
+                                    <div contenteditable="true" name="newComment" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text" id='newCommentArea'></div>
+                                </div>
+                                <button value="<?= $data->id() ?>" name="commentButton" type="button" class="commentButton cursor-pointer bg-blue-500 text-white w-fit px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200 self-end mb-2 mr-2">
+                                    Répondre
+                                </button>
+                            </div>
+                        </div>
                     <div class="<?= $tweet->isLiked($data->id()) ? "flex cursor-pointer hover:text-pink-500 text-pink-400" : "flex cursor-pointer hover:text-pink-400" ?>">
                         <button value=<?= implode("-", ["tweet_id" => $data->id(), "user_id" => $data->user_id()]) ?> name="likeButton" type="button" class="likeButton">
                             <i class="<?= $tweet->isLiked($data->id()) ? "fa-heart mt-1 fa-solid" : "fa-heart mt-1 fa-regular" ?>"></i>
@@ -177,4 +204,3 @@ $tweet = new TweetManager;
             </div>
     <?php endforeach ?>
 <?php endif ?>
-</div>
