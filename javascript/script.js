@@ -174,101 +174,62 @@ $(document).ready(function () {
     let caractersCount;
     let subMenuCaractersCount;
 
-    if ($(".newTweetArea").value == "" || $(".submenuTweet").value == "") {
+    if ($(".tweetArea").value == "" || $(".submenuTweet").value == "") {
         $(".ConfirmNewTweet").css("pointer-events", "none");
         $(".ConfirmNewTweet").css("background-color", "rgb(191 219 254)");
     }
 
     $(".tweetArea").on("input", function (e) {
-        caractersCount = $(".newTweetArea")[0].innerHTML.length;
-        subMenuCaractersCount = $(".submenuTweet")[0].innerHTML.length;
+        caractersCount = $(".tweetArea")[0].innerHTML.length;
 
         if (caractersCount > 0 || subMenuCaractersCount > 0) {
             $(".checkNbOfCaracters").removeClass("hidden");
             $(".checkNbOfCaracters").addClass("block");
-        } else {
+        } 
+        else {
             $(".checkNbOfCaracters").removeClass("block");
             $(".checkNbOfCaracters").addClass("hidden");
         }
 
         // accesibiliy management
 
-        if (
-            (e.key !== "Backspace" && caractersCount >= 140) ||
-            subMenuCaractersCount >= 140
-        ) {
+        if (e.key !== "Backspace" && caractersCount >= 140 ) {
             $(".ConfirmNewTweet").css("pointer-events", "none");
             $(".ConfirmNewTweet").css("background-color", "rgb(191 219 254)");
-        } else if (
-            (e.key !== "Backspace" && caractersCount <= 140) ||
-            subMenuCaractersCount <= 140
-        ) {
+        } 
+        else if (e.key !== "Backspace" && caractersCount <= 140) {
             $(".ConfirmNewTweet").css("pointer-events", "auto");
             $(".ConfirmNewTweet").css("background-color", "rgb(59 130 246)");
-        } else if (
-            (caractersCount !== 0 && e.key == "Backspace") ||
-            subMenuCaractersCount !== 0
-        ) {
-            if (caractersCount < 140 || subMenuCaractersCount < 140) {
+        } 
+        else if (caractersCount !== 0 && e.key == "Backspace") {
+
+            if (caractersCount < 140) {
                 $(".ConfirmNewTweet").css("pointer-events", "auto");
-                $(".ConfirmNewTweet").css(
-                    "background-color",
-                    "rgb(59 130 246)"
-                );
+                $(".ConfirmNewTweet").css("background-color","rgb(59 130 246)");
             }
         }
 
         // width management
 
-        if (caractersCount < 140 && subMenuCaractersCount < 140) {
+        if (caractersCount < 140) {
             $(".countCaracters").css("width", `${caractersCount}px`);
-            $(".subMenuCountCaracters").css(
-                "width",
-                `${subMenuCaractersCount}px`
-            );
-        } else {
+        } 
+        else {
             $(".countCaracters").css("width", `140px`);
-            $(".subMenuCountCaracters").css("width", "140px");
         }
 
         // colors management
 
-        if (
-            (caractersCount > 0 && caractersCount <= 50) ||
-            (subMenuCaractersCount > 0 && subMenuCaractersCount <= 50)
-        ) {
+        if (caractersCount > 0 && caractersCount <= 50) {
             $(".countCaracters").css("background-color", "rgb(74 222 128)");
-            $(".subMenuCountCaracters").css(
-                "background-color",
-                "rgb(74 222 128)"
-            );
-        } else if (
-            (caractersCount > 50 && caractersCount <= 100) ||
-            (subMenuCaractersCount > 50 && subMenuCaractersCount <= 100)
-        ) {
+        } 
+        else if (caractersCount > 50 && caractersCount <= 100) {
             $(".countCaracters").css("background-color", "rgb(250 204 21)");
-            $(".subMenuCountCaracters").css(
-                "background-color",
-                "rgb(250 204 21)"
-            );
-        } else if (
-            (caractersCount > 100 && caractersCount <= 120) ||
-            (subMenuCaractersCount > 100 && subMenuCaractersCount <= 120)
-        ) {
-            $(".countCaracters").css(
-                "background-vvevecolor",
-                "rgb(251 146 60)"
-            );
-            $(".subMenuCountCaracters").css(
-                "background-color",
-                "rgb(251 146 60)"
-            );
+        } 
+        else if (caractersCount > 100 && caractersCount <= 120) {
+            $(".countCaracters").css("background-vvevecolor","rgb(251 146 60)");
         } else if (caractersCount > 120 || subMenuCaractersCount > 120) {
             $(".countCaracters").css("background-color", "rgb(248 113 113)");
-            $(".subMenuCountCaracters").css(
-                "background-color",
-                "rgb(248 113 113)"
-            );
         }
     });
 
