@@ -48,15 +48,15 @@
             <div class="flex">
                 <label for="searchTweets">
                     <i class="fa-solid fa-magnifying-glass p-4 mx-auto text-left hover:bg-gray-100 rounded-full m-2.5 p-2 cursor-pointer"></i>
-                </label> 
-                <input type="text" class="bg-gray-200 p-5 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7 mt-4 " name="searchTweets" placeholder="Recherche Twitter"  id="searchTweets">
+                </label>
+                <input type="text" class="bg-gray-200 p-5 rounded-3xl text-left focus:bg-white focus:text-blue-200 w-5/6 h-7 mt-4 " name="searchTweets" placeholder="Recherche Twitter" id="searchTweets">
 
                 <i class="fa-solid fa-gear hover:bg-gray-200 m-2.5 rounded-full p-4 button cursor-pointer"></i>
             </div>
 
             <?= $content ?>
 
-        </div> 
+        </div>
 
         <div class="hidden lg:flex col-span-3 w-full mx-auto">
             <div class="border h-fit mt-4 mr-4 ml-4 p-4 rounded-lg fixed lg:w-[290px] xl:w-[350px] justify-center">
@@ -105,10 +105,10 @@
                     <label for="email" class="font-semibold">*Email:</label>
                 </div>
                 <div class="email mb-3 w-2/3">
-                    <input type="email" id="email" name="email" placeholder="example@test.com" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold" required></input>
+                    <input type="email" id="email" name="email" placeholder="exemple@test.com" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold" required></input>
                 </div>
                 <div class="password mb-1 w-2/3">
-                    <label for="password" class="font-semibold">*Password:</label>
+                    <label for="password" class="font-semibold">*Mot de passe:</label>
                 </div>
                 <div class="password mb-3 w-2/3">
                     <input type="password" id="password" name="password" placeholder="******" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold" required></input>
@@ -118,6 +118,9 @@
             <div class="signUp mb-5 w-2/3 flex flex-col justify-center items-center">
                 <p>Vous n'avez pas de compte ?</p>
                 <a class="text-blue-500 cursor-pointer logInSwitchButton">Inscrivez-vous</a>
+            </div>
+            <div class='errorMsg'>
+
             </div>
         </div>
     </div>
@@ -133,25 +136,25 @@
                     <p class="text-xl text-center font-semibold">Rejoignez Twitter</p>
                 </div>
                 <div class="username mb-1 w-2/3">
-                    <label for="nickname" class="font-semibold">*Username:</label>
+                    <label for="nickname" class="font-semibold">*Pseudo:</label>
                 </div>
                 <div class="username mb-3 w-2/3">
-                    <input type="text" id="signInUsername" name="nickname" placeholder="Username" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
+                    <input type="text" id="signInUsername" name="nickname" placeholder="Pseudo" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
                 </div>
                 <div class="signInEmail mb-1 w-2/3">
                     <label for="email" class="font-semibold">*Email:</label>
                 </div>
                 <div class="signInEmail mb-3 w-2/3">
-                    <input type="email" id="signInEmail" name="email" placeholder="example@test.com" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
+                    <input type="email" id="signInEmail" name="email" placeholder="exemple@test.com" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
                 </div>
                 <div class="signInPassword mb-1 w-2/3">
-                    <label for="registerPassword" class="font-semibold">*Password:</label>
+                    <label for="registerPassword" class="font-semibold">*Mot de passe:</label>
                 </div>
                 <div class="signInPassword mb-3 w-2/3">
                     <input type="password" id="signInPassword" name="registerPassword" placeholder="******" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
                 </div>
                 <div class="signInConfirmPw mb-1 w-2/3">
-                    <label for="registerConfirmPassword" class="font-semibold">*Confirm Password:</label>
+                    <label for="registerConfirmPassword" class="font-semibold">*Confirmer le mot de passe:</label>
                 </div>
                 <div class="signInConfirmPw mb-3 w-2/3">
                     <input type="password" id="signInConfirmPw" name="registerConfirmPassword" placeholder="******" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
@@ -161,6 +164,9 @@
             <div class="signUp mb-5 w-2/3 flex flex-col justify-center items-center">
                 <p>Vous avez déjà un compte ?</p>
                 <a class="text-blue-500 signInSwitchButton cursor-pointer">Connectez-vous</a>
+            </div>
+            <div class='errorMsg'>
+
             </div>
         </div>
     </div>

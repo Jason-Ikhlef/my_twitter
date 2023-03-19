@@ -8,9 +8,14 @@ $("#register-btn").click(function (e) {
         data: str,
         success: function (data) {
             if (data == "") {
-                alert("gg bro")
+                $('.errorMsg').html(`<p class='text-blue-500 font-bold mb-2'>Votre compte a bien été crée</p>`)
+                setTimeout(() => {
+                    $('#signInOverlay').hide()
+                    $('#loginOverlay').show()
+                    $('.errorMsg').html('')
+                  }, 1000)
             } else {
-                alert(data)
+                $('.errorMsg').html(`<p class='text-red-400 font-bold mb-2'>${data}</p>`)
             }
         }
     })

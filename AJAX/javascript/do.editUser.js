@@ -18,7 +18,7 @@ $("#editBtn").click(function (e) {
         let validImageTypes = ["image/jpeg", "image/png"];
 
         if ($.inArray(fileType, validImageTypes) < 0) {
-            console.log("Le fichier joint n'est pas de type jpeg ou png");
+            $('.errorMsg').html('<p class="text-red-400 font-bold mb-2">Le fichier doit être de format jpeg ou png</p>')
             return;
         }
 
@@ -32,7 +32,8 @@ $("#editBtn").click(function (e) {
             let validImageTypes = ["image/jpeg", "image/png"];
 
             if ($.inArray(fileType, validImageTypes) < 0) {
-                console.log("Le fichier joint n'est pas de type jpeg ou png");
+                $('.errorMsg').html('<p class="text-red-400 font-bold mb-2">Le fichier doit être de format jpeg ou png</p>')
+
                 return;
             }
 
@@ -51,7 +52,7 @@ $("#editBtn").click(function (e) {
         let validImageTypes = ["image/jpeg", "image/png"];
 
         if ($.inArray(fileType, validImageTypes) < 0) {
-            console.log("Le fichier joint n'est pas de type jpeg ou png");
+            $('.errorMsg').html('<p class="text-red-400 font-bold mb-2">Le fichier doit être de format jpeg ou png</p>')
             return;
         }
 
@@ -67,7 +68,7 @@ $("#editBtn").click(function (e) {
         let validImageTypes = ["image/jpeg", "image/png"];
 
         if ($.inArray(fileType, validImageTypes) < 0) {
-            console.log("Le fichier joint n'est pas de type jpeg ou png");
+            $('.errorMsg').html('<p class="text-red-400 font-bold mb-2">Le fichier doit être de format jpeg ou png</p>')
             return;
         }
 

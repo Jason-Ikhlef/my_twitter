@@ -16,13 +16,13 @@ $tweet = new TweetManager;
             <form id="newTweet">
                 <div id="tweetMessage" class="flex mt-4">
                     <a href="profil"><img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
-                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
+                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea tweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
                 </div>
 
-                <div class="atPopup hidden relative bg-gray-200 rounded-xl z-10">
-                    *
+                <div class="atPopup hidden absolute ml-2 h-[100px] overflow-y-hidden bg-gray-200 rounded-xl z-10 w-fit">
+                    
+
                 </div>
-                <div class="absolute flex flex-col w-1/5 bg-white max-h-48 ml-10 border border-1 border-gray-400 overflow-auto"></div>
 
                 <div class="flex justify-between my-auto">
                     <div class="flex ml-12 mt-2 mb-4">
@@ -49,7 +49,7 @@ $tweet = new TweetManager;
         <?php if ($tweets) : ?>
             
             <?php foreach ($tweets as $data) : ?>
-                <div class="w-full hover:bg-gray-100 border-y">
+                <div class="w-full hover:bg-gray-100 border-y tweetForDark">
                     <?php if (empty($data->message()) && $data->origin()) { ?>
 
                         <!-- message si l'utilisateur co ou un utilisateur à retweeté  -->
@@ -59,7 +59,7 @@ $tweet = new TweetManager;
                             <p class='text-blue-400 italic ml-4 mt-2'>Vous avez retweeté</p>
 
                         <?php } else { ?>
-                            <p class='text-blue-400 italic ml-4 mt-2'><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
+                            <p class='text-blue-400 italic'><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
                         <?php } ?>
 
                         <!-- Partie Tweet (affichée directement sur l'index) -->
@@ -79,8 +79,8 @@ $tweet = new TweetManager;
 
                             <!-- Tweet de l'utilisateur -->
 
-                        <div class="tweet-main">
-                            <p class="ml-20">
+                        <div class="tweet-main ml-20">
+                            <span>
                                 <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
                                 <?php if ($tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->images()) !== "") { ?>
                                     <img src="<?= "../../img/" . $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->images()) ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
@@ -133,7 +133,7 @@ $tweet = new TweetManager;
                                                     <div class='border rounded-xl text-sm ml-16'>
                                                         <div class='flex gap-2'>
                                                             <img src="https://via.placeholder.com/150" alt="avatar" class="w-8 h-8 rounded-full m-2">
-                                                            <p class="font-bold mt-2">
+                                                            <p class="font-bold mt-2 ml-2">
                                                                 <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
                                                             </p>
                                                             <p class='italic text-gray-400 mt-2'>
@@ -175,7 +175,7 @@ $tweet = new TweetManager;
                                         <!-- Affichage du tweet de base -->
 
                                         <div class='flex'>
-                                            <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full">
+                                            <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2">
                                             <div class='flex flex-col'>
                                                 <p class="font-bold mt-3 ml-2">
                                                     <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
@@ -219,7 +219,7 @@ $tweet = new TweetManager;
                                 <button class="seeComments cursor-pointer" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
                             </form>
                         </div>
-                    </div>
+                </div>
             <?php } else { ?>
 
                 <!-- Partie 2 des tweets -->
@@ -233,8 +233,8 @@ $tweet = new TweetManager;
                         </p>
                     </form>
                 </div>
-                <div class="tweet-main">
-                    <p class="ml-20">
+                <div class="tweet-main ml-20">
+                    <span>
                         <?= $tweet->spanMessage($data->message()) ?>
                         <?php if ($data->images() !== "") {?>
                             <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
@@ -301,7 +301,7 @@ $tweet = new TweetManager;
                                             </div>
                                             <div class='border rounded-xl text-sm ml-16'>
                                                 <div class='flex gap-2'>
-                                                    <img src="https://via.placeholder.com/150" alt="avatar" class="w-8 h-8 rounded-full m-2">
+                                                    <img src="https://via.placeholder.com/150" alt="avatar" class="w-8 h-8 rounded-full m-2 mt-1">
                                                     <p class="font-bold mt-2">
                                                         nom du boug (tweet de base)
                                                     </p>
@@ -381,7 +381,6 @@ $tweet = new TweetManager;
                     <form action="tweet" method="post" class="tweetMainForm">
                         <button class="seeComments cursor-pointer" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
                     </form>
-
                 </div>
             </div>
             <?php } ?>
