@@ -19,13 +19,20 @@ $tweet = new TweetManager;
         <div class="tweet-header flex flex-col gap-2">
             <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
             <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
-            <p class='text-sm italic'><?= $tweet->aboveCommentsTweet()[0]->message() ?></p>
+            <p class='text-sm'><?= $tweet->aboveCommentsTweet()[0]->message() ?>
+            <?php if ($tweet->aboveCommentsTweet()[0]->images() !== "") {?>
+                <img src="<?= "../../img/" . $tweet->aboveCommentsTweet()[0]->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+            <?php } ?>
+            </p>
         </div>
     </div>
         <?php if ($tweet->aboveCommentsTweet()[0]->origin()) :?>
         <div class="tweet-quote">
             <div class="message-quoteTweet w-full mt-2 pl-4 pr-4">
                 <?= $tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->message() ?>
+                <?php if ($tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->images() !== "") {?>
+                <img src="<?= "../../img/" . $tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+            <?php } ?>
             </div>
         </div>
     <?php endif ?>

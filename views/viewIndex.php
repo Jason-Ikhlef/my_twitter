@@ -252,8 +252,8 @@ $tweet = new TweetManager;
                             <div>
                                 <p class="ml-2 mb-2">
                                     <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
-                                    <?php if ($data->images() !== "") {?>
-                                        <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                                    <?php if ($tweet->getImageFromOrigin($data->origin()) !== "") {?>
+                                        <img src="<?= "../../img/" . $tweet->getImageFromOrigin($data->origin()) ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
                                     <?php } ?>
                                 </p>
                                 <form action="tweet" method="post" class="tweetMainForm">

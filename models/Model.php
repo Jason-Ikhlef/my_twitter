@@ -11,7 +11,7 @@ abstract class Model
     private static function setDb()
     {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'root');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'AJR2042ci6');
 
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -726,5 +726,21 @@ abstract class Model
         $data = $query->fetch();
 
         return $data;
+    }
+
+    protected function getImageFromOriginQuery ($origin) {
+
+        $query = self::$_db->prepare(
+
+            "SELECT images FROM tweets
+            WHERE id = :id"
+
+        );
+
+        $query->execute(["id" => $origin]);
+
+        $data = $query->fetch();
+
+        return $data[0];
     }
 }
