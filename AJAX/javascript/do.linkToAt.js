@@ -9,7 +9,8 @@ $(div).on("input", function() {
         url: "./AJAX/php/do.linkToAt.php",
         success: function(data) {
             if (data) {
-
+                $('.atPopup').html("")
+                let n = 1
                 let start = 0;
                 const selection = window.getSelection();
                 if (selection.rangeCount > 0) {
@@ -28,7 +29,12 @@ $(div).on("input", function() {
                     const word = words[i];
                     if (word.startsWith("@")) {
                         const span = document.createElement("span");
-                        span.className = "myAt";
+                        span.classList.add("myAt", "text-blue-700");
+                        span.textContent = word + " ";
+                        newContent.appendChild(span);
+                    } else if (word.startsWith("#")) {
+                        const span = document.createElement("span");
+                        span.classList.add("myHtag", "text-blue-700");
                         span.textContent = word + " ";
                         newContent.appendChild(span);
                     } else {
@@ -59,13 +65,30 @@ $(div).on("input", function() {
                             const length = childNode.length;
                             if (!foundStart && start >= currentOffset && start <= currentOffset + length) {
                                 newRange.setStart(childNode, start - currentOffset);
+                                $('.atPopup').hide()
                                 foundStart = true;
                             }
                             currentOffset += length;
                         } else if (childNode.nodeType === 1 && childNode.tagName === "SPAN") {
                             const length = childNode.textContent.length;
+                            
                             if (!foundStart && start >= currentOffset && start <= currentOffset + length) {
                                 newRange.setStart(childNode.firstChild, start - currentOffset);
+                                let spanValue = childNode.innerText.replace("@", "")
+                                Object.values(JSON.parse(data)).forEach(e => {
+                                    if (e[n].includes(spanValue)) {
+                                        $('.atPopup').html($('.atPopup').html() + `<p class="followedName" style="cursor:pointer;">${e[n]}</p>` )
+                                    }
+                                    n++
+                                })
+                                $('.atPopup').show()
+                                $('.followedName').each(function() {
+                                    
+                                    $(this).on('click', e => {
+
+                                        childNode.innerText = '@' + $(this).text();
+                                    })
+                                }) 
                                 foundStart = true;
                             }
                             currentOffset += length;
@@ -77,8 +100,6 @@ $(div).on("input", function() {
                     newRange.collapse(true);
                     newSelection.removeAllRanges();
                     newSelection.addRange(newRange);
-                    
-                    console.log(data);
                 }
                 
             } else {
