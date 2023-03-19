@@ -10,7 +10,7 @@ $(".commentButton").on("click", function(e) {
                        
             if (data == 1) {
 
-                // window.location.replace('/twitter/index')
+                window.location.replace('/twitter/index')
                 
             } else {
 
