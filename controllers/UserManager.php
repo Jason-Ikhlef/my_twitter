@@ -256,5 +256,12 @@ class UserManager extends Model
         return $data[0];
     }
 
-    
+    public function getTweetsCount ($id) {
+
+        $this->getDb();
+        
+        $data = $this->getTweetsCountQuery ($id);
+
+        return $data;
+    }    
 }

@@ -268,4 +268,10 @@ $(document).ready(function () {
         $("#editOverlay").removeClass("block");
         $("#editOverlay").addClass("hidden");
     });
+
+    // Input file tweet
+
+    $("#imgInTweet").change(function (e) { 
+        $("#imgInTweetName").html($("#imgInTweet").val().replace(/.*(\/|\\)/, ''))
+    });
 });

@@ -665,4 +665,20 @@ abstract class Model
 
         return $data;
     }
+
+    protected function getTweetsCountQuery ($id) {
+
+        $query = self::$_db->prepare(
+
+            "SELECT COUNT(*) FROM tweets
+            WHERE user_id = :id"
+
+        );
+
+        $query->execute(["id" => $id]);
+        
+        $data = $query->fetch();
+
+        return $data;
+    }
 }

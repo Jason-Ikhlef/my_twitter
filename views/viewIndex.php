@@ -31,6 +31,7 @@ $tweet = new TweetManager;
                         </label>
                         <form id="putImgInTweet">
                             <input title="" class="absolute bg-inherit w-2 h-2 file:bg-inherit text-transparent file:text-transparent file:border-0 file:text-inherit" accept="image/png,image/jpeg,image/webp,image/jpg" type="file" name="imgInTweet" id="imgInTweet">
+                            <span id="imgInTweetName" class="m-auto"></span>
                         </form>
                     </div>
                     <div class='hidden w-[140px] bg-gray-200 h-2 checkNbOfCaracters self-center'>
@@ -81,7 +82,9 @@ $tweet = new TweetManager;
                         <div class="tweet-main">
                             <p class="ml-20">
                                 <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
-                                <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                                <?php if ($tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->images()) !== "") { ?>
+                                    <img src="<?= "../../img/" . $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->images()) ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                                <?php } ?>
                             </p>
                         </div>
 
@@ -233,7 +236,9 @@ $tweet = new TweetManager;
                 <div class="tweet-main">
                     <p class="ml-20">
                         <?= $tweet->spanMessage($data->message()) ?>
-                        <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                        <?php if ($data->images() !== "") {?>
+                            <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                        <?php } ?>
                     </p>
                 </div>
                 <?php if ($data->origin()) : ?>
