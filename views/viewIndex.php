@@ -15,7 +15,7 @@ $tweet = new TweetManager;
             <form id="newTweet">
                 <div id="tweetMessage" class="flex mt-4">
                     <a href="profil"><img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
-                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></div>
+                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea tweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none"></div>
                 </div>
                 <div class="absolute flex flex-col w-1/5 bg-white max-h-48 ml-10 border border-1 border-gray-400 overflow-auto"></div>
                 <div class="flex justify-between my-auto">
