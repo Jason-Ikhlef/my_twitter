@@ -129,7 +129,7 @@
             <form id="newTweet">
                 <div class="flex mt-4">
                     <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                    <div contenteditable="true" name="newSubmenuTweet" placeholder="Quoi de neuf ?" class="newSubmenuTweet w-full h-10  border mt-5 mr-2 focus:outline-none"></div>
+                    <div contenteditable="true" name="newSubmenuTweet" placeholder="Quoi de neuf ?" class="submenuTweet tweetArea w-full h-10 border mt-5 mr-2 focus:outline-none"></div>
                 </div>
                 <div class="flex justify-between my-auto">
                     <div class="flex ml-12 mt-2 mb-4">
