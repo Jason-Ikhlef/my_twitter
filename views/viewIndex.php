@@ -16,7 +16,7 @@ $tweet = new TweetManager;
             <form id="newTweet">
                 <div id="tweetMessage" class="flex mt-4">
                     <a href="profil"><img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
-                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea tweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
+                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea tweetArea resize-none w-5/6 h-10 mt-5 mr-2 focus:outline-none cursor-text overflow-auto"></div>
                 </div>
 
 
@@ -125,7 +125,7 @@ $tweet = new TweetManager;
 
                                                     <div class='flex mt-2'>
                                                         <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                                                        <div contenteditable="true" name="newQuoteRetweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newQuoteRetweet resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
+                                                        <div contenteditable="true" name="newQuoteRetweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newQuoteRetweet resize-none w-5/6 h-10 mt-5 mr-2 focus:outline-none cursor-text overflow-auto"></div>
                                                     </div>
 
                                                         <!-- Affichage du tweet qui va être cité -->
@@ -195,7 +195,7 @@ $tweet = new TweetManager;
 
                                         <div class='flex'>
                                             <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                                            <div contenteditable="true" name="newCommentArea" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
+                                            <div contenteditable="true" name="newCommentArea" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-5/6 h-10 mt-5 mr-2 focus:outline-none cursor-text overflow-auto"></div>
                                         </div>
                                         <button value="<?= $data->origin() ?>" name="commentButton" type="button" class="commentButton cursor-pointer bg-blue-500 text-white w-fit px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200 self-end mb-2 mr-2">
                                             Répondreez:kjfbsdjhf,bd
@@ -243,7 +243,7 @@ $tweet = new TweetManager;
                 </div>
                 <?php if ($data->origin()) : ?>
 
-                    <div class="border w-fit mt-4 rounded-xl mx-auto">
+                    <div class="border w-[504px] mt-4 rounded-xl mx-auto">
                         <div class="flex flex-col w-full">
                             <div class="flex p-4 w-full">
                                 <img src="<?= "../../img/" . $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->picture()  ?>" alt="avatar" class="w-12 h-12 rounded-full">
@@ -299,7 +299,7 @@ $tweet = new TweetManager;
                                             <button class="closeQuote self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
                                             <div class='flex mt-2'>
                                                 <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                                                <div id="quoteRetweetMsg" contenteditable="true" name="newQuoteRetweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newQuoteRetweet resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
+                                                <div id="quoteRetweetMsg" contenteditable="true" name="newQuoteRetweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newQuoteRetweet resize-none w-5/6 h-10 mt-5 mr-2 focus:outline-none cursor-text overflow-auto"></div>
                                             </div>
                                             <div class='border rounded-xl text-sm ml-16'>
                                                 <div class='flex gap-2'>
@@ -364,7 +364,7 @@ $tweet = new TweetManager;
 
                                 <div class='flex'>
                                     <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                                    <div contenteditable="true" name="newComment" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text" id='newCommentArea'></div>
+                                    <div contenteditable="true" name="newComment" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newCommentArea resize-none w-5/6 h-10 mt-5 mr-2 focus:outline-none cursor-text overflow-auto" id='newCommentArea'></div>
                                 </div>
                                 <button value="<?= $data->id() ?>" name="commentButton" type="button" class="commentButton cursor-pointer bg-blue-500 text-white w-fit px-4 rounded-3xl my-4 mr-4 hover:bg-blue-200 self-end mb-2 mr-2">
                                     Répondre
