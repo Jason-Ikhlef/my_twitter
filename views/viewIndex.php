@@ -16,11 +16,12 @@ $tweet = new TweetManager;
             <form id="newTweet">
                 <div id="tweetMessage" class="flex mt-4">
                     <a href="profil"><img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2"></a>
-                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
+                    <div contenteditable="true" name="newTweet" placeholder="Quoi de neuf ?" cols="30" rows="10" class="newTweetArea tweetArea resize-none w-full h-10 mt-5 mr-2 focus:outline-none cursor-text"></div>
                 </div>
 
                 <div class="atPopup hidden absolute ml-2 h-[100px] overflow-y-hidden bg-gray-200 rounded-xl z-10 w-fit">
                     
+
                 </div>
 
                 <div class="flex justify-between my-auto">
