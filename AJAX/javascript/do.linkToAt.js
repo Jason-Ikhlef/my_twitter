@@ -9,7 +9,6 @@ $(div).on("input", function() {
         url: "./AJAX/php/do.linkToAt.php",
         success: function(data) {
             if (data) {
-                console.log(data);
                 $('.atPopup').html("")
                 let n = 1
                 let start = 0;
