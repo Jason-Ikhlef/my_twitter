@@ -11,7 +11,7 @@ abstract class Model
     private static function setDb()
     {
 
-        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'root');
+        self::$_db = new PDO('mysql:host=localhost;dbname=tweet_academy;charset=utf8;', 'root', 'AJR2042ci6');
 
         self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
@@ -54,7 +54,11 @@ abstract class Model
         session_start();
 
         $user_id = $_SESSION['user_id'];
-        // $user_id = 2;
+
+        if ($images !== ""){
+
+            $images = $this->uploadImg($images);
+        }
 
         try {
 
@@ -83,7 +87,7 @@ abstract class Model
 
             $query = self::$_db->prepare(
 
-                'SELECT tweets.id, origin, user_id, message FROM tweets
+                'SELECT tweets.id, origin, user_id, message, images FROM tweets
                 WHERE comments IS NULL
                 ORDER BY date DESC
                 LIMIT 50'
@@ -494,6 +498,45 @@ abstract class Model
         }
     }
 
+    public function uploadImg ($data){
+
+        $data = base64_decode($data);
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+
+        anchor:
+
+        $randomString = '';
+
+        for ($i = 0; $i < 2; $i++) {
+
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+
+        $link = "/var/www/html/img/";
+
+        if (file_exists($link . $randomString)) {
+
+            goto anchor;
+        }
+
+        $im = imagecreatefromstring($data);
+
+        if ($im !== false) {
+
+            header('Content-Type: image/png');
+            imagepng($im, $link . $randomString);
+            imagedestroy($im);
+
+            return $randomString;
+
+        } else {
+
+            return false;
+        }
+    }
+
     protected function htagQuery(string $hashtag, string $obj) {
 
         $tweets = [];
@@ -547,22 +590,23 @@ abstract class Model
         $followList = $this->getFollowQuery($currentUser);
 
         if (!in_array($followId, $followList)) {
-
+            
             array_push($followList, $followId);
+            $followList = array_diff($followList, array("", "-"));
         } else {
-
-            $followList = array_diff($followList, array($followId));
+            
+            $followList = array_diff($followList, array($followId, ""));
         }
-
+        
         $followList = implode("-", $followList);
 
-        $followList = $followList . "-";
+        if (strlen($followList) >= 1){
 
-        if (substr($followList, 0, 1) !== "-") {
-
-            $followList = "-" . $followList;
+            $followList = $followList . "-";
         }
 
+        $followList = "-" . $followList;
+        
         $query = self::$_db->prepare(
 
             "UPDATE users SET follows = :follows
@@ -617,6 +661,22 @@ abstract class Model
         
         $query->execute(["id" => "%-" . $id . "-%"]);
 
+        $data = $query->fetch();
+
+        return $data;
+    }
+
+    protected function getTweetsCountQuery ($id) {
+
+        $query = self::$_db->prepare(
+
+            "SELECT COUNT(*) FROM tweets
+            WHERE user_id = :id"
+
+        );
+
+        $query->execute(["id" => $id]);
+        
         $data = $query->fetch();
 
         return $data;

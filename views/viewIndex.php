@@ -31,6 +31,7 @@ $tweet = new TweetManager;
                         </label>
                         <form id="putImgInTweet">
                             <input title="" class="absolute bg-inherit w-2 h-2 file:bg-inherit text-transparent file:text-transparent file:border-0 file:text-inherit" accept="image/png,image/jpeg,image/webp,image/jpg" type="file" name="imgInTweet" id="imgInTweet">
+                            <span id="imgInTweetName" class="m-auto"></span>
                         </form>
                     </div>
                     <div class='hidden w-[140px] bg-gray-200 h-2 checkNbOfCaracters self-center'>
@@ -46,6 +47,7 @@ $tweet = new TweetManager;
 
     <?php if (isset($_SESSION["user_id"]) && !isset($_POST["disconnect"])) : ?>
         <?php if ($tweets) : ?>
+            
             <?php foreach ($tweets as $data) : ?>
                 <div class="w-full hover:bg-gray-100 border-y tweetForDark">
                     <?php if (empty($data->message()) && $data->origin()) { ?>
@@ -65,13 +67,12 @@ $tweet = new TweetManager;
 
                             <!-- Pseudo + image (en placeholder pour l'instant) de l'utilisateur -->
                         <div class="flex p-4">
-                            <img src="<?= "../../img/" . $user->nicknameFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
-                            
-                            <form class="displayProfil" method="get" action="profil">
-                                <input class="displayProfilHidden" type="hidden" name="id" value="<?= $data->user_id() ?>">
-                                <button class="displayProfilBtn font-bold mt-3 ml-2">
+                            <form class="displayProfil flex cursor-pointer" method="get" action="profil">
+                                <input type="hidden" name="id" value="<?= $data->user_id() ?>">
+                                <img src="<?= "../../img/" . $user->nicknameFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
+                                <p class="font-bold mt-3 ml-2">
                                     <?= $user->nicknameFromId($tweet->idUserFromOrigin($data->origin())[0]->user_id())[0]->nickname() ?>
-                                </button>
+                                </p>
                             </form>
                                 
                         </div>
@@ -81,8 +82,10 @@ $tweet = new TweetManager;
                         <div class="tweet-main ml-20">
                             <span>
                                 <?= $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->message()) ?>
-                                <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
-                            </span>
+                                <?php if ($tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->images()) !== "") { ?>
+                                    <img src="<?= "../../img/" . $tweet->spanMessage($tweet->getAllTweetsDataById($data->origin(), 'Tweet')[0]->images()) ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                                <?php } ?>
+                            </p>
                         </div>
 
                             <!-- Partie 'fonctionnalitées' du tweet -->
@@ -222,19 +225,21 @@ $tweet = new TweetManager;
                 <!-- Partie 2 des tweets -->
 
                 <div class="flex p-4">
-                    <img src="<?= "../../img/" . $user->getPictureFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
-                    <form class="displayProfil" method="get" action="profil">
-                        <input class="displayProfilHidden" type="hidden" name="id" value="<?= $data->user_id() ?>">
-                        <button class="displayProfilBtn mt-2 ml-4 font-bold" class="font-bold mt-3 ml-2">
+                    <form class="displayProfil flex cursor-pointer" method="get" action="profil">
+                        <img src="<?= "../../img/" . $user->getPictureFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full">
+                        <input type="hidden" name="id" value="<?= $data->user_id() ?>">
+                        <p class="font-bold mt-3 ml-2">
                             <?= $user->nicknameFromId($data->user_id())[0]->nickname(); ?>
-                        </button>
+                        </p>
                     </form>
                 </div>
                 <div class="tweet-main ml-20">
                     <span>
                         <?= $tweet->spanMessage($data->message()) ?>
-                        <img src="https://via.placeholder.com/150 " alt="tweet content" class="h-[504px] w-[504px]  rounded-xl mt-2">
-                    </span>
+                        <?php if ($data->images() !== "") {?>
+                            <img src="<?= "../../img/" . $data->images() ?>" alt="tweet content" class="h-[504px] w-[504px] rounded-xl mt-2">
+                        <?php } ?>
+                    </p>
                 </div>
                 <?php if ($data->origin()) : ?>
 

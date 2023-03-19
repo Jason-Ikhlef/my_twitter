@@ -6,8 +6,6 @@ $this->_t = 'Tweet Academy | Profil';
 (!isset($_SESSION["profil_id"])) ? ($_SESSION["profil_id"] = $_SESSION["user_id"]) : null;
 
 $data = $user->getUserById($_SESSION["profil_id"]);
-$followInfos = $user->getFollowInfo($_SESSION["user_id"], $_SESSION["profil_id"], $data[0]->follows());
-$followers = $user->getFollowers($_SESSION["profil_id"]);
 
 ?>
 
@@ -16,7 +14,7 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
         <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
         <div>
             <p><?= $data[0]->nickname() ?></p>
-            <p class="text-xs italic">Nb Tweets</p>
+            <p class="text-xs italic"><?= $user->getTweetsCount($_SESSION["profil_id"])[0] ?> tweets</p>
         </div>
     </div>
     <div class="profile w-full">
@@ -30,7 +28,7 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
         <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
             <button class="editButton bg-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2">Editer le profil</button>
         <?php } else { ?>
-            <?php if(!$followInfos[0]) {?>
+            <?php if(!$user->getFollowInfo($_SESSION["user_id"], $_SESSION["profil_id"], $data[0]->follows())[0]) {?>
             <form id="followForm">
                 <button class="followButton bg-black text-white border-2 border-gray-200 rounded-full w-40 h-8 mt-[-50px] max-sm:mt-[-30px] max-sm:w-32 max-sm:mr-2" id="<?= $_SESSION["profil_id"] ?>">Suivre</button>
             </form>
@@ -56,8 +54,8 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
                 <p class="ml-2 leading-5">A rejoint Twitter en <?= $joinDate ?></p>
             </div>
             <div class="followers flex mt-4 max-sm:flex-col">
-                <p class="follows mr-4"><span><?= $followInfos[1] ?></span> abonnement(s) </p>
-                <p class="followed ml-4 max-sm:ml-0"> <span><?= $followers ?></span> abonné(s) </p>
+                <p class="follows mr-4"><span><?= $user->getFollowInfo($_SESSION["user_id"], $_SESSION["profil_id"], $data[0]->follows())[1] ?></span> abonnement(s) </p>
+                <p class="followed ml-4 max-sm:ml-0"> <span><?= $user->getFollowers($_SESSION["profil_id"]) ?></span> abonné(s) </p>
             </div>
         </div>
     </div>

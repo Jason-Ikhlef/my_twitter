@@ -28,6 +28,11 @@ class ControllerTweet
             
             session_start();
 
+            if (isset($_SESSION["profil_id"])){
+
+                unset($_SESSION["profil_id"]);
+            }
+            
             $this->_tweetManager = new TweetManager;
             $comments = $this->_tweetManager->getComments();
             

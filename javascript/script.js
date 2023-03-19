@@ -323,6 +323,9 @@ $(document).ready(function () {
         $("#editOverlay").addClass("hidden");
     });
 
-    // dark theme
+    // Input file tweet
 
+    $("#imgInTweet").change(function (e) { 
+        $("#imgInTweetName").html($("#imgInTweet").val().replace(/.*(\/|\\)/, ''))
+    });
 });
