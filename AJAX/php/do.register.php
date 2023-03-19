@@ -32,5 +32,5 @@ if (!empty($_POST["nickname"]) && !empty($_POST["email"]) && !empty($_POST["regi
     }
 
 } else {
-    echo "Tous les champs avec une étoile sont requis";
+    echo "Tous les champs avec une * sont requis";
 }

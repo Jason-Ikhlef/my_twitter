@@ -31,5 +31,5 @@ if (!empty($_POST["email"] && !empty($_POST["password"]))) {
         echo true;
     }
 } else {
-    echo "Tous les champs avec une étoile sont requis";
+    echo "Tous les champs avec une * sont requis";
 }

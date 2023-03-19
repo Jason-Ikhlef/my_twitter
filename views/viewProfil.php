@@ -21,10 +21,10 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
     </div>
     <div class="profile w-full">
         <div class="banner">
-            <img class="w-full h-48" src="<?= "../../img/" . $data[0]->banner() ?>">
+            <img class="w-full h-48 object-cover" src="<?= "../../img/" . $data[0]->banner() ?>">
         </div>
         <div class="profilePicture">
-            <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-full max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3" src="<?= "../../img/" . $data[0]->picture() ?>">
+            <img class="mt-[-70px] outline outline-4 outline-white ml-6 rounded-full w-40 h-40 max-sm:w-24 max-sm:mt-[-50px] max-sm:ml-3 " src="<?= "../../img/" . $data[0]->picture() ?>">
         </div>
         <div class="flex justify-end">
         <?php if (!isset($_SESSION["profil_id"]) || $_SESSION["user_id"] == $_SESSION["profil_id"]) { ?>
@@ -104,6 +104,9 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
             </div>
             <div class="editConfirmPw mb-3 w-2/3">
                 <input type="password" id="newPassword" name="newPassword" placeholder="******" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
+            </div>
+            <div class='errorMsg'>
+
             </div>
             <button class="bg-blue-500 w-2/3 h-8 rounded-lg text-white my-3 font-semibold" id="editBtn">Enregistrer</button>
         </form>

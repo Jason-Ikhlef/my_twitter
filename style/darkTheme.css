@@ -1,0 +1,61 @@
+@keyframes transitionDarkTheme {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+body.light, body.dark {
+    opacity: 1;
+    animation: transitionDarkTheme 2s 1 linear;
+}
+
+body.dark {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+body.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark i:hover, 
+body.dark .feed input{
+    background-color: rgb(24 24 27);
+    border-radius: 20px;
+}
+
+body.dark .retweetOverlay:hover, 
+body.dark .retweetOverlay, 
+body.dark .editButton, 
+body.dark .logoutDisplayOverlay div+div:hover {
+    background-color: rgb(24 24 27);
+    border-radius: 20px;
+}
+
+body.dark .tweetForDark:hover {
+    background-color: rgb(24 24 27);
+    border-radius: 0;
+}
+body.dark .popupRT:hover {
+    background-color: rgb(107 114 128 / 0.5);
+}
+
+body.dark .popupRT p, 
+body.dark .commentTweet p {
+    color: #ffffff;
+}
+
+body.dark input, 
+body.dark .popup{
+    background-color: rgb(24 24 27);
+    border-radius: 20px;
+}
+
+
+body.dark .leftMenu div:hover{
+    background-color: rgb(63 63 70);
+}

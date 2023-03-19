@@ -206,7 +206,7 @@ class TweetManager extends Model {
                 $msg = str_replace($word, '<a href="profil" class="toProfile text-blue-700 hover:underline underline-offset-1">' . $word . "</a>", $msg);
                 
             } else if (str_starts_with($word, "#")) {
-                $msg = str_replace($word, '<form style="width:fit-content; display:inline;" action="hashtag" method ="get"><button class="toHashtag text-blue-700 hover:underline underline-offset-1" name="value" type="submit" value=' . str_replace("#", '', $word) . ">" . $word . "</button></form>", $msg);
+                $msg = str_replace($word, '<form class="w-fit inline" action="hashtag" method ="get"><button class="toHashtag text-blue-700 hover:underline underline-offset-1" name="value" type="submit" value=' . str_replace("#", '', $word) . ">" . $word . "</button></form>", $msg);
             }
         }
 
