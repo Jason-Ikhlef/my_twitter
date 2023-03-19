@@ -54,13 +54,10 @@ $tweet = new TweetManager;
 
                         <!-- message si l'utilisateur co ou un utilisateur à retweeté  -->
 
-                        <?php if ($_SESSION['user_id'] == $data->user_id()) { ?>
+                        <?php if ($_SESSION['user_id'] != $data->user_id()) { ?>
 
-                            <p class='text-blue-400 italic ml-4 mt-2'>Vous avez retweeté</p>
-
-                        <?php } else { ?>
-                            <p class='text-blue-400 italic'><?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
-                        <?php } ?>
+                            
+                            <p class='text-blue-400 italic'>&ThickSpace;<?= $user->nicknameFromId($data->user_id())[0]->nickname() ?> a retweeté</p>
 
                         <!-- Partie Tweet (affichée directement sur l'index) -->
 
@@ -219,6 +216,7 @@ $tweet = new TweetManager;
                                 <button class="seeComments cursor-pointer" value="<?= $data->id() ?>" name="seeComments" type="submit">Voir plus</button>
                             </form>
                         </div>
+                <?php } ?>
                 </div>
             <?php } else { ?>
 
