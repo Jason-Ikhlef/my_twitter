@@ -14,6 +14,11 @@ class TweetManager extends Model {
             return 'Message trop long';
         }
 
+        if ($images !== "") {
+
+            $images = explode(",", $images)[1];
+        }
+
         $this->getDb();
         $data = $this->newTweetQuery($message, $images);
 
@@ -203,10 +208,10 @@ class TweetManager extends Model {
         foreach ($words as $word) {
 
             if (str_starts_with($word, "@")) {
-                $msg = str_replace($word, '<a href="profil" class="toProfile text-blue-700 hover:underline underline-offset-1">' . $word . "</a>", $msg);
+                $msg = str_replace($word, '<span class="toProfile cursor-pointer w-fit text-blue-700 hover:underline underline-offset-1">' . $word . "</span>", $msg);
                 
             } else if (str_starts_with($word, "#")) {
-                $msg = str_replace($word, '<form style="width:fit-content; display:inline;" action="hashtag" method ="get"><button class="toHashtag text-blue-700 hover:underline underline-offset-1" name="value" type="submit" value=' . str_replace("#", '', $word) . ">" . $word . "</button></form>", $msg);
+                $msg = str_replace($word, '<form class="w-fit inline" action="hashtag" method ="get"><button class="toHashtag text-blue-700 hover:underline underline-offset-1" name="value" type="submit" value=' . str_replace("#", '', $word) . ">" . $word . "</button></form>", $msg);
             }
         }
 

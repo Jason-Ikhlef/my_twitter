@@ -8,7 +8,6 @@ $(".followButton").click(function (e) {
         url: "./AJAX/php/do.follow.php",
         data: { follow: str },
         success: function (data) {
-            
             $count = Number($('.followed span').html())
 
             if ($('.followButton').html() == "Ne plus suivre"){

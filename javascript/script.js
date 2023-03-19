@@ -1,3 +1,31 @@
+if(!localStorage.getItem('theme')){
+    localStorage.setItem('theme','light')
+}
+
+$('.lightTheme').on('click',function(){
+
+    if(localStorage.getItem('theme') == 'dark'){
+        $('body').removeClass(localStorage.getItem('theme'))
+        localStorage.setItem('theme','light')
+        $('body').addClass(localStorage.getItem('theme'))
+        $(this).html(`
+            <i class="fa-solid fa-sun p-4 mx-auto rounded-full hover:bg-gray-100"></i>
+            <p class='hidden xl:block text-xl mt-3 '>${localStorage.getItem('theme')}</p>
+        `)
+    }
+
+    else {
+        
+        $('body').removeClass(localStorage.getItem('theme'))
+        localStorage.setItem('theme','dark')
+        $('body').addClass(localStorage.getItem('theme'))
+        $(this).html(`
+            <i class="fa-solid fa-moon p-4 mx-auto rounded-full hover:bg-gray-100"></i>
+            <p class='hidden xl:block text-xl mt-3 '>${localStorage.getItem('theme')}</p>
+        `)
+    }
+})
+
 $(document).ready(function () {
     //Log in popup display
 
@@ -142,81 +170,107 @@ $(document).ready(function () {
     });
 
     // Carac length
+    
+    let caractersCount;
+    let subMenuCaractersCount;
 
-    // let caractersCount
-    // let subMenuCaractersCount
+    if ($(".newTweetArea").value == "" || $(".submenuTweet").value == "") {
+        $(".ConfirmNewTweet").css("pointer-events", "none");
+        $(".ConfirmNewTweet").css("background-color", "rgb(191 219 254)");
+    }
 
-    // console.log($('.newTweetArea'));
-    // if($('.newTweetArea')[0].value == ""){
-    //     $('.ConfirmNewTweet').css('pointer-events','none')
-    //     $('.ConfirmNewTweet').css('background-color','rgb(191 219 254)')
-    // }
+    $(".tweetArea").on("input", function (e) {
+        caractersCount = $(".newTweetArea")[0].innerHTML.length;
+        subMenuCaractersCount = $(".submenuTweet")[0].innerHTML.length;
 
-    // $('.newTweeetArea').on('input',function (e) {
-    //     console.log('oui');
-    // })
-    //   caractersCount = $('.postTweet')[0].value.length
-    //   subMenuCaractersCount = $('.postTweet')[1].value.length
+        if (caractersCount > 0 || subMenuCaractersCount > 0) {
+            $(".checkNbOfCaracters").removeClass("hidden");
+            $(".checkNbOfCaracters").addClass("block");
+        } else {
+            $(".checkNbOfCaracters").removeClass("block");
+            $(".checkNbOfCaracters").addClass("hidden");
+        }
 
-    //   if(caractersCount > 0 || subMenuCaractersCount > 0){
-    //     $('.checkNbOfCaracters').removeClass('hidden')
-    //     $('.checkNbOfCaracters').addClass('block')
-    //   }
-    //   else {
-    //     $('.checkNbOfCaracters').removeClass('block')
-    //     $('.checkNbOfCaracters').addClass('hidden')
-    //   }
+        // accesibiliy management
 
-    //   // accesibiliy management
+        if (
+            (e.key !== "Backspace" && caractersCount >= 140) ||
+            subMenuCaractersCount >= 140
+        ) {
+            $(".ConfirmNewTweet").css("pointer-events", "none");
+            $(".ConfirmNewTweet").css("background-color", "rgb(191 219 254)");
+        } else if (
+            (e.key !== "Backspace" && caractersCount <= 140) ||
+            subMenuCaractersCount <= 140
+        ) {
+            $(".ConfirmNewTweet").css("pointer-events", "auto");
+            $(".ConfirmNewTweet").css("background-color", "rgb(59 130 246)");
+        } else if (
+            (caractersCount !== 0 && e.key == "Backspace") ||
+            subMenuCaractersCount !== 0
+        ) {
+            if (caractersCount < 140 || subMenuCaractersCount < 140) {
+                $(".ConfirmNewTweet").css("pointer-events", "auto");
+                $(".ConfirmNewTweet").css(
+                    "background-color",
+                    "rgb(59 130 246)"
+                );
+            }
+        }
 
-    //   if(e.key !== 'Backspace' && caractersCount >= 140 || subMenuCaractersCount >= 140 ){
-    //     $('.ConfirmNewTweet').css('pointer-events','none')
-    //     $('.ConfirmNewTweet').css('background-color','rgb(191 219 254)')
-    //   }
+        // width management
 
-    //   else if(e.key !== 'Backspace' && caractersCount <= 140 || subMenuCaractersCount <= 140){
-    //     $('.ConfirmNewTweet').css('pointer-events','auto')
-    //     $('.ConfirmNewTweet').css('background-color','rgb(59 130 246)')
-    //   }
+        if (caractersCount < 140 && subMenuCaractersCount < 140) {
+            $(".countCaracters").css("width", `${caractersCount}px`);
+            $(".subMenuCountCaracters").css(
+                "width",
+                `${subMenuCaractersCount}px`
+            );
+        } else {
+            $(".countCaracters").css("width", `140px`);
+            $(".subMenuCountCaracters").css("width", "140px");
+        }
 
-    //   else if(caractersCount !== 0 && e.key == 'Backspace' || subMenuCaractersCount !== 0){
+        // colors management
 
-    //     if(caractersCount < 140 || subMenuCaractersCount < 140){
-    //       $('.ConfirmNewTweet').css('pointer-events','auto')
-    //       $('.ConfirmNewTweet').css('background-color','rgb(59 130 246)')
-    //     }
-    //   }
-
-    //   // width management
-
-    //   if(caractersCount < 140 && subMenuCaractersCount < 140){
-    //     $('.countCaracters').css('width',`${caractersCount}px`)
-    //     $('.subMenuCountCaracters').css('width',`${subMenuCaractersCount}px`)
-    //   }
-    //   else {
-    //     $('.countCaracters').css('width',`140px`)
-    //     $('.subMenuCountCaracters').css('width','140px')
-    //   }
-
-    //   // colors management
-
-    //   if(caractersCount > 0 && caractersCount <= 50 || subMenuCaractersCount > 0 && subMenuCaractersCount <= 50){
-    //     $('.countCaracters').css('background-color','rgb(74 222 128)')
-    //     $('.subMenuCountCaracters').css('background-color','rgb(74 222 128)')
-    //   }
-    //   else if(caractersCount > 50 && caractersCount <= 100 || subMenuCaractersCount > 50 && subMenuCaractersCount <= 100){
-    //     $('.countCaracters').css('background-color','rgb(250 204 21)')
-    //     $('.subMenuCountCaracters').css('background-color','rgb(250 204 21)')
-    //   }
-    //   else if(caractersCount > 100 && caractersCount <= 120 || subMenuCaractersCount > 100 && subMenuCaractersCount <= 120){
-    //     $('.countCaracters').css('background-vvevecolor','rgb(251 146 60)')
-    //     $('.subMenuCountCaracters').css('background-color','rgb(251 146 60)')
-    //   }
-    //   else if(caractersCount > 120 || subMenuCaractersCount > 120) {
-    //     $('.countCaracters').css('background-color','rgb(248 113 113)')
-    //     $('.subMenuCountCaracters').css('background-color','rgb(248 113 113)')
-    //   }
-    //  })
+        if (
+            (caractersCount > 0 && caractersCount <= 50) ||
+            (subMenuCaractersCount > 0 && subMenuCaractersCount <= 50)
+        ) {
+            $(".countCaracters").css("background-color", "rgb(74 222 128)");
+            $(".subMenuCountCaracters").css(
+                "background-color",
+                "rgb(74 222 128)"
+            );
+        } else if (
+            (caractersCount > 50 && caractersCount <= 100) ||
+            (subMenuCaractersCount > 50 && subMenuCaractersCount <= 100)
+        ) {
+            $(".countCaracters").css("background-color", "rgb(250 204 21)");
+            $(".subMenuCountCaracters").css(
+                "background-color",
+                "rgb(250 204 21)"
+            );
+        } else if (
+            (caractersCount > 100 && caractersCount <= 120) ||
+            (subMenuCaractersCount > 100 && subMenuCaractersCount <= 120)
+        ) {
+            $(".countCaracters").css(
+                "background-vvevecolor",
+                "rgb(251 146 60)"
+            );
+            $(".subMenuCountCaracters").css(
+                "background-color",
+                "rgb(251 146 60)"
+            );
+        } else if (caractersCount > 120 || subMenuCaractersCount > 120) {
+            $(".countCaracters").css("background-color", "rgb(248 113 113)");
+            $(".subMenuCountCaracters").css(
+                "background-color",
+                "rgb(248 113 113)"
+            );
+        }
+    });
 
     //Sign in popup display
 
@@ -267,5 +321,11 @@ $(document).ready(function () {
     $(".editClose").on("click", function () {
         $("#editOverlay").removeClass("block");
         $("#editOverlay").addClass("hidden");
+    });
+
+    // Input file tweet
+
+    $("#imgInTweet").change(function (e) { 
+        $("#imgInTweetName").html($("#imgInTweet").val().replace(/.*(\/|\\)/, ''))
     });
 });

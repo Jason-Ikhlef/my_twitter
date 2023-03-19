@@ -67,6 +67,7 @@ $(div).on("input", function() {
                             if (!foundStart && start >= currentOffset && start <= currentOffset + length) {
                                 newRange.setStart(childNode, start - currentOffset);
                                 $('.atPopup').hide()
+                                $('.atPopup').css('overflow','hidden')
                                 foundStart = true;
                             }
                             currentOffset += length;
@@ -78,11 +79,12 @@ $(div).on("input", function() {
                                 let spanValue = childNode.innerText.replace("@", "")
                                 Object.values(JSON.parse(data)).forEach(e => {
                                     if (e[n].includes(spanValue)) {
-                                        $('.atPopup').html($('.atPopup').html() + `<p class="followedName" style="cursor:pointer;">${e[n]}</p>` )
+                                        $('.atPopup').html($('.atPopup').html() + `<p class="followedName cursor-pointer w-fit p-2">${e[n]}</p>` )
                                     }
                                     n++
                                 })
                                 $('.atPopup').show()
+                                $('.atPopup').css('overflow','auto')
                                 $('.followedName').each(function() {
                                     
                                     $(this).on('click', e => {

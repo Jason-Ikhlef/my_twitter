@@ -7,6 +7,7 @@ $tweet = new TweetManager;
 
 ?>
 
+
 <div class='flex'>
     <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
     <p class="text-xl font-bold pl-3 pt-3">Tweet</p>
@@ -19,17 +20,18 @@ $tweet = new TweetManager;
             <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
             <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
         </div>
+    </div>
 
-    </div>
-    <div class="tweet-main ml-2">
-        <?= $tweet->aboveCommentsTweet()[0]->message()?>
-    </div>
-    <?php if ($tweet->aboveCommentsTweet()[0]->origin()) :?>
-        <div class="tweet-quote">
-            <div class="message-quoteTweet w-full mt-2 pl-4 pr-4">
-                <?= $tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->message() ?>
+    <div class="tweet border">
+        <div class='flex'>
+            <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-4">
+            <div class="tweet-header flex flex-col gap-2">
+                <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
+                <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
             </div>
+
         </div>
+
     <?php endif ?>
     <div class="tweet-footer mt-4 flex gap-4">
                     <button class="retweetButtonPopup flex hover:text-blue-400" value="<?= $tweet->aboveCommentsTweet()[0]->id() ?>" name="retweetButton" >
@@ -93,10 +95,9 @@ $tweet = new TweetManager;
                     </form>
                 </div>
 </div>
-<br>
 
-<?php if ($comments): ?>
-    <?php foreach ($comments as $data): ?>
+    <?php if ($comments): ?>
+        <?php foreach ($comments as $data): ?>
             <div class="tweet">
                 <div class="tweet-header flex">
                     <img src="<?= "../../img/" . $user->nicknameFromId($data->user_id())[0]->picture() ?>" alt="avatar" class="w-12 h-12 rounded-full m-4">
@@ -174,6 +175,6 @@ $tweet = new TweetManager;
                     </form>
                 </div>
             </div>
-            <br>
     <?php endforeach ?>
 <?php endif ?>
+</div>
