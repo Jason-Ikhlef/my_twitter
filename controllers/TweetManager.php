@@ -243,6 +243,14 @@ class TweetManager extends Model {
             return false;
         }
     }
+
+    public function getImageFromOrigin ($origin) {
+
+        $this->getDb();
+        $data = $this->getImageFromOriginQuery($origin);
+
+        return $data;
+    }
 }
 
 ?>
