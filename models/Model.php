@@ -253,6 +253,36 @@ abstract class Model
 
         $user_id = $_SESSION['user_id'];
 
+        if ($message == '') {
+
+            $query = self::$_db->prepare(
+
+                "SELECT * FROM tweets
+                WHERE message = :message AND origin = :origin AND user_id = :user_id"
+
+            );
+
+            $query->execute(["origin" => $origin, "user_id" => $user_id, "message" => $message]);
+
+            $result = $query->fetchAll();
+
+            if ($result) {
+
+                $query = self::$_db->prepare(
+
+                    "DELETE FROM tweets
+                    WHERE message = :message AND origin = :origin AND user_id = :user_id"
+    
+                );
+
+                $query->execute(["origin" => $origin, "user_id" => $user_id, "message" => $message]);
+
+                return true;
+
+            }
+            
+        }
+
         try {
 
             $query = self::$_db->prepare(
@@ -401,7 +431,6 @@ abstract class Model
     protected function dislikeQuery(int $tweet_id)
     {
 
-        session_start();
         $user_id = $_SESSION['user_id'];
 
         try {
@@ -665,6 +694,26 @@ abstract class Model
 
         return $data;
     }
+
+
+    protected function isRetweetedQuery($origin, $message = '')
+    {
+    
+        $user_id = $_SESSION['user_id'];
+
+        $query = self::$_db->prepare(
+
+            "SELECT * FROM tweets
+            WHERE message = :message AND origin = :origin AND user_id = :user_id"
+
+        );
+
+        $query->execute(["origin" => $origin, "user_id" => $user_id, "message" => $message]);
+
+        $result = $query->fetchAll();
+
+        return $result;
+    } 
 
     protected function getTweetsCountQuery ($id) {
 

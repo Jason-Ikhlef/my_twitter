@@ -230,6 +230,19 @@ class TweetManager extends Model {
             return false;
         }
     }
+
+    public function isRetweeted($origin) {
+
+        $this->getDb();
+        $data = $this->isRetweetedQuery($origin);
+
+        if ($data) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
