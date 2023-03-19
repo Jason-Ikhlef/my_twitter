@@ -119,6 +119,9 @@
                 <p>Vous n'avez pas de compte ?</p>
                 <a class="text-blue-500 cursor-pointer logInSwitchButton">Inscrivez-vous</a>
             </div>
+            <div class='errorMsg'>
+
+            </div>
         </div>
     </div>
 
@@ -161,6 +164,9 @@
             <div class="signUp mb-5 w-2/3 flex flex-col justify-center items-center">
                 <p>Vous avez déjà un compte ?</p>
                 <a class="text-blue-500 signInSwitchButton cursor-pointer">Connectez-vous</a>
+            </div>
+            <div class='errorMsg'>
+
             </div>
         </div>
     </div>

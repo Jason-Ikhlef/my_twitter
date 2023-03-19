@@ -7,7 +7,6 @@ $(".ConfirmNewTweet").on("click", function(e) {
         data: {message : message.text().trim()},
         url: "./AJAX/php/do.newTweet.php",
         success: function(data) {
-            
             if (data != 'Message trop long' && data != 'Tweet vide') {
         
                 window.location.replace('/twitter/index')

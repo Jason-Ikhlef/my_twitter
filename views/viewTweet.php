@@ -8,48 +8,45 @@ $tweet = new TweetManager;
 ?>
 
 <div class="tweet">
-    <div class="tweet-header">
-        <?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?>
 
-<div class='flex'>
-    <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
-    <p class="text-xl font-bold pl-3 pt-3">Tweet</p>
-</div>
-
-<div class="tweet border">
     <div class='flex'>
-        <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-4">
-        <div class="tweet-header flex flex-col gap-2">
-            <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
-            <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
-        </div>
+        <a href="index"><i class="fa-solid fa-arrow-left mx-4 self-center"></i></a>
+        <p class="text-xl font-bold pl-3 pt-3">Tweet</p>
+    </div>
 
-    </div>
-    <div class="tweet-main ml-2">
-        <?= $tweet->aboveCommentsTweet()[0]->message()?>
-    </div>
-    <?php if ($tweet->aboveCommentsTweet()[0]->origin()) :?>
-        <div class="tweet-quote">
-            <div class="message-quoteTweet w-full mt-2 pl-4 pr-4">
-                <?= $tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->message() ?>
+    <div class="tweet border">
+        <div class='flex'>
+            <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-4">
+            <div class="tweet-header flex flex-col gap-2">
+                <p class='font-bold mt-4'><?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p> 
+                <p class='text-sm italic'>@<?= $user->nicknameFromId($tweet->aboveCommentsTweet()[0]->user_id())[0]->nickname() ?></p>
+            </div>
+
+        </div>
+        <div class="tweet-main ml-2">
+            <?= $tweet->aboveCommentsTweet()[0]->message()?>
+        </div>
+        <?php if ($tweet->aboveCommentsTweet()[0]->origin()) :?>
+            <div class="tweet-quote">
+                <div class="message-quoteTweet w-full mt-2 pl-4 pr-4">
+                    <?= $tweet->getAllTweetsDataById($tweet->aboveCommentsTweet()[0]->origin(), 'Tweet')[0]->message() ?>
+                </div>
+            </div>
+        <?php endif ?>
+        <div class="tweet-footer flex border gap-2 w-full text-center">
+            <div class='nb-Retweet flex ml-2 gap-2 hover:underline cursor-pointer'>
+                <p class='font-bold no-underline'>Nb de retweet(ce sera un nombre)</p>
+                <p class='cursor-pointer hover:underline'>Retweets</p>
+            </div>
+            <div class='nb-Likes flex hover:underline cursor-pointer gap-2'>
+                <p class='font-bold no-underline'>Nb de Likes (ce sera un nombre)</p>
+                <p class='hover:underline cursor-pointer'>J'aime</p>
             </div>
         </div>
-    <?php endif ?>
-    <div class="tweet-footer flex border gap-2 w-full text-center">
-        <div class='nb-Retweet flex ml-2 gap-2 hover:underline cursor-pointer'>
-            <p class='font-bold no-underline'>Nb de retweet(ce sera un nombre)</p>
-            <p class='cursor-pointer hover:underline'>Retweets</p>
-        </div>
-        <div class='nb-Likes flex hover:underline cursor-pointer gap-2'>
-            <p class='font-bold no-underline'>Nb de Likes (ce sera un nombre)</p>
-            <p class='hover:underline cursor-pointer'>J'aime</p>
-        </div>
     </div>
-</div>
-<br>
 
-<?php if ($comments): ?>
-    <?php foreach ($comments as $data): ?>
+    <?php if ($comments): ?>
+        <?php foreach ($comments as $data): ?>
             <div class="tweet">
                 <div class="tweet-header flex">
                     <img src="https://via.placeholder.com/150" alt="avatar" class="w-12 h-12 rounded-full m-4">
@@ -87,6 +84,6 @@ $tweet = new TweetManager;
                     </form>
                 </div>
             </div>
-            <br>
     <?php endforeach ?>
 <?php endif ?>
+</div>

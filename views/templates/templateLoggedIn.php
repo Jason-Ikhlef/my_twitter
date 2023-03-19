@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <link rel="icon" href="./style/assets/icone-twitter-ronde.png">
+    <link rel="stylesheet" href="./style/darkTheme.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/176eaa1f6f.js" crossorigin="anonymous"></script>
     <script src="./AJAX/javascript/do.newTweet.js" defer></script>
@@ -27,6 +28,7 @@
 
 <body>
     <div class="grid grid-cols-5 lg:grid-cols-10 xl:grid-cols-12 gap-2">
+
         <div class="hidden xl:col-span-1 xl:block">
 
         </div>
@@ -34,7 +36,7 @@
 
             <div class="col-span-1 h-screen fixed flex flex-col justify-between ">
 
-                <div>
+                <div class='leftMenu'>
 
                     <i class="fa-brands fa-twitter w-fit hover:bg-blue-100 px-3 py-2 text-blue-500 rounded-full mx-auto text-2xl cursor-pointer xl:ml-1.5"></i>
                     <a href="index">
@@ -61,7 +63,7 @@
                             <p class="hidden xl:block text-xl mt-3 ">Profil</p>
                         </div>
                     </a>
-                    <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer ">
+                    <div class="w-fit flex text-xl xl:hover:bg-gray-200 rounded-3xl pr-2 cursor-pointer lightTheme">
                         <i class="fa-solid fa-images p-4 mx-auto rounded-full hover:bg-gray-100"></i>
                         <p class="hidden xl:block text-xl mt-3 ">Thèmes</p>
                     </div>
@@ -106,7 +108,7 @@
 
         </div>
 
-        <div class="hidden lg:flex col-span-3 w-full mx-auto">
+        <div class="hidden lg:flex col-span-3">
             <div class="h-fit mr-4 ml-4 p-4 rounded-lg fixed lg:w-[290px] xl:w-[350px] mx-auto">
                 <label for="searchTweets">
                     <i class="fa-solid fa-magnifying-glass p-4 mx-auto text-left hover:bg-gray-100 rounded-full m-2.5 p-2 cursor-pointer"></i>
@@ -124,12 +126,14 @@
     <!-- Tweet Submenu Popup -->
 
     <div id="tweetSubmenuOverlay" class="fixed w-full h-auto p-10 bg-gray-500/50 inset-0 z-1 hidden">
-        <div class="popup bg-white flex flex-col justify-center items-center w-auto m-auto max-w-md h-auto rounded-lg text-black p-1">
+        <div class="popup bg-white w-auto m-auto max-w-md h-auto rounded-lg text-black p-1">
             <button class="tweetSubmenuClose self-start ml-3 mt-1 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-full">&times;</button>
             <form id="newTweet">
-                <div class="flex mt-4">
+                <div class="flex mt-2">
                     <img src="<?= "../../img/" . $_SESSION["user_data"]["picture"] ?>" alt="avatar" class="w-12 h-12 rounded-full m-2">
-                    <div contenteditable="true" name="newSubmenuTweet" placeholder="Quoi de neuf ?" class="submenuTweet tweetArea w-full h-10 border mt-5 mr-2 focus:outline-none"></div>
+
+                    <div contenteditable="true" name="newSubmenuTweet" placeholder="Quoi de neuf ?" class="newSubmenuTweet tweetArea w-full h-10 mt-5 mr-2 focus:outline-none"></div>
+
                 </div>
                 <div class="flex justify-between my-auto">
                     <div class="flex ml-12 mt-2 mb-4">

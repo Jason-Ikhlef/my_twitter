@@ -1,3 +1,31 @@
+if(!localStorage.getItem('theme')){
+    localStorage.setItem('theme','light')
+}
+
+$('.lightTheme').on('click',function(){
+
+    if(localStorage.getItem('theme') == 'dark'){
+        $('body').removeClass(localStorage.getItem('theme'))
+        localStorage.setItem('theme','light')
+        $('body').addClass(localStorage.getItem('theme'))
+        $(this).html(`
+            <i class="fa-solid fa-sun p-4 mx-auto rounded-full hover:bg-gray-100"></i>
+            <p class='hidden xl:block text-xl mt-3 '>${localStorage.getItem('theme')}</p>
+        `)
+    }
+
+    else {
+        
+        $('body').removeClass(localStorage.getItem('theme'))
+        localStorage.setItem('theme','dark')
+        $('body').addClass(localStorage.getItem('theme'))
+        $(this).html(`
+            <i class="fa-solid fa-moon p-4 mx-auto rounded-full hover:bg-gray-100"></i>
+            <p class='hidden xl:block text-xl mt-3 '>${localStorage.getItem('theme')}</p>
+        `)
+    }
+})
+
 $(document).ready(function () {
     //Log in popup display
 
@@ -294,4 +322,7 @@ $(document).ready(function () {
         $("#editOverlay").removeClass("block");
         $("#editOverlay").addClass("hidden");
     });
+
+    // dark theme
+
 });

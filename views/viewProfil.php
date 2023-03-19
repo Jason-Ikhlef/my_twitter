@@ -107,6 +107,9 @@ $followers = $user->getFollowers($_SESSION["profil_id"]);
             <div class="editConfirmPw mb-3 w-2/3">
                 <input type="password" id="newPassword" name="newPassword" placeholder="******" class="w-full p-2 bg-gray-200 placeholder:text-blue-500 text-blue-500 border-2 border-blue-500 rounded-md font-semibold"></input>
             </div>
+            <div class='errorMsg'>
+
+            </div>
             <button class="bg-blue-500 w-2/3 h-8 rounded-lg text-white my-3 font-semibold" id="editBtn">Enregistrer</button>
         </form>
     </div>
